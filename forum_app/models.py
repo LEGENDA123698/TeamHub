@@ -1,6 +1,13 @@
 from django.db import models
 
-class Thread(models.Model):
+class Section(models.Model):
     name = models.CharField(max_length=50, blank=True)
-    date = models.DateTimeField(auto_now=True, blank=True)
-    #author = 
+
+
+class Theme(models.Model):
+    name = models.CharField(max_length=50, blank=True)
+    text = models.TextField(max_length=10000, blank=True)
+
+class Message(models.model):
+    text = models.TextField(max_length=10000, blank=True)
+
