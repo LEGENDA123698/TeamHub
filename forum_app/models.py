@@ -8,6 +8,6 @@ class Theme(models.Model):
     name = models.CharField(max_length=50, blank=True)
     text = models.TextField(max_length=10000, blank=True)
 
-class Message(models.model):
+class Message(models.Model):
     text = models.TextField(max_length=10000, blank=True)
 
