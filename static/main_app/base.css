@@ -1,0 +1,17 @@
+* {
+    font-family: -apple-system;
+}
+
+.no-focus:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.username-textarea {
+    font-weight: normal;
+    transition: font-weight 0.1s ease;
+}
+
+.username-textarea:hover {
+    font-weight: bold;
+}
