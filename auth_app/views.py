@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import *
 from django.contrib import messages
+#
 
 def logout_view(request):
     logout(request)
