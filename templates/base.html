@@ -15,7 +15,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Панель навигации</a>
+        <a class="navbar-brand" href="#">TeamHub</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
             <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         user
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'login'%}">Login</a></li>
                         <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
                         <li>
