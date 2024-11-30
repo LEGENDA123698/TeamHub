@@ -1,6 +1,8 @@
 @import '../fonts/fonts.css';
 
 * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-family: "SF Pro";
 }
 
@@ -12,7 +14,7 @@
 .username-textarea {
     will-change: font-weight;
     font-weight: normal;
-    transition: font-weight 0.3s ease;
+    transition: font-weight 0.1s ease;
 }
 
 .username-textarea:hover {
