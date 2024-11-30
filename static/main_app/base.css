@@ -1,5 +1,6 @@
 * {
-    font-family: -apple-system;
+    font-family: "SF Pro";
+    src: url('../fonts/SFProText-Regular.ttf');
 }
 
 .no-focus:focus {
