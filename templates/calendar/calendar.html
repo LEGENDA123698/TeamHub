@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'calendar/calendar.css' %}">
+</head>
+<body>
+
+    <div class="calendar-header">
+        {{month}} {{year}}
+    </div>
+
+    <div class="calendar">
+        {%for date in date_list%}
+        {%for event in events%}
+
+            {%if event.date.year == year and event.date.month == month and event.date.day == date%}
+                <div class="calendar-day" style="background-color: brown;">{{date}}</div>
+            {%else%}
+                <div class="calendar-day">{{date}}</div>
+            {%endif%}
+
+        {%endfor%}
+        {%endfor%}
+    </div>
+
+</body>
+</html>
