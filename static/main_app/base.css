@@ -1,0 +1,20 @@
+@import '../fonts/fonts.css';
+
+* {
+    font-family: "SF Pro";
+}
+
+.no-focus:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.username-textarea {
+    will-change: font-weight;
+    font-weight: normal;
+    transition: font-weight 0.3s ease;
+}
+
+.username-textarea:hover {
+    font-weight: bold;
+}
