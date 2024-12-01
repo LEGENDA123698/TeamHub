@@ -13,9 +13,11 @@
     <link href="{% static 'main_app/base.css' %}" rel="stylesheet">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top mx-auto">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Панель навигации</a>
+        <a href="{% url 'start' %}">
+            <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
             <span class="navbar-toggler-icon"></span>
@@ -31,7 +33,7 @@
                         <li><a class="dropdown-item" href="{% url 'login'%}">Login</a></li>
                         <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class="dropdown-divider mx-auto">
                         </li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                     </ul>
