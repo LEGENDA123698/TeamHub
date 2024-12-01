@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from .views import *
+from main_app import views
 
 urlpatterns = [
-    path('', StartView.as_view(), name="start"),
+    path('', views.StartView.as_view(), name = "main-page"),
 ]
