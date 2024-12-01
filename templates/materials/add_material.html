@@ -7,7 +7,7 @@
 
     <form method="get">
         {% csrf_token %}
-        <select name="option" id="option">
+        <select name="option" id="option" onchange="this.form.submit()">
             {% for option in options %}
                 <option value="{{ option }}" {% if option == selected_option %}selected{% endif %}>{{ option }}</option>
             {% endfor %}
