@@ -6,7 +6,7 @@ from django import forms
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['title', 'description', 'date']
+        fields = ['title', 'description', 'date',]
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
         }

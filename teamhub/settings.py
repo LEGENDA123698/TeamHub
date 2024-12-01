@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'main_app',
     'notifications_app',
     'calendar_app',
+    'colorfield',
     
 
 ]
