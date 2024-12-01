@@ -14,17 +14,14 @@
 <form method="post" action="{% url 'register' %}">
     {%csrf_token%}
     <div class="form-floating mb-3">
-        <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Username</label>
+        <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
     </div>
     <div class="form-floating">
         <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
     </div>
     <br>
     <div class="form-floating">
-        <input type="password" name="password2" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Repeat paaword</label>
+        <input type="password" name="password2" class="form-control" id="floatingPassword" placeholder="Repeat Password">
     </div>
     <button type="submit" class="btn btn-outline-info">Login</button>
 </form>
