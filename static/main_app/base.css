@@ -39,7 +39,6 @@
 
 .btn:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    transform: scale(1.02);
 }
 
 .btn:active {
@@ -74,7 +73,7 @@
 
 .carousel-item:hover .carousel-caption {
     opacity: 0.3;
-}
+
 
 .navbar {
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
@@ -117,13 +116,14 @@
 .dropdown-item:hover {
     background: #007aff;
     color: white;
+    border-radius: 10px;
+    height: 32px;
 }
 
 .dropdown-divider {
     margin-top: 4px;
     margin-bottom: 4px;
     width: 90%;
-}
 
 @media (min-width: 768px) {
     .animate {
