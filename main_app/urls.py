@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from main_app import views
+from .views import *
 
 urlpatterns = [
     path('', StartView.as_view(), name="start"),
+]

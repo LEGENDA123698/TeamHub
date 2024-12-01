@@ -74,6 +74,7 @@
 .carousel-item:hover .carousel-caption {
     opacity: 0.3;
 
+}
 
 .navbar {
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
@@ -124,6 +125,7 @@
     margin-top: 4px;
     margin-bottom: 4px;
     width: 90%;
+}
 
 @media (min-width: 768px) {
     .animate {
