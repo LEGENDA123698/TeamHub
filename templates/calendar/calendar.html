@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'calendar/calendar.css' %}">
+</head>
+<body>
+
+    <div style="display: flex;gap: 50px;">
+    <div style="float: left;display: flex;flex-direction: column;align-items: center;">
+    <div>
+        <a href="?month={{ month|add:'-1' }}&year={{ year }}">Previous Month</a>
+        <a href="?month={{ month|add:'1' }}&year={{ year }}">Next Month</a>
+    </div>
+
+    <div class="calendar-header">
+        {{month_name}} {{year}}
+    </div>
+
+    <div class="calendar">
+        {% for day_data in days_with_events %}
+            {% if day_data.events %}
+                <div class="calendar-day" style="background-color: {{ day_data.events.0.color }}; border-color: {{ day_data.events.0.color }};">
+                    {{ day_data.day }}
+                </div>
+            {% elif day_data.day == 0 %}
+                <div class="calendar-day" style="background-color: #b6b6b6;"></div>
+            {% else %}
+                <div class="calendar-day">{{ day_data.day }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'calendar_create_event' %}">Create new event</a>
+    </div>
+
+    <div style="float: right;">
+        <ul>
+        {%for event in events%}
+        <li>
+            <b>{{event.title}}</b> {{event.date}}<br>
+            {{event.description}}<br>
+            <a href="{% url 'calendar_update_event' event.pk %}">Edit</a>
+            <a href="{% url 'calendar_delete_event' event.pk %}">Delete</a>
+        </li>
+        <br>
+        {%endfor%}
+        </ul>
+    </div>
+    </div>
+
+</body>
+</html>

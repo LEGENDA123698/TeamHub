@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Update</title>
+</head>
+<body>
+
+    <form method = "post">
+        {% csrf_token %}
+        {{form.as_p }}
+        <input type="color" name="color-select" value="{{event.color}}"><br>
+        <button type="submit">sumbit</button>
+    </form>
+
+</body>
+</html>
