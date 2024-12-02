@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Оголошення</h1>
+    <ul>
+        {% for notification in notifications %}
+            <li>
+                <small>({{ notification.date|date:"Y-m-d H:i" }})</small>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
