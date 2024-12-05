@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block content %}
+<h2 style='color: rgb(255, 255, 255);'>Ви точно хочете видалити {{ task.title }}?</h2>
+<form method="POST">
+    {%csrf_token%}
+    <a href="{% url 'task_detail' task.pk %}" class="btn btn btn-success">Ой, не треба</a>
+    <button type="submit" class="btn btn-danger">Так, я впевнений</button>
+</form>
+{% endblock %}

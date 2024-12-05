@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container mt-3">
+    <h2 style='color: rgb(255, 255, 255);'>{{ task.title }}</h2>
+    <p style='color: rgb(255, 255, 255);'>{{ task.description }}</p>
+    <p style='color: rgb(255, 255, 255);'>Статус: <span class="badge text-bg-primary">{{ task.status }}</span></p>
+    <p style='color: rgb(255, 255, 255);'>Приріоритет: <span class="badge text-bg-primary">{{ task.priority }}</span></p>
+    <p style='color: rgb(255, 255, 255);'>До: <span class="badge text-bg-primary">{{ task.due_date }}</span></p>
+
+    {% if task.image %}
+    <img src="{{ task.image.url }}">
+    {% endif %}
+
+    <p><div class="h4 pb-2 mb-4 text-primary border-bottom border-primary"></p>
+        Безпечна зона
+      </div>
+      <p><a href="/delete_task/{{ task.id }}" class="btn btn-primary">Збільшити анонімність (Тільки для ⱣLUS)</a></p>
+
+    <div class="h4 pb-2 mb-4 text-warning border-bottom border-warning">
+        Обережна зона
+      </div>
+    <p><a href="/update_task/{{ task.id }}" class="btn btn-warning">Редагувати</a></p>
+
+    <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger">
+        Небезпечна зона
+      </div>
+    <p><a href="/delete_task/{{ task.id }}" class="btn btn-danger">Видалити</a></p>
+</div>
+
+{% endblock %}
