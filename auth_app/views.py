@@ -14,7 +14,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('start')
+            return redirect('main-page')
         else:
             print("FormNotValid")
     else:
@@ -32,7 +32,7 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 print("login")
-                return redirect('start')
+                return redirect('main-page')
             else:
                 messages.error(request, 'invalid login or password')
     else:
