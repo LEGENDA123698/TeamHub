@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r6d#hzy16)$s(qp+@763bb95af9lva+1y0sa520r-ayjzk1z$+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'gallery_app',
     'main_app',
     'notifications_app',
+    'calendar_app',
+    'materials_app',
+    'colorfield',
     
 
 ]
