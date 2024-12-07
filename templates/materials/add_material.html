@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add material</title>
+</head>
+<body>
+
+    <form method="get">
+        {% csrf_token %}
+        <select name="option" id="option" onchange="this.form.submit()">
+            {% for option in options %}
+                <option value="{{ option }}" {% if option == selected_option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+        <!--<button type="submit">выбрать</button>-->
+    </form>
+
+    <form method="post" enctype='multipart/form-data'>
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">submit</button>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>{{ notification.text }}</p>
+    <small>Автор: {{ notification.author }} | {{ notification.date|date:"Y-m-d H:i" }}</small>
+{% endblock %} 
