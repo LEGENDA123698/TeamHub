@@ -1,19 +1,17 @@
-{% load static %} {% block extra_head %}
-<link
-  href="{% static 'forum_app/forum.css' %}"
-  type="text/css"
-  rel="stylesheet"
-/>
-{% endblock %} {% if sections %}
-<div class="sections-list">
-  <h1>Разделы форума:</h1>
-  <ul>
+
+{% include 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+{% if sections %}
+<div class="default-placeholder">
+    <div class="placeholder-header">Текст плашки</div>
     {% for section in sections %}
-    <li>
-      <a href="{% url 'forum_app:section_detail' section.pk %}"
-        >{{ section.name }}</a
-      >
-    </li>
+    <div class="placeholder-item">
+        <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
+    </div>
     {% endfor %}
   </ul>
 </div>
