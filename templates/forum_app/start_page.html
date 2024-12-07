@@ -1,10 +1,15 @@
 {% include 'base.html' %}
+{% load static %}
 
 {% block extra_head %}
-<link href="{% static 'forum_app/start_page.html' %}" type="text/css" rel="stylesheet">
+<link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet">
 {% endblock %}
+{% if sections %}
 <div class="default-placeholder">
     {% for section in sections %}
-    <p>{{ section.name }}</p>
+    <div class="placeholder-item">{{ section.name }}</div>
     {% endfor %}
 </div>
+{% else %}
+<p>Разделы отсутствуют.</p>
+{% endif %}
