@@ -1,53 +1,69 @@
 {% load static %}
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
 
-    {% block extra_head %}{% endblock %}
+  {% block extra_head %}{% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
 
-    <link href="{% static 'main_app/base.css' %}" type="text/css" rel="stylesheet">
+  <link href="{% static 'base.css' %}" type="text/css" rel="stylesheet" />
 </head>
 
 <nav class="navbar fixed-top">
-    <div class="container-fluid">
-        <a href="{% url 'main-page' %}">
-            <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img">
-        </a>
-        <a id="navbarDropdown" data-bs-toggle="dropdown" href="#" class="no-focus">
-            <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img">
-        </a>
-        <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'login'%}">Login</a></li>
-            <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
-            <li>
-                <hr class="dropdown-divider mx-auto">
-            </li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-        </ul>
-    </div>
+  <div class="container-fluid">
+    <a href="{% url 'main-page' %}">
+      <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img" />
+    </a>
+    <a id="navbarDropdown" data-bs-toggle="dropdown" href="#" class="no-focus">
+      <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img" />
+    </a>
+    <ul
+      class="dropdown-menu dropdown-menu-lg-end animate slideIn"
+      aria-labelledby="navbarDropdown"
+    >
+      {% if user.is_authenticated %}
+      <p class="dropdown-item" style="font-weight: bold">{{ user.username }}</p>
+      {% endif %}
+      <li>
+        <hr class="dropdown-divider mx-auto" />
+      </li>
+      {% if user.is_authenticated %}
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+      <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </div>
 </nav>
 
 <ul class="dropdown-menu mainmenu" aria-labelledby="navbarDropdown">
-    <li>item 1</li>
-    <li>item 3</li>
-    <li>item 3</li>
+  <li>item 1</li>
+  <li>item 3</li>
+  <li>item 3</li>
 </ul>
 
-
 <script>
-    document.querySelector('.mainmenu-toggler').addEventListener('mouseover', function () {
-        document.querySelector('.mainmenu').classList.add('show');
+  document
+    .querySelector(".mainmenu-toggler")
+    .addEventListener("mouseover", function () {
+      document.querySelector(".mainmenu").classList.add("show");
     });
 
-    document.querySelector('.mainmenu-toggler').addEventListener('mouseout', function () {
-        document.querySelector('.mainmenu').classList.remove('show');
+  document
+    .querySelector(".mainmenu-toggler")
+    .addEventListener("mouseout", function () {
+      document.querySelector(".mainmenu").classList.remove("show");
     });
 </script>
-{% block content %}
-
-{% endblock %}
+{% block content %} {% endblock %}
