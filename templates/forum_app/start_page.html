@@ -6,8 +6,11 @@
 {% endblock %}
 {% if sections %}
 <div class="default-placeholder">
+    <div class="placeholder-header">Текст плашки</div>
     {% for section in sections %}
-    <div class="placeholder-item">{{ section.name }}</div>
+    <div class="placeholder-item">
+        <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
+    </div>
     {% endfor %}
 </div>
 {% else %}
