@@ -82,12 +82,12 @@
 
 }
 
-.navbar {
+.navbar.scrolled {
     background: transparent;
     transition: background, box-shadow, backdrop-filter, --webkit-backdrop-filter, background-color 0.3s ease-in-out;
 }
 
-.navbar.scrolled {
+.navbar {
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
     width: 100%;
     background: transparent;
@@ -127,6 +127,11 @@
     line-height: 16px;
 }
 
+.logout-item:hover {
+    background: #ff3b30 !important;
+    border-radius: 3px;
+}
+
 .dropdown-item:hover {
     background: #007aff;
     color: white;
@@ -145,11 +150,11 @@
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    position: sticky;
-    height: 10vh;
-    width: 10vw;
-    top: 0;
-    left: 0;
+    position: fixed !important;
+    height: 30vh;
+    width: 30vw;
+    top: 11%;
+    left: 3;
     transform: scale(0);
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -157,6 +162,8 @@
 }
 
 .mainmenu.show {
+    opacity: 1;
+    transform: scale(1);
     position: sticky;
 }
 

@@ -8,11 +8,12 @@
     background: rgba(0, 0, 0, 0.15);
     color: white;
     padding: 5px 15px;
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 14px 14px 0px 0px;
     width: 30vw;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
+    max-height: 48%;
 }
 
 .default-placeholder {
@@ -50,8 +51,19 @@
     text-decoration: none;
 }
 
-
 .placeholder-item:hover {
     color: white !important;
     background: #007aff !important;
+}
+
+.create-button {
+    position: relative;
+    border-radius: 9px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #007aff, #0051a8);
+    color: white;
+    padding-bottom: 1px;
 }
