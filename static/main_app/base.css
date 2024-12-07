@@ -39,6 +39,7 @@
 
 .btn:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transform: scale(1.02);
 }
 
 .btn:active {
@@ -49,12 +50,17 @@
 .carousel {
     background: black;
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
+    height: 100vh;
+}
+
+.carousel-inner {
+    height: 100vh;
 }
 
 .carousel-item {
     position: relative;
     overflow: hidden;
-    transform: scale(1);
+    height: 100vh !important;
     mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
     transition: transform 0.8s ease-in-out;
 }
@@ -77,8 +83,13 @@
 }
 
 .navbar {
+    background: transparent;
+    transition: background, box-shadow, backdrop-filter, --webkit-backdrop-filter, background-color 0.3s ease-in-out;
+}
+
+.navbar.scrolled {
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
-    width: 150%;
+    width: 100%;
     background: transparent;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -90,6 +101,7 @@
     width: auto;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
     cursor: pointer;
+    z-index: 1050;
 }
 
 .rounded-circle {
@@ -101,15 +113,16 @@
 }
 
 .dropdown-menu {
-    padding: 4px 4px;
+    padding: 5px 6px;
     border-radius: 8px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .dropdown-item {
     margin-bottom: 1px;
     height: 24px;
     font-size: 14px;
-    border-radius: 4px;
+    border-radius: 3px;
     text-align: left;
     line-height: 16px;
 }
@@ -117,14 +130,69 @@
 .dropdown-item:hover {
     background: #007aff;
     color: white;
-    border-radius: 10px;
-    height: 32px;
+    border-radius: 4px;
 }
 
 .dropdown-divider {
     margin-top: 4px;
     margin-bottom: 4px;
     width: 90%;
+}
+
+.mainmenu {
+    padding: 4px 4px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    position: sticky;
+    height: 10vh;
+    width: 10vw;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 9999;
+}
+
+.mainmenu.show {
+    position: sticky;
+}
+
+.mainmenu:hover {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.mainmenu-toggler {
+    background: inherit;
+    cursor: pointer;
+}
+
+.mainmenu-toggler:hover .mainmenu {
+    display: block;
+    animation: scaleAnimation 0.3s forwards;
+}
+
+.mainmenu-toggler:active {
+    transform: scale(0.95);
+}
+
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @media (min-width: 768px) {
