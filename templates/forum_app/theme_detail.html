@@ -1,0 +1,29 @@
+{% load static %} {% block extra_head %}
+<link
+  href="{% static 'forum_app/forum.css' %}"
+  type="text/css"
+  rel="stylesheet"
+/>
+{% endblock %} {% if themes %}
+<div class="theme-detail">
+  <h1>{{ themes.name }}</h1>
+  <p>{{ themes.description }}</p>
+  <div class="messages-list">
+    <h2>Сообщения:</h2>
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>
+        <p><strong>{{ message.message_author }}</strong>:</p>
+        <p>{{ message.text }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Нет сообщений в теме.</p>
+    {% endif %}
+  </div>
+</div>
+{% else %}
+<p>Тема не найдена.</p>
+{% endif %}
