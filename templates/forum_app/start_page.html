@@ -1,0 +1,10 @@
+{% include 'base.html' %}
+
+{% block extra_head %}
+<link href="{% static 'forum_app/start_page.html' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+<div class="default-placeholder">
+    {% for section in sections %}
+    <p>{{ section.name }}</p>
+    {% endfor %}
+</div>
