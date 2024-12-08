@@ -241,5 +241,16 @@
 
         }
     });
+
+    const updateSVGPosition = () => {
+        const scrollY = window.scrollY;
+        document.querySelectorAll('.carousel-item svg').forEach(svg => {
+            svg.style.transform = `translateY(${scrollY}px)`;
+        });
+    };
+    window.addEventListener('scroll', updateSVGPosition);
+    document.querySelector('.carousel').addEventListener('slid.bs.carousel', updateSVGPosition);
+
+    updateSVGPosition();
 </script>
 {% endblock %}

@@ -25,7 +25,7 @@
     <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
       {% if user.is_authenticated %}
       <p class="dropdown-item" style="font-weight: bold">
-        <i class="fa-solid fa-user-tie"></i> {{ user.username }}
+        <i class="fa-solid fa-user-tie" title="Admin"></i> {{ user.username }}
       </p>
       <li><a class="dropdown-item" href="{% url 'notifications-list' %}">
           <i class="fa-solid fa-bell"></i> Notifications</a></li>

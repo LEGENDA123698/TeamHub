@@ -63,10 +63,23 @@
     height: 100vh !important;
     mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
     transition: transform 0.8s ease-in-out;
+    will-change: transform;
 }
 
-.carousel-item:hover {
-    transform: scale(1.05);
+.carousel-item svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0);
+    pointer-events: none;
+    will-change: transform;
+    transition: scale 0.8s ease-in-out;
+}
+
+.carousel-item:hover svg {
+    scale: 1.4;
 }
 
 .carousel-indicators {
@@ -102,6 +115,16 @@
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
     cursor: pointer;
     z-index: 1050;
+    transition: transform 0.2s ease-in-out;
+    will-change: filter, transform;
+}
+
+.navbar-img:hover {
+    transform: scale(1.05);
+}
+
+.navbar-img:active {
+    transform: scale(0.95);
 }
 
 .rounded-circle {
@@ -231,6 +254,7 @@
 .slideIn {
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
+    animation-direction: alternate;
 }
 
 @-webkit-keyframes slideIn {
