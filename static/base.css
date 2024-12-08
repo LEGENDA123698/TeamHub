@@ -88,11 +88,6 @@
     transition: opacity 0.8s ease-in-out;
 }
 
-.carousel-item:hover .carousel-caption {
-    opacity: 0.3;
-
-}
-
 .navbar.scrolled {
     background: transparent;
     transition: background, box-shadow, backdrop-filter, --webkit-backdrop-filter, background-color 0.3s ease-in-out;
