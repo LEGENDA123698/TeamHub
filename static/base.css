@@ -48,6 +48,7 @@
 }
 
 .carousel {
+    background: white !important;
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
     height: 100vh;
 }
@@ -145,7 +146,7 @@
 
 .logout-item:hover {
     background: #ff3b30 !important;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
 .dropdown-item:hover {
@@ -200,6 +201,30 @@
 
 .mainmenu-toggler:active {
     transform: scale(0.95);
+}
+
+.search {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    width: 100%;
+    background: #EDEEF0;
+    color: #84848B;
+    margin-bottom: 1px;
+    height: 24px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 16px;
+    background-image: url('magnifying-glass-solid.svg');
+    background-size: 14px 14px;
+    background-position-y: center;
+    background-position-x: 0.8rem;
+    background-repeat: no-repeat;
+    padding-left: 1.9rem;
+}
+
+.search:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 @keyframes scaleAnimation {

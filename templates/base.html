@@ -23,6 +23,12 @@
       <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img" />
     </a>
     <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
+      <li>
+        <input type="search" class="search" placeholder="Search">
+      </li>
+      <li>
+        <hr class="dropdown-divider mx-auto" />
+      </li>
       {% if user.is_authenticated %}
       <p class="dropdown-item" style="font-weight: bold">
         <i class="fa-solid fa-user-tie" title="Admin"></i> {{ user.username }}
