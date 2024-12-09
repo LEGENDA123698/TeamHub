@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Friend requests</title>
+</head>
+<body>
+    
+    {%for request in requests%}
+        <p>Friend request from {{request.sender}}</p>
+        <form method="POST" action="{% url 'add_friend' request.sender.pk %}">
+            {% csrf_token %}
+            <button type="submit">accept</button>
+        </form>
+        <form method="POST" action="{% url 'decline' request.sender.pk %}">
+            {% csrf_token %}
+            <button type="submit">decline</button>
+        </form>
+        <br><br><br>
+    {%endfor%}
+
+</body>
+</html>

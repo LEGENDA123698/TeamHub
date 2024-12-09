@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'calendar_app',
     'materials_app',
     'colorfield',
+    'portfolio_app',
     
 
 ]
@@ -134,3 +135,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# standart user
+
+AUTH_USER_MODEL = 'auth_app.User'

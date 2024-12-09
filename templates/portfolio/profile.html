@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {%load static%}
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'portfolio/avatar.css' %}">
+</head>
+<body>
+
+    <div style="margin-left: 50px;margin-top: 20px;">
+    <div style="display: flex;gap: 50px;">
+
+    {%if current_user == user%}
+    <a href="{%url 'update_avatar' current_user.pk %}"><div class='avatar own_avatar' style="background-image: url('{{user.avatar.url}}');"></div></a>
+    {%else%}
+    <div class='avatar' style="background-image: url('{{user.avatar.url}}');"></div>
+    {%endif%}
+
+    <div>
+        <h1>{{user.username}}</h1>
+        <p>{{user.about}}</p>
+    </div>
+
+    {%if current_user != user%}
+    {%if is_friend%}
+    <form method="post" action="{% url 'delete_friend' user.pk %}">
+        {% csrf_token %}
+        <button type="submit">Delete friend</button>
+    </form>
+    {%else%}
+    <form method="post" action="{% url 'friend_request' user.pk %}">
+        {% csrf_token %}
+        <button type="submit">Send friend request</button>
+    </form>
+    {%endif%}
+    {%else%}
+    <a href="{% url 'friend_requests' %}">view friend requests</a><br>
+    <a href="{%url 'update_profile' current_user.pk %}">edit profile</a>
+    {%endif%}
+
+    </div>
+    </div>
+    <hr>
+
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="portfolio-tab" data-bs-toggle="tab" data-bs-target="#portfolio" type="button" role="tab" aria-controls="portfolio" aria-selected="true">portfolio</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab" aria-controls="comments" aria-selected="false">comments</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="friends-tab" data-bs-toggle="tab" data-bs-target="#friends" type="button" role="tab" aria-controls="friends" aria-selected="false">friends</button>
+        </li>
+        </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <br>
+        <div class="tab-pane show active" id="portfolio" role="tabpanel" aria-labelledby="portfolio-tab">
+            <ul>
+                <a href="{% url 'create_portfolio' %}">add new</a><br><br>
+                <div id="carouselExample" class="carousel slide"  style="max-width: 500px;max-height: 500px;margin: auto;">
+                <div class="carousel-inner">
+                {%for element in showcase_elements%}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{element.image.url}}" class="d-block w-100"><br>
+                    <a href="{% url 'update_portfolio' element.pk %}">edit</a>    
+                    <a href="{% url 'delete_portfolio' element.pk %}">delete</a>
+                </div>
+                {%endfor%}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+                </div>
+            </ul>
+        </div>
+        <div class="tab-pane" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+            <ul>
+                {%for comment in comments%}
+                <p>{{comment}}</p><br>
+                {%endfor%}
+            </ul>
+        </div>
+
+        <div class="tab-pane" id="friends" role="tabpanel" aria-labelledby="friends-tab">
+            <ul>
+                {%for friend in friends%}
+                <div style="display: flex;gap: 10px;">
+                <div class='avatar small' style="background-image: url('{{friend.avatar.url}}');"></div>
+                <a href="{% url 'user_profile' friend.pk %}">{{friend.username}}</a>
+                </div><br>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+    <hr style="margin-top: 200px;">
+    <div style="display: flex;justify-content: center;"><img src="{% static 'portfolio/aaaa.jpg' %}"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
