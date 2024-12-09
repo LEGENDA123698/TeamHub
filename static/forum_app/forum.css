@@ -1,5 +1,9 @@
 @import '../base.css';
 
+body {
+    background-color: gainsboro;
+}
+
 .placeholder-header {
     position: absolute;
     top: -35px;
@@ -27,6 +31,7 @@
     width: 30vw;
     top: 25vh;
     padding: 6px 6px;
+    background: white;
 }
 
 .placeholder-item {

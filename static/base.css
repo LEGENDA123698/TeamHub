@@ -48,6 +48,7 @@
 }
 
 .carousel {
+    background: white !important;
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
     height: 100vh;
 }
@@ -145,7 +146,7 @@
 
 .logout-item:hover {
     background: #ff3b30 !important;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
 .dropdown-item:hover {
@@ -166,26 +167,55 @@
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    position: fixed !important;
+    position: fixed;
     height: 30vh;
+    max-width: fit-content;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+    grid-auto-flow: dense !important;
+    gap: 4px;
     width: 30vw;
-    top: 11%;
+    top: 11.2%;
     left: 3;
+    z-index: 9999;
     transform: scale(0);
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 9999;
+    pointer-events: none;
 }
 
 .mainmenu.show {
-    opacity: 1;
-    transform: scale(1);
-    position: sticky;
+    pointer-events: auto;
+    animation: showMenu 0.3s forwards;
 }
 
-.mainmenu:hover {
-    transform: scale(1);
-    opacity: 1;
+.mainmenu.hide {
+    pointer-events: none;
+    animation: hideMenu 0.3s forwards;
+}
+
+@keyframes showMenu {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes hideMenu {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 .mainmenu-toggler {
@@ -193,13 +223,57 @@
     cursor: pointer;
 }
 
-.mainmenu-toggler:hover .mainmenu {
-    display: block;
-    animation: scaleAnimation 0.3s forwards;
-}
-
 .mainmenu-toggler:active {
     transform: scale(0.95);
+}
+
+.mainmenu-item {
+    background-color: white;
+    display: flex;
+    border-radius: 4px;
+    text-align: center;
+    width: 100%;
+    flex-direction: column;
+    height: 48.83%;
+    font-weight: bold;
+    transition: transform 300ms ease-in-out;
+}
+
+.mainmenu-item i {
+    margin-top: 20%;
+    font-size: 50px;
+}
+
+.mainmenu-item:hover {
+    transform: scale(1.02);
+}
+
+.mainmenu-item:active {
+    transform: scale(0.98);
+}
+
+.search {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    width: 100%;
+    background: #EDEEF0;
+    color: #84848B;
+    margin-bottom: 1px;
+    height: 24px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 16px;
+    background-image: url('magnifying-glass-solid.svg');
+    background-size: 14px 14px;
+    background-position-y: center;
+    background-position-x: 0.8rem;
+    background-repeat: no-repeat;
+    padding-left: 1.9rem;
+}
+
+.search:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 @keyframes scaleAnimation {
