@@ -55,22 +55,83 @@
 </nav>
 
 <ul class="dropdown-menu mainmenu" aria-labelledby="navbarDropdown">
-  <li>item 1</li>
-  <li>item 3</li>
-  <li>item 3</li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'forum_app:forum-start' %}">Forum
+      <i class="fa-solid fa-comments"></i>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'calendar' %}">Calendar
+      <i class="fa-solid fa-calendar"></i>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'forum_app:forum-start' %}">Forum
+      <i class="fa-solid fa-comments"></i>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'calendar' %}">Calendar
+      <i class="fa-solid fa-calendar"></i>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'forum_app:forum-start' %}">Forum
+      <i class="fa-solid fa-comments"></i>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'calendar' %}">Calendar
+      <i class="fa-solid fa-calendar"></i>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'forum_app:forum-start' %}">Forum
+      <i class="fa-solid fa-comments"></i>
+    </a>
+  </li>
+  <li>
+    <a class="dropdown-item mainmenu-item" href="{% url 'calendar' %}">Calendar
+      <i class="fa-solid fa-calendar"></i>
+    </a>
+  </li>
+
 </ul>
 
 <script>
-  document
-    .querySelector(".mainmenu-toggler")
-    .addEventListener("mouseover", function () {
-      document.querySelector(".mainmenu").classList.add("show");
-    });
+  const toggler = document.querySelector(".mainmenu-toggler");
+  const menu = document.querySelector(".mainmenu");
 
-  document
-    .querySelector(".mainmenu-toggler")
-    .addEventListener("mouseout", function () {
-      document.querySelector(".mainmenu").classList.remove("show");
-    });
+  let hideMenuTimer;
+
+  function showMenu() {
+    clearTimeout(hideMenuTimer);
+    menu.classList.remove("hide");
+    menu.classList.add("show");
+  }
+
+  function hideMenu() {
+    menu.classList.remove("show");
+    menu.classList.add("hide");
+  }
+
+  toggler.addEventListener("mouseover", showMenu);
+  toggler.addEventListener("mouseout", function (event) {
+    if (!menu.contains(event.relatedTarget)) {
+      hideMenuWithDelay();
+    }
+  });
+
+  menu.addEventListener("mouseover", showMenu);
+  menu.addEventListener("mouseout", function (event) {
+    if (!toggler.contains(event.relatedTarget)) {
+      hideMenuWithDelay();
+    }
+  });
+
+  function hideMenuWithDelay() {
+    hideMenuTimer = setTimeout(hideMenu, 200);
+  }
+
 </script>
 {% block content %} {% endblock %}
