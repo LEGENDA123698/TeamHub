@@ -3,17 +3,33 @@
 
 {% block extra_head %}
 <link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet">
+<style>
+  .chill-guy {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(90deg) translateX(100%);
+    transition: transform 0.5s ease;
+  }
+
+  .chill-guy:hover {
+    transform: translateX(0);
+  }
+</style>
+
 {% endblock %}
 {% if sections %}
 <div class="default-placeholder">
   <div class="placeholder-header">
-    <p>Sections</p>
+    <span>Sections</span>
     <button class="create-button">+</button>
   </div>
   {% for section in sections %}
   <div class="placeholder-item">
     <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
+    <button class="item-button">+</button>
   </div>
+  <img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
   {% endfor %}
   </ul>
 </div>

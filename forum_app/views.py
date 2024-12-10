@@ -1,7 +1,12 @@
 from typing import Any
 from django.shortcuts import render
+from django.http import HttpResponseForbidden
 from django.views.generic import *
 from .models import *
+from .forms import *
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.core.paginator import Paginator
 
 
 class SectionListView(ListView):
@@ -27,7 +32,22 @@ class ThemeDetailView(DetailView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['messages'] = self.object.theme_message.all()
+        context['form'] = MessageForm()
+        paginator = Paginator(context['messages'], 1)
+        page_number = self.request.GET.get('page')
+        context['page_obj'] = paginator.get_page(page_number)
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.theme = self.object
+            message.message_author = request.user
+            message.save()
+            return redirect(reverse('forum_app:theme_detail', args=[self.object.pk]))
+        return self.get(request, *args, **kwargs)
     
 #-----------------------------------------------------------------
     
@@ -75,7 +95,19 @@ class MessageDeleteView(DeleteView):
     context_object_name = "message"
     template_name = ""
 
+    def dispatch(self, request, *args, **kwargs):
+        message = self.get_object()
+        if message.message_author != request.user:
+            return HttpResponseForbidden("Вы не можете удалить это сообщение.")
+        return super().dispatch(request, *args, **kwargs)
+
 class MessageUpdateView(UpdateView):
     model = Message
     context_object_name = "message"
     template_name = ""
+
+    def dispatch(self, request, *args, **kwargs):
+        message = self.get_object()
+        if message.message_author != request.user:
+            return HttpResponseForbidden("Вы не можете редактировать это сообщение.")
+        return super().dispatch(request, *args, **kwargs)

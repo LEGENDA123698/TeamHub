@@ -1,29 +1,169 @@
-{% load static %} {% block extra_head %}
-<link
-  href="{% static 'forum_app/forum.css' %}"
-  type="text/css"
-  rel="stylesheet"
-/>
-{% endblock %} {% if themes %}
-<div class="theme-detail">
-  <h1>{{ themes.name }}</h1>
-  <p>{{ themes.description }}</p>
-  <div class="messages-list">
-    <h2>Сообщения:</h2>
-    {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>
-        <p><strong>{{ message.message_author }}</strong>:</p>
-        <p>{{ message.text }}</p>
-      </li>
-      {% endfor %}
-    </ul>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'forum_app/forum.css' %}" />
+  <title>Детали темы</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .theme-detail {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-detail h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .theme-detail p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .messages-list h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+
+    .messages-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .messages-list li {
+      padding: 10px;
+      margin-bottom: 10px;
+      background: #ecf0f1;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .messages-list li p {
+      margin: 5px 0;
+    }
+
+    .messages-list li strong {
+      color: #e74c3c;
+    }
+
+    .message-form h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #16a085;
+    }
+
+    .message-form form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-form textarea {
+      width: 100%;
+      min-height: 80px;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+    }
+
+    .message-form button {
+      align-self: flex-start;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .message-form button:hover {
+      background: #2980b9;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .theme-detail .no-theme {
+      text-align: center;
+      font-size: 18px;
+      color: #c0392b;
+    }
+  </style>
+</head>
+
+<body>
+  {% if themes %}
+  <div class="theme-detail">
+    <h1>{{ themes.name }}</h1>
+    <p>{{ themes.description }}</p>
+    <div class="messages-list">
+      <h2>Сообщения:</h2>
+      {% if messages %}
+      <ul>
+        {% for message in page_obj %}
+        <li>
+          <p><strong>{{ message.message_author }}</strong>:</p>
+          <p>{{ message.text }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <div>
+        {% include 'page.html' %}
+      </div>
+      {% else %}
+      <p>Нет сообщений в теме.</p>
+      {% endif %}
+    </div>
+    {% if user.is_authenticated %}
+    <div class="message-form">
+      <h3>Написать сообщение:</h3>
+      <form method="post">
+        {% csrf_token %} {{ form.text }}
+        <br />
+        <button type="submit">Отправить</button>
+      </form>
+    </div>
     {% else %}
-    <p>Нет сообщений в теме.</p>
+    <p>
+      Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы оставить
+      сообщение.
+    </p>
     {% endif %}
   </div>
-</div>
-{% else %}
-<p>Тема не найдена.</p>
-{% endif %}
+  {% else %}
+  <p class="no-theme">Тема не найдена.</p>
+  {% endif %}
+</body>
+
+</html>
