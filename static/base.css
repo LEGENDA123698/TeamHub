@@ -78,7 +78,7 @@
 }
 
 .carousel-item:hover svg {
-    scale: 1.4;
+    scale: 1.02;
 }
 
 .carousel-indicators {
@@ -102,10 +102,8 @@
     width: 28vw;
     background: white;
     border-radius: 14px;
-    /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
     border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 8px 12px;
-    overflow: hidden;
 }
 
 .navbar-img {
@@ -138,6 +136,8 @@
     padding: 5px 6px;
     border-radius: 8px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    top: -11px !important;
+    left: 65px !important
 }
 
 .dropdown-item {
@@ -182,22 +182,26 @@
     grid-auto-flow: dense !important;
     gap: 4px;
     width: 30vw;
-    top: 11.2%;
-    left: 3;
-    z-index: 9999;
+    top: 15px !important;
+    left: 100px !important;
     transform: scale(0);
+    transform-origin: right top;
+    z-index: 1000;
     opacity: 0;
     pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .mainmenu.show {
     pointer-events: auto;
-    animation: showMenu 0.2s forwards;
+    transform: scale(1);
+    opacity: 1;
 }
 
 .mainmenu.hide {
     pointer-events: none;
-    animation: hideMenu 0.2s forwards;
+    transform: scale(0);
+    opacity: 0;
 }
 
 @keyframes showMenu {

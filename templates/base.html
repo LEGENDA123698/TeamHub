@@ -19,38 +19,41 @@
     <a href="{% url 'main-page' %}" class="p-0">
       <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img mainmenu-toggler m-0" />
     </a>
-    <a id="navbarDropdown" data-bs-toggle="dropdown" href="#" class="no-focus p-0">
-      <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img m-0" />
-    </a>
-    <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
-      <li>
-        <input type="search" class="search" placeholder="Search">
-      </li>
-      <li>
-        <hr class="dropdown-divider mx-auto" />
-      </li>
-      {% if user.is_authenticated %}
-      <p class="dropdown-item" style="font-weight: bold">
-        <i class="fa-solid fa-user-tie" title="Admin"></i> {{ user.username }}
-      </p>
-      <li><a class="dropdown-item" href="{% url 'notifications-list' %}">
-          <i class="fa-solid fa-bell"></i> Notifications</a></li>
-      {% else %}
-      <p class="dropdown-item">Guest</p>
-      {% endif %}
-      <li>
-        <hr class="dropdown-divider mx-auto" />
-      </li>
-      {% if user.is_authenticated %}
-      <li>
-        <a class="dropdown-item logout-item" href="{% url 'logout' %}">
-          <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-      </li>
-      {% else %}
-      <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-      <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
-      {% endif %}
-    </ul>
+    <div class="dropdown">
+      <a class="no-focus p-0" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img m-0" />
+      </a>
+      <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
+        <li>
+          <input type="search" class="search" placeholder="Search">
+        </li>
+        <li>
+          <hr class="dropdown-divider mx-auto" />
+        </li>
+        {% if user.is_authenticated %}
+        <p class="dropdown-item" style="font-weight: bold">
+          <i class="fa-solid fa-user-tie" title="Admin"></i> {{ user.username }}
+        </p>
+        <li><a class="dropdown-item" href="{% url 'notifications-list' %}">
+            <i class="fa-solid fa-bell"></i> Notifications</a></li>
+        {% else %}
+        <p class="dropdown-item">Guest</p>
+        {% endif %}
+        <li>
+          <hr class="dropdown-divider mx-auto" />
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a class="dropdown-item logout-item" href="{% url 'logout' %}">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </li>
+        {% else %}
+        <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+        <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
 
