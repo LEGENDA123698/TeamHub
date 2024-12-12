@@ -15,12 +15,12 @@
 </head>
 
 <nav class="navbar fixed-top">
-  <div class="container-fluid">
-    <a href="{% url 'main-page' %}">
-      <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img mainmenu-toggler" />
+  <div class="container-fluid p-0">
+    <a href="{% url 'main-page' %}" class="p-0">
+      <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img mainmenu-toggler m-0" />
     </a>
-    <a id="navbarDropdown" data-bs-toggle="dropdown" href="#" class="no-focus">
-      <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img" />
+    <a id="navbarDropdown" data-bs-toggle="dropdown" href="#" class="no-focus p-0">
+      <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img m-0" />
     </a>
     <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
       <li>

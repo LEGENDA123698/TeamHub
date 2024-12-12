@@ -5,7 +5,7 @@ from django.views.generic import *
 from .models import *
 from .forms import *
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 
 
@@ -53,8 +53,12 @@ class ThemeDetailView(DetailView):
     
 class SectionCreateView(CreateView):
     model = Section 
-    context_object_name = "section"
-    template_name = ""
+    fields = ['name']
+    success_url = reverse_lazy('forum_app:forum-start')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return redirect(self.success_url)
 
 class SectionDeleteView(DeleteView):
     model = Section

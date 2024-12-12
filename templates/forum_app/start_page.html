@@ -16,23 +16,43 @@
     transform: translateX(0);
   }
 </style>
-
 {% endblock %}
+
+{% block content %}
 {% if sections %}
 <div class="default-placeholder">
   <div class="placeholder-header">
     <span>Sections</span>
-    <button class="create-button">+</button>
+    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
+      <i class="fa-solid fa-plus"></i>
+    </button>
   </div>
   {% for section in sections %}
   <div class="placeholder-item">
     <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
     <button class="item-button">+</button>
   </div>
-  <img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
   {% endfor %}
-  </ul>
+  <img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
 </div>
+
+<div class="modal fade" id="createSectionModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="POST" action="{% url 'forum_app:section-create' %}">
+        {% csrf_token %}
+        <div class="modal-body p-0">
+          <div class="search-container">
+            <input type="text" name="name" class="search" placeholder="Section Name">
+            <button type="button" class="close-button" data-bs-dismiss="modal">×</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% else %}
 <p>Разделы отсутствуют.</p>
 {% endif %}
+{% endblock %}
