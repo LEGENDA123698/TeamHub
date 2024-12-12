@@ -1,11 +1,21 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h1>Оголошення</h1>
-    <ul>
-        {% for notification in notifications %}
-            <li>
-                <small>({{ notification.date|date:"Y-m-d H:i" }})</small>
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+<head>
+    <title>Notifications List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notifications_app/notif.css' %}">
+</head>
+<body>
+    {% block content %}
+            {% for notification in notifications %}
+                <div class="notification">
+                    <p class="text">{{ notification.text }}</p>
+                    <p class="author">By {{ notification.author }}</p>
+                    <p class="date">{{ notification.date }}</p>
+                    <a href="{% url 'notification-detail' notification.pk %}" class="back-link">View Details</a> 
+                </div>
+                {% empty %}
+                    <p class="">No notifications available.</p>
+                {% endfor %}
+    {% endblock %}
+
+</body>
+

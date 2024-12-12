@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from auth_app.models import User
 
 class Section(models.Model):
     name = models.CharField(max_length=50, blank=True)
