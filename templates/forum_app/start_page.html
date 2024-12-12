@@ -85,7 +85,7 @@
 
   <div id="confirm{{ section.pk }}" class="confirm-popup" style="display: none;">
     <div class="confirm-content">
-      <span>Delete section?</span>
+      <span>Delete {{ section.name }}?</span>
       <div class="confirm-buttons">
         <button onclick="hideConfirm({{ section.pk }})">Cancel</button>
         <a href="{% url 'forum_app:section-delete' section.pk %}">Delete</a>
