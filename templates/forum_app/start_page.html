@@ -33,9 +33,22 @@
     <button class="item-button">+</button>
   </div>
   {% endfor %}
-  <img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
 </div>
 
+
+{% else %}
+<div class="default-placeholder">
+  <div class="placeholder-header">
+    <span>Sections</span>
+    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+  <div class="placeholder-item">
+    <a>No sections yet</a>
+  </div>
+</div>
+{% endif %}
 <div class="modal fade" id="createSectionModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -52,7 +65,10 @@
   </div>
 </div>
 
-{% else %}
-<p>Разделы отсутствуют.</p>
-{% endif %}
+<div style="display: flex; flex-direction: column; align-items: center;">
+  <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="get-of-my-oven">
+  <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Go to top</a>
+</div>
+
+<img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
 {% endblock %}

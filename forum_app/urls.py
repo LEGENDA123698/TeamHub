@@ -10,5 +10,5 @@ urlpatterns = [
     path('section/<int:pk>/', SectionDetailView.as_view(), name='section_detail'),
     path('theme/<int:pk>/', ThemeDetailView.as_view(), name='theme_detail'),
     path('section/create/', SectionCreateView.as_view(), name='section-create'),
-
+    path('theme/create/', ThemeCreateView.as_view(), name='theme-create')
 ]

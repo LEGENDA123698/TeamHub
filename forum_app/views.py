@@ -73,9 +73,13 @@ class SectionUpdateView(UpdateView):
 #-----------------------------------------------------------------
 
 class ThemeCreateView(CreateView):
-    model = Theme 
-    context_object_name = "theme"
-    template_name = ""
+    model = Theme
+    fields = ['name']
+    success_url = reverse_lazy('forum_app:section_detail')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return redirect(self.success_url)
 
 class ThemeDeleteView(DeleteView):
     model = Theme
