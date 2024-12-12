@@ -76,9 +76,10 @@
 }
 
 .placeholder-item a {
+    margin-left: 20px;
     position: absolute;
     width: 100%;
-    text-align: center;
+    text-align: left;
     line-height: 60px;
     color: inherit;
     text-decoration: none;
@@ -91,9 +92,9 @@
     transform: scale(1);
 }
 
-.placeholder-item .item-button {
+.placeholder-item .edit-button {
     position: absolute;
-    left: 50%;
+    right: 11%;
     transform: translateX(30px) scale(0.8);
     opacity: 0;
     transition: opacity 0.1s ease-in-out,
@@ -104,7 +105,7 @@
     width: 25px;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.15);
-    background: linear-gradient(145deg, #007aff, #0051a8);
+    background: linear-gradient(145deg, #C7C7CC, #8E8E93);
     color: white;
     display: flex;
     justify-content: center;
@@ -113,7 +114,34 @@
     font-size: 16px;
 }
 
-.placeholder-item:hover .item-button {
+.placeholder-item .delete-button {
+    position: absolute;
+    right: 6%;
+    transform: translateX(30px) scale(0.8);
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out,
+        transform 0.1s ease-in-out;
+    z-index: 2;
+    border-radius: 9px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #ff3b30, #a82d28);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.placeholder-item:hover .delete-button {
+    opacity: 1;
+    transform: translateX(30px) scale(1);
+}
+
+.placeholder-item:hover .edit-button {
     opacity: 1;
     transform: translateX(30px) scale(1);
 }
@@ -147,7 +175,7 @@
 
 .modal {
     position: absolute !important;
-    top: -237px !important;
+    top: -227.5px !important;
     left: 27.17vw !important;
 }
 

@@ -30,7 +30,7 @@
   {% for theme in themes %}
   <div class="placeholder-item">
     <a href="{% url 'forum_app:theme_detail' theme.pk %}">{{ theme.name }}</a>
-    <button class="item-button">+</button>
+    <button class="item-button"><i class="fa-solid fa-plus"></i></button>
   </div>
   {% endfor %}
 </div>
@@ -52,7 +52,7 @@
 <div class="modal fade" id="createThemeModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <form method="POST" action="{% url 'forum_app:theme-create' %}">
+      <form method="POST" action="{% url 'forum_app:theme-create' section_pk=sections.pk %}">
         {% csrf_token %}
         <div class="modal-body p-0">
           <div class="search-container">

@@ -15,6 +15,53 @@
   .chill-guy:hover {
     transform: translateX(0);
   }
+
+  .confirm-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .confirm-content {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5) display: flex;
+    background: white;
+    padding: 15px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .confirm-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .confirm-buttons button,
+  .confirm-buttons a {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .confirm-buttons button {
+    background: #ccc;
+    color: black;
+  }
+
+  .confirm-buttons a {
+    background: #dc3545;
+    color: white;
+  }
 </style>
 {% endblock %}
 
@@ -30,7 +77,20 @@
   {% for section in sections %}
   <div class="placeholder-item">
     <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
-    <button class="item-button">+</button>
+    <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+    <button class="delete-button" onclick="showConfirm({{ section.pk }})">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+
+  <div id="confirm{{ section.pk }}" class="confirm-popup" style="display: none;">
+    <div class="confirm-content">
+      <span>Delete section?</span>
+      <div class="confirm-buttons">
+        <button onclick="hideConfirm({{ section.pk }})">Cancel</button>
+        <a href="{% url 'forum_app:section-delete' section.pk %}">Delete</a>
+      </div>
+    </div>
   </div>
   {% endfor %}
 </div>
@@ -71,4 +131,14 @@
 </div>
 
 <img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
+
+<script>
+  function showConfirm(id) {
+    document.getElementById('confirm' + id).style.display = 'flex';
+  }
+
+  function hideConfirm(id) {
+    document.getElementById('confirm' + id).style.display = 'none';
+  }
+</script>
 {% endblock %}

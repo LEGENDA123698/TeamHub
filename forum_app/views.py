@@ -62,8 +62,10 @@ class SectionCreateView(CreateView):
 
 class SectionDeleteView(DeleteView):
     model = Section
-    context_object_name = "section"
-    template_name = ""
+    success_url = reverse_lazy('forum_app:forum-start')
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
 class SectionUpdateView(UpdateView):
     model = Section
@@ -75,11 +77,14 @@ class SectionUpdateView(UpdateView):
 class ThemeCreateView(CreateView):
     model = Theme
     fields = ['name']
-    success_url = reverse_lazy('forum_app:section_detail')
+    template_name = 'forum_app/section_detail.html'
 
     def form_valid(self, form):
-        response = super().form_valid(form)
-        return redirect(self.success_url)
+        theme = form.save(commit=False)
+        section_pk = self.kwargs.get('section_pk')
+        theme.section = Section.objects.get(pk=section_pk)
+        theme.save()
+        return redirect('forum_app:section_detail', pk=theme.section.pk)
 
 class ThemeDeleteView(DeleteView):
     model = Theme
