@@ -6,6 +6,11 @@
     font-family: "SF Pro";
 }
 
+*::selection {
+    background-color: #007aff;
+    color: white;
+}
+
 .no-focus:focus {
     outline: none !important;
     box-shadow: none !important;
