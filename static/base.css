@@ -246,7 +246,7 @@
     flex-direction: column;
     height: 48.83%;
     font-weight: bold;
-    transition: transform 300ms ease-in-out;
+    transition: transform 0.1s ease-in-out, background 0.1s ease-in-out, color 0.1s ease-in-out;
 }
 
 .mainmenu-item i {
@@ -350,3 +350,13 @@
         -webkit-opacity: 0;
     }
 }
+
+/* .gradient-rect {
+    background-color: white;
+    width: 100vw;
+    height: 2vh;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+} */

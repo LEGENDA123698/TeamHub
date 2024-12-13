@@ -1,0 +1,25 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid Layout</title>
+<link rel="stylesheet" href="{% static 'gallery_app/gallery.css' %}">
+{% endblock %}
+
+{% block content%}
+
+<body>
+    <div class="grid-container">
+        {% for image in images %}
+        <div class="grid-item" style="
+            --cols: {{ image.grid_column_span }};
+            --rows: {{ image.grid_row_span }};">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}">
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+{% endblock %}

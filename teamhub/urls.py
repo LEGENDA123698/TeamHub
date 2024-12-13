@@ -27,7 +27,8 @@ urlpatterns = [
     path('', include('calendar_app.urls')),
     path('', include('materials_app.urls')),
     path('notifications/', include('notifications_app.urls')),
-    path('', include('portfolio_app.urls'))
+    path('', include('portfolio_app.urls')),
+    path('gallery/', include('gallery_app.urls'))
 ]
 
 if settings.DEBUG:
