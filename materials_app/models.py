@@ -13,8 +13,8 @@ material_types = (
 class Material(models.Model):
     description = models.TextField()
     link = models.TextField(blank=True)
-    file = models.FileField(upload_to='files/', blank=True, null=True)
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    file = models.FileField(upload_to='media/material_files/', blank=True, null=True)
+    image = models.ImageField(upload_to='media/material_files/', blank=True, null=True)
     type = models.CharField(max_length=20, choices=material_types,default='LINK')
 
     def cut_url(self):
