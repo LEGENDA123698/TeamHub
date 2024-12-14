@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'materials_app',
     'colorfield',
     'portfolio_app',
+    'vote_app',
     
 
 ]

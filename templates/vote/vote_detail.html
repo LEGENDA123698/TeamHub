@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Votes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <h1>{{vote.title}}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {% for answer in answers %}
+        <input type="radio" id="{{answer.id}}" name="vote" value="{{answer.id}}">
+        <label for="{{answer.id}}">{{answer.title}}</label><br>
+        <p>{{answer.procent}}%</p>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width:{{answer.procent}}%;">
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+        <button type="submit">sumbit</button> 
+    </form>
+
+    {%for answer in answers%}
+    {% if current_user in answer.user.all %}
+    <form method="post" action="{% url 'remove_vote_answer' answer.pk %}">
+        {% csrf_token %}
+        <button type="submit">Remove vote</button>
+    </form>
+    {%endif%}
+    {%endfor%}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
