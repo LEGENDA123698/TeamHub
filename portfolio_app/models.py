@@ -3,7 +3,7 @@ from auth_app.models import User
 
 
 class ShowcaseElement(models.Model):
-    image = models.ImageField(upload_to='showcase_files/')
+    image = models.ImageField(upload_to='media/showcase_files/')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='showcase_elements')
 
 class FriendRequest(models.Model):

@@ -26,6 +26,8 @@ urlpatterns = [
     path('forum/', include('forum_app.urls')),
     path('', include('calendar_app.urls')),
     path('', include('materials_app.urls')),
+    path('', include('portfolio_app.urls')),
+    path('', include('vote_app.urls')),
     path('notifications/', include('notifications_app.urls'))
 ]
 
