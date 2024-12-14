@@ -26,7 +26,7 @@
             <div class="background-gradient"></div>
             <p class="title-text">{{ image.title }}</p>
             <a href="{{ image.image.url}}" download><i class="fa-solid fa-download control-buttons"></i></a>
-            {% if image.author == user %}
+            {% if image.author == user or user.is_staff %}
             <a href="#" data-bs-toggle="modal" data-bs-target="#deleteImageModal{{image.id}}">
                 <i class="fa-solid fa-trash control-buttons"></i>
             </a>
