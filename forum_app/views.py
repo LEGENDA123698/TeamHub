@@ -91,15 +91,18 @@ class ThemeCreateView(CreateView):
         return redirect('forum_app:section_detail', pk=theme.section.pk)
 
 class ThemeDeleteView(DeleteView):
-    model = Theme  # Исправлено с Section на Theme
-    success_url = reverse_lazy('forum_app:forum-start')
+    model = Theme
 
-    def dispatch(self, request, *args, **kwargs):
-        theme = self.get_object()
-        if theme.section.creator != request.user:  # Права на удаление темы
-            return HttpResponseForbidden("Вы не можете удалить эту тему.")
-        return super().dispatch(request, *args, **kwargs)
+    def get_success_url(self):
+        return reverse('forum_app:section_detail', kwargs={'pk': self.object.section.pk})
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
+    
+    
 class ThemeUpdateView(UpdateView):
     model = Theme
     fields = ['name']
