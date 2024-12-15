@@ -179,14 +179,14 @@
     border: 1px solid rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     position: fixed;
-    height: 30vh;
+    height: fit-content; 
     max-width: fit-content;
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
     grid-template-rows: repeat(2, 1fr) !important;
     grid-auto-flow: dense !important;
     gap: 4px;
-    width: 30vw;
+    width: 400px; 
     top: 15px !important;
     left: 100px !important;
     transform: scale(0);
@@ -249,13 +249,14 @@
     text-align: center;
     width: 100%;
     flex-direction: column;
-    height: 48.83%;
+    height: 100%;
     font-weight: bold;
     transition: transform 0.1s ease-in-out, background 0.1s ease-in-out, color 0.1s ease-in-out;
 }
 
 .mainmenu-item i {
-    margin-top: 20%;
+    margin-top: 10%;
+    margin-bottom: 5px;
     font-size: 50px;
 }
 
