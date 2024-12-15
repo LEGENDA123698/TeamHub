@@ -1,6 +1,6 @@
 @import '../base.css';
 
-body {
+/** body {
     background-color: rgb(167, 167, 167);
     justify-content: center;
     align-items: center;
@@ -23,4 +23,17 @@ body {
     font-size: 0.8em;
     color: #000000;
     text-align: right;
+} **/
+
+.container {
+    background: whitesmoke;
+    border-radius: 14px;
+    padding: 6px;
+    width: 80vw;
+    margin-top: 14.5vh;
+    gap: 6px;
+}
+
+.navbar {
+    width: 79vw
 }

@@ -4,7 +4,7 @@ from django import forms
 class NotificationForm(forms.ModelForm):
     class Meta:
         model = Notification
-        fields = ['text', 'author', 'date']
+        fields = ['text', 'date']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'})
         }
