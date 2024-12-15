@@ -3,20 +3,143 @@
 
 {% block extra_head %}
 <link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet">
+<style>
+  .chill-guy {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(90deg) translateX(100%);
+    transition: transform 0.5s ease;
+  }
+
+  .chill-guy:hover {
+    transform: translateX(0);
+  }
+
+  .confirm-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .confirm-content {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5) display: flex;
+    background: white;
+    padding: 15px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .confirm-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .confirm-buttons button,
+  .confirm-buttons a {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .confirm-buttons button {
+    background: #ccc;
+    color: black;
+  }
+
+  .confirm-buttons a {
+    background: #dc3545;
+    color: white;
+  }
+</style>
+<title>TeamHub Forum</title>
 {% endblock %}
+
+{% block content %}
 {% if sections %}
 <div class="default-placeholder">
   <div class="placeholder-header">
-    <p>Sections</p>
-    <button class="create-button">+</button>
+    <span>Sections</span>
+    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
+      <i class="fa-solid fa-plus"></i>
+    </button>
   </div>
   {% for section in sections %}
   <div class="placeholder-item">
     <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
+    <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+    <button class="delete-button" onclick="showConfirm({{ section.pk }})">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+
+  <div id="confirm{{ section.pk }}" class="confirm-popup" style="display: none;">
+    <div class="confirm-content">
+      <span>Delete {{ section.name }}?</span>
+      <div class="confirm-buttons">
+        <button onclick="hideConfirm({{ section.pk }})">Cancel</button>
+        <a href="{% url 'forum_app:section-delete' section.pk %}">Delete</a>
+      </div>
+    </div>
   </div>
   {% endfor %}
-  </ul>
 </div>
+
+
 {% else %}
-<p>Разделы отсутствуют.</p>
+<div class="default-placeholder">
+  <div class="placeholder-header">
+    <span>Sections</span>
+    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+  <div class="placeholder-item">
+    <a>No sections yet</a>
+  </div>
+</div>
 {% endif %}
+<div class="modal fade" id="createSectionModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="POST" action="{% url 'forum_app:section-create' %}">
+        {% csrf_token %}
+        <div class="modal-body p-0">
+          <div class="search-container">
+            <input type="text" name="name" class="search" placeholder="Section Name">
+            <button type="button" class="close-button" data-bs-dismiss="modal">×</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+  <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="get-of-my-oven">
+  <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Go to top</a>
+</div>
+
+<img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
+
+<script>
+  function showConfirm(id) {
+    document.getElementById('confirm' + id).style.display = 'flex';
+  }
+
+  function hideConfirm(id) {
+    document.getElementById('confirm' + id).style.display = 'none';
+  }
+</script>
+{% endblock %}

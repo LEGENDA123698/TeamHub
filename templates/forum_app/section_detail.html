@@ -1,12 +1,74 @@
-{% include 'base.html' %}{% load static %} {% block extra_head %}
-<link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet" />
-{% endblock %} {% if sections %}
+{% include 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet">
+<style>
+  .chill-guy {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(90deg) translateX(100%);
+    transition: transform 0.5s ease;
+  }
+
+  .chill-guy:hover {
+    transform: translateX(0);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if themes %}
 <div class="default-placeholder">
-  <div class="placeholder-header">{{ sections.name }}</div>
+  <div class="placeholder-header">
+    <span>{{ sections.name }}</span>
+    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createThemeModal">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
   {% for theme in themes %}
   <div class="placeholder-item">
     <a href="{% url 'forum_app:theme_detail' theme.pk %}">{{ theme.name }}</a>
+    <button class="item-button"><i class="fa-solid fa-plus"></i></button>
   </div>
   {% endfor %}
 </div>
+
+{% else %}
+<div class="default-placeholder">
+  <div class="placeholder-header">
+    <span>{{ sections.name }}</span>
+    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createThemeModal">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+  <div class="placeholder-item">
+    <a>No themes yet</a>
+  </div>
+</div>
 {% endif %}
+
+<div class="modal fade" id="createThemeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="POST" action="{% url 'forum_app:theme-create' section_pk=sections.pk %}">
+        {% csrf_token %}
+        <div class="modal-body p-0">
+          <div class="search-container">
+            <input type="text" name="name" class="search" placeholder="Theme Name">
+            <button type="button" class="close-button" data-bs-dismiss="modal">×</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+  <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="get-of-my-oven">
+  <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Go to top</a>
+</div>
+
+<img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
+{% endblock %}

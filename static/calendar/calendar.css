@@ -2,9 +2,13 @@
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
+    gap: 6px;
     max-width: 600px;
     margin: 20px auto;
+    margin-right: 10px;
+    border-radius: 10px;
+    background: white;
+    padding: 6px;
 }
 
 .calendar-header {
@@ -19,4 +23,17 @@
     border-radius: 5px;
     padding: 10px;
     text-align: center;
+}
+
+.container {
+    background: whitesmoke;
+    border-radius: 14px;
+    padding: 6px;
+    width: 80vw;
+    margin-top: 14.5vh;
+    gap: 6px;
+}
+
+.navbar {
+    width: 79vw
 }

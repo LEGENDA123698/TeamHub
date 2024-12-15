@@ -12,46 +12,50 @@
     crossorigin="anonymous"></script>
 
   <link href="{% static 'base.css' %}" type="text/css" rel="stylesheet" />
-  <link rel="stylesheet" href="{% static 'portfolio/avatar.css' %}">
+  <link rel="icon" href="{% static 'logo.png' %}">
 </head>
 
+<!-- <div class="gradient-rect"></div> -->
 <nav class="navbar fixed-top">
-  <div class="container-fluid">
-    <a href="{% url 'main-page' %}">
-      <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img mainmenu-toggler" />
+  <div class="container-fluid p-0">
+    <a href="{% url 'main-page' %}" class="p-0">
+      <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img mainmenu-toggler m-0" />
     </a>
-    <a id="navbarDropdown" data-bs-toggle="dropdown" href="#" class="no-focus">
-      <div class='navbar-brand navbar-img mainmenu-toggler avatar' style="background-image: url('{{user.avatar.url}}'); width: 50px;height: 50px;"></div>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
-      <li>
-        <input type="search" class="search" placeholder="Search">
-      </li>
-      <li>
-        <hr class="dropdown-divider mx-auto" />
-      </li>
-      {% if user.is_authenticated %}
-      <a class="dropdown-item" href="{% url 'user_profile' user.pk %}">
-        <i class="fa-solid fa-user-tie" title="Admin"></i> {{ user.username }}
+    <div class="dropdown">
+      <a class="no-focus p-0" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <img src="{% static 'user_icon.png' %}" class="navbar-brand navbar-img m-0" />
       </a>
-      <li><a class="dropdown-item" href="{% url 'notifications-list' %}">
-          <i class="fa-solid fa-bell"></i> Notifications</a></li>
-      {% else %}
-      <p class="dropdown-item">Guest</p>
-      {% endif %}
-      <li>
-        <hr class="dropdown-divider mx-auto" />
-      </li>
-      {% if user.is_authenticated %}
-      <li>
-        <a class="dropdown-item logout-item" href="{% url 'logout' %}">
-          <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-      </li>
-      {% else %}
-      <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-      <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
-      {% endif %}
-    </ul>
+      <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
+        <li>
+          <input type="search" class="search" placeholder="Search">
+        </li>
+        <li>
+          <hr class="dropdown-divider mx-auto" />
+        </li>
+        {% if user.is_authenticated %}
+        <p class="dropdown-item" style="font-weight: bold">
+          <i class="fa-solid fa-user-tie" title="Admin"></i> {{ user.username }}
+        </p>
+        <li><a class="dropdown-item" href="{% url 'notifications-list' %}">
+            <i class="fa-solid fa-bell"></i> Notifications</a></li>
+        {% else %}
+        <p class="dropdown-item">Guest</p>
+        {% endif %}
+        <li>
+          <hr class="dropdown-divider mx-auto" />
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a class="dropdown-item logout-item" href="{% url 'logout' %}">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </li>
+        {% else %}
+        <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+        <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
 
@@ -67,8 +71,8 @@
     </a>
   </li>
   <li>
-    <a class="dropdown-item mainmenu-item" href="{% url 'forum_app:forum-start' %}">Forum
-      <i class="fa-solid fa-comments"></i>
+    <a class="dropdown-item mainmenu-item" href="{% url 'gallery-start' %}">Gallery
+      <i class="fa-solid fa-image"></i>
     </a>
   </li>
   <li>

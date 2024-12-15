@@ -1,0 +1,223 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TeamHub Gallery</title>
+<link rel="stylesheet" href="{% static 'gallery_app/gallery.css' %}">
+{% endblock %}
+
+{% block content%}
+
+<body>
+    <div class="grid-container">
+        <div class="grid-item add-image-item">
+            <a href="#" class="add-image-button" data-bs-toggle="modal" data-bs-target="#addImageModal">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+        {% for image in images %}
+        <div class="grid-item" style="
+            --cols: {{ image.grid_column_span }};
+            --rows: {{ image.grid_row_span }};">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}">
+            <a href="{% url 'user_profile' image.author.id%}" class="author-name"> {{ image.author.username }}</a>
+            <div class="background-gradient"></div>
+            <p class="title-text">{{ image.title }}</p>
+            <a href="{{ image.image.url}}" download><i class="fa-solid fa-download control-buttons"></i></a>
+            {% if image.author == user or user.is_staff %}
+            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteImageModal{{image.id}}">
+                <i class="fa-solid fa-trash control-buttons"></i>
+            </a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#editImageModal{{image.id}}">
+                <i class="fa-solid fa-pen control-buttons"></i>
+            </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="modal fade" id="addImageModal" tabindex="-1" aria-labelledby="addImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addImageModalLabel">Add New Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'image-create' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="imageTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="imageTitle" name="title" maxlength="20"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imageFile" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="imageFile" name="image" accept="image/*"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Size</label>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="grid_column_span" class="form-label">Width</label>
+                                    <select class="form-select" id="grid_column_span" name="grid_column_span" required>
+                                        <option value="1">1x</option>
+                                        <option value="2">2x</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="grid_row_span" class="form-label">Height</label>
+                                    <select class="form-select" id="grid_row_span" name="grid_row_span" required>
+                                        <option value="1">1x</option>
+                                        <option value="2">2x</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Preview</label>
+                                    <div class="grid-preview">
+                                        <div class="preview-item"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer start-50">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add Image</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for image in images %}
+    <div class="modal fade" id="editImageModal{{image.id}}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'image-update' image.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="imageTitle{{image.id}}" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="imageTitle{{image.id}}" name="title"
+                                maxlength="20" required value="{{ image.title }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="imageFile{{image.id}}" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="imageFile{{image.id}}" name="image"
+                                accept="image/*">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Size</label>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="grid_column_span{{image.id}}" class="form-label">Width</label>
+                                    <select class="form-select" id="grid_column_span{{image.id}}"
+                                        name="grid_column_span" required>
+                                        <option value="1" {% if image.grid_column_span == 1 %}selected{% endif %}>1x
+                                        </option>
+                                        <option value="2" {% if image.grid_column_span == 2 %}selected{% endif %}>2x
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="grid_row_span{{image.id}}" class="form-label">Height</label>
+                                    <select class="form-select" id="grid_row_span{{image.id}}" name="grid_row_span"
+                                        required>
+                                        <option value="1" {% if image.grid_row_span == 1 %}selected{% endif %}>1x</option>
+                                        <option value="2" {% if image.grid_row_span == 2 %}selected{% endif %}>2x</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Preview</label>
+                                    <div class="grid-preview">
+                                        <div class="preview-item" id="preview{{image.id}}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteImageModal{{image.id}}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this image?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form method="POST" action="{% url 'image-delete' image.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const columnSelect = document.getElementById('grid_column_span');
+        const rowSelect = document.getElementById('grid_row_span');
+        const previewItem = document.querySelector('.preview-item');
+
+        function updatePreview() {
+            const cols = columnSelect.value;
+            const rows = rowSelect.value;
+            previewItem.style.setProperty('--preview-cols', cols);
+            previewItem.style.setProperty('--preview-rows', rows);
+        }
+
+        columnSelect.addEventListener('change', updatePreview);
+        rowSelect.addEventListener('change', updatePreview);
+
+        updatePreview();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        {% for image in images %}
+        (function () {
+            const columnSelect = document.getElementById('grid_column_span{{image.id}}');
+            const rowSelect = document.getElementById('grid_row_span{{image.id}}');
+            const previewItem = document.getElementById('preview{{image.id}}');
+
+            if (columnSelect && rowSelect && previewItem) {
+                function updatePreview() {
+                    const cols = columnSelect.value;
+                    const rows = rowSelect.value;
+                    previewItem.style.setProperty('--preview-cols', cols);
+                    previewItem.style.setProperty('--preview-rows', rows);
+                }
+
+                columnSelect.addEventListener('change', updatePreview);
+                rowSelect.addEventListener('change', updatePreview);
+
+                updatePreview();
+            }
+        })();
+        {% endfor %}
+    });
+</script>
+
+{% endblock %}

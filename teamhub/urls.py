@@ -28,7 +28,7 @@ urlpatterns = [
     path('', include('materials_app.urls')),
     path('', include('portfolio_app.urls')),
     path('', include('vote_app.urls')),
-    path('notifications/', include('notifications_app.urls'))
+    path('notifications/', include('notifications_app.urls')),
 ]
 
 if settings.DEBUG:
