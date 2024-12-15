@@ -1,15 +1,26 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'auth_app/auth.css' %}">
+{% endblock %}
+
+{% block content %}
 <p style="font-size: 30px;font-weight: 600;">Login</p><br>
 
 <form method="post" action="{% url 'login' %}">
   {%csrf_token%}
-  <div class="form-floating mb-3">
-    <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+  <div class="input-container">
+    <p class="mb-0" style="font-weight: 500;">Username</p>
+    <input type="text" name="username" class="auth-input mb-1" id="floatingInput">
+    <span class="d-flex justify-content-between">
+      <p class="mb-0" style="font-weight: 500;">Password</p>
+      <a href="{% url 'forgot-password'%}" class="ml-5" style="color: #007AFF; font-size: 12px; text-decoration: none;">Forgot password?</a>
+    </span>
+    <input type="password" name="password" class="auth-input mb-0" id="floatingPassword">
+    <button type="submit" class="auth-button">Login</button>
+    <p>Have no account? <a href="{% url 'register'%}">Register here!</a></p>
   </div>
-  <div class="form-floating">
-    <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-outline-info" style="margin-top: 20px;">Login</button>
 </form>
 
-</form>
-<p>Have no account? <a href="{% url 'register'%}">Register here!</a></p>
+{% endblock %}
