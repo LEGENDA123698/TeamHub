@@ -33,7 +33,7 @@ class ThemeDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['messages'] = self.object.theme_message.all()
         context['form'] = MessageForm()
-        paginator = Paginator(context['messages'], 1)
+        paginator = Paginator(context['messages'], 4)
         page_number = self.request.GET.get('page')
         context['page_obj'] = paginator.get_page(page_number)
         return context
@@ -69,8 +69,12 @@ class SectionDeleteView(DeleteView):
 
 class SectionUpdateView(UpdateView):
     model = Section
-    context_object_name = "section"
-    template_name = ""
+    fields = ['name']
+    success_url = reverse_lazy('forum_app:forum-start')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return redirect(self.success_url)
 
 #-----------------------------------------------------------------
 
@@ -87,14 +91,24 @@ class ThemeCreateView(CreateView):
         return redirect('forum_app:section_detail', pk=theme.section.pk)
 
 class ThemeDeleteView(DeleteView):
-    model = Theme
-    context_object_name = "theme"
-    template_name = ""
+    model = Theme  # Исправлено с Section на Theme
+    success_url = reverse_lazy('forum_app:forum-start')
+
+    def dispatch(self, request, *args, **kwargs):
+        theme = self.get_object()
+        if theme.section.creator != request.user:  # Права на удаление темы
+            return HttpResponseForbidden("Вы не можете удалить эту тему.")
+        return super().dispatch(request, *args, **kwargs)
 
 class ThemeUpdateView(UpdateView):
-    model = Section
-    context_object_name = "theme"
-    template_name = ""
+    model = Theme
+    fields = ['name']
+
+    def get_success_url(self):
+        if self.object.section:
+            return reverse('forum_app:section_detail', args=[self.object.section.pk])
+        return reverse_lazy('forum_app:forum-start')
+
 
 #-----------------------------------------------------------------
 

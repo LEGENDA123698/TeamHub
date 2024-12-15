@@ -22,31 +22,35 @@
     left: 0;
     width: 100%;
     height: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    background: rgba(0, 0, 0, 0.5); /* Dark background overlay */
   }
 
   .confirm-content {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.5) display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     background: white;
     padding: 15px;
     border-radius: 14px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 300px; /* Optional, adjust as needed */
   }
 
   .confirm-buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center; /* Centering buttons */
     gap: 10px;
+    width: 100%;
   }
 
   .confirm-buttons button,
   .confirm-buttons a {
-    padding: 5px 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 11px;
     cursor: pointer;
@@ -58,9 +62,18 @@
     color: black;
   }
 
+  .confirm-buttons button[type="submit"] {
+    background: #28a745; /* Green background for Save */
+    color: white;
+  }
+
   .confirm-buttons a {
     background: #dc3545;
     color: white;
+  }
+
+  .confirm-buttons button, .confirm-buttons a {
+    width: auto; /* Ensure buttons size correctly */
   }
 </style>
 <title>TeamHub Forum</title>
@@ -78,12 +91,13 @@
   {% for section in sections %}
   <div class="placeholder-item">
     <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
-    <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+    <button class="edit-button" onclick="showEdit({{ section.pk }}, '{{ section.name }}')">
+      <i class="fa-solid fa-pen-to-square"></i>
+    </button>
     <button class="delete-button" onclick="showConfirm({{ section.pk }})">
       <i class="fa-solid fa-trash"></i>
     </button>
   </div>
-
   <div id="confirm{{ section.pk }}" class="confirm-popup" style="display: none;">
     <div class="confirm-content">
       <span>Delete {{ section.name }}?</span>
@@ -93,10 +107,20 @@
       </div>
     </div>
   </div>
+  <div id="edit{{ section.pk }}" class="confirm-popup" style="display: none;">
+    <div class="confirm-content">
+      <form method="POST" action="{% url 'forum_app:section-update' section.pk %}">
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ section.name }}" required>
+        <div class="confirm-buttons">
+          <button type="button" onclick="hideEdit({{ section.pk }})">Cancel</button>
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
   {% endfor %}
 </div>
-
-
 {% else %}
 <div class="default-placeholder">
   <div class="placeholder-header">
@@ -110,6 +134,7 @@
   </div>
 </div>
 {% endif %}
+
 <div class="modal fade" id="createSectionModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -118,7 +143,7 @@
         <div class="modal-body p-0">
           <div class="search-container">
             <input type="text" name="name" class="search" placeholder="Section Name">
-            <button type="button" class="close-button" data-bs-dismiss="modal">×</button>
+            <button type="button" class="close-button" data-bs-dismiss="modal">&times;</button>
           </div>
         </div>
       </form>
@@ -140,6 +165,17 @@
 
   function hideConfirm(id) {
     document.getElementById('confirm' + id).style.display = 'none';
+  }
+
+  function showEdit(id, currentName) {
+    const editPopup = document.getElementById('edit' + id);
+    const inputField = editPopup.querySelector('input[name="name"]');
+    inputField.value = currentName;
+    editPopup.style.display = 'flex';
+  }
+
+  function hideEdit(id) {
+    document.getElementById('edit' + id).style.display = 'none';
   }
 </script>
 {% endblock %}

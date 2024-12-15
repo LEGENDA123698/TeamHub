@@ -6,6 +6,7 @@ class Section(models.Model):
 
 class Theme(models.Model):
     name = models.CharField(max_length=50, blank=True)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name="themes", default=1)
     text = models.TextField(max_length=10000, blank=True)
     author = models.ForeignKey(User, related_name="theme_author", on_delete=models.CASCADE, blank=True, default=1)
     related_section = models.ForeignKey(Section, related_name="section_theme", on_delete=models.CASCADE, blank=True, default=1)
