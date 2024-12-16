@@ -136,6 +136,9 @@
         <li>
           <p><strong>{{ message.message_author }}</strong>:</p>
           <p>{{ message.text }}</p>
+          {% if message.image %}
+          <img src="{{ message.image.url }}" alt="Изображение" style="max-width: 100%; height: auto; margin-top: 10px;">
+          {% endif %}
         </li>
         {% endfor %}
       </ul>
@@ -176,9 +179,11 @@
     {% if user.is_authenticated %}
     <div class="message-form">
       <h3>Написать сообщение:</h3>
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.text }}
+        <br />
+        {{ form.image }}
         <br />
         <button type="submit">Отправить</button>
       </form>

@@ -40,14 +40,18 @@ class ThemeDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = MessageForm(request.POST)
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden("Вы должны быть авторизованы для отправки сообщений.")
+        
+        form = MessageForm(request.POST, request.FILES)  # Добавлено request.FILES
         if form.is_valid():
             message = form.save(commit=False)
-            message.theme = self.object
+            message.related_theme = self.object
             message.message_author = request.user
             message.save()
             return redirect(reverse('forum_app:theme_detail', args=[self.object.pk]))
         return self.get(request, *args, **kwargs)
+
     
 #-----------------------------------------------------------------
     
@@ -80,13 +84,21 @@ class SectionUpdateView(UpdateView):
 
 class ThemeCreateView(CreateView):
     model = Theme
-    fields = ['name']
+    fields = ['name'] 
     template_name = 'forum_app/section_detail.html'
 
     def form_valid(self, form):
-        theme = form.save(commit=False)
         section_pk = self.kwargs.get('section_pk')
-        theme.section = Section.objects.get(pk=section_pk)
+    
+        try:
+            theme_section = Section.objects.get(pk=section_pk)
+        except Section.DoesNotExist:
+            return redirect('forum_app:section_list')
+        theme_author = self.request.user
+        theme = form.save(commit=False)
+        theme.section = theme_section
+        theme.author = theme_author
+        theme.related_section = theme_section
         theme.save()
         return redirect('forum_app:section_detail', pk=theme.section.pk)
 
