@@ -26,15 +26,10 @@ urlpatterns = [
     path('forum/', include('forum_app.urls')),
     path('', include('calendar_app.urls')),
     path('', include('materials_app.urls')),
-<<<<<<< HEAD
     path('notifications/', include('notifications_app.urls')),
     path('', include('portfolio_app.urls')),
-    path('gallery/', include('gallery_app.urls'))
-=======
+    path('gallery/', include('gallery_app.urls')),
     path('', include('portfolio_app.urls')),
-    path('', include('vote_app.urls')),
-    path('notifications/', include('notifications_app.urls'))
->>>>>>> b19aa67c359ad67e526fbc3dd61e6832e0e2aa38
 ]
 
 if settings.DEBUG:
