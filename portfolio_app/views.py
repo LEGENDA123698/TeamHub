@@ -5,6 +5,7 @@ from auth_app.models import *
 from portfolio_app.forms import *
 from django.urls import reverse_lazy
 from forum_app.models import Message
+from portfolio_app.mixins import UserIsOwnerMixin, UserIsProfileOwner
 
 
 class ProfileView(DetailView):
@@ -38,7 +39,7 @@ class PortfolioCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'pk': self.request.user.id})
     
-class PortfolioUpdateView(UpdateView):
+class PortfolioUpdateView(UserIsOwnerMixin, UpdateView):
     model = ShowcaseElement
     form_class = ShowcaseElementForm
     template_name = 'portfolio/update.html'
@@ -46,7 +47,7 @@ class PortfolioUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'pk': self.request.user.id})
     
-class PortfolioDeleteView(DeleteView):
+class PortfolioDeleteView(UserIsOwnerMixin, DeleteView):
     model = ShowcaseElement
 
     def get(self, request, *args, **kwargs):
@@ -63,7 +64,7 @@ class FriendRequestsView(TemplateView):
         context['requests'] = FriendRequest.objects.filter(receiver=user.id)
         return context
 
-class AvatarUpdateView(UpdateView):
+class AvatarUpdateView(UserIsProfileOwner, UpdateView):
     model = User
     form_class = AvatarForm
     template_name = 'portfolio/update.html'
@@ -71,7 +72,7 @@ class AvatarUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'pk': self.request.user.id})
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(UserIsProfileOwner, UpdateView):
     model = User
     form_class = ProfileForm
     template_name = 'portfolio/update.html'

@@ -1,0 +1,21 @@
+.nickname {
+    padding-top: 70px;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    max-width: 700px;
+}
+
+.about {
+    position: relative;
+    font-size: 20px;
+    font-weight: normal;
+    padding-top: -40px;
+    display: block;
+}
+
+.theme {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
