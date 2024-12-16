@@ -10,17 +10,19 @@
         <div class="placeholder-header">
             <h1 class='text-center'>Notifications</h1>
             {% if user.is_staff %}
-            <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#">
+            <!-- <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#">
                 <i class="fa-solid fa-plus"></i>
-            </button>
+            </button> -->
             {% endif %}
         </div>
     </div>
 {% if notifications %}
 {% if page_object %}
     {% for notification in page_object %}
-        <h2>{{ notification.author }}</h2>
-        <p>{{ notification.text }}</p>
+        <h2>{{ notification.author }} <h4>ID: {{ notification.id }}</h4></h2>
+        <p>Content:
+            <a class='button' href="{% url 'notification-detail' notification.pk %}">View Details</a>
+        </p>
     {% endfor %}
     <ul class='pagination'>
         {% if page_object.has_previous %}

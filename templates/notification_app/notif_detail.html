@@ -1,123 +1,18 @@
+{% include 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block extra_head %}
+<link rel="stylesheet" href='{% static '/notifications_app/notif.css' %}'>
+<title>Notifications #{{ notification.id }} Details</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="default-placeholder">
+        <div class="placeholder-header">        
+            <h1 class='text-center'>Notification's Details</h1>
+        </div>
+        <h2>Author: {{ notification.author }}</h2> 
+        <p>Content: {{ notification.text }}</p>
+    </div>
+</div>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notification Details</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-
-    .notif-detail {
-      max-width: 800px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .notif-detail h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      color: #2c3e50;
-    }
-
-    .notif-detail p {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .notif-list h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      color: #34495e;
-    }
-
-    .notif-list ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .notif-list li {
-      padding: 10px;
-      margin-bottom: 10px;
-      background: #ecf0f1;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .notif-list li p {
-      margin: 5px 0;
-    }
-
-    .notif-list li strong {
-      color: #e74c3c;
-    }
-
-    .notif-form h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-      color: #16a085;
-    }
-
-    .notif-form form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .notif-form textarea {
-      width: 100%;
-      min-height: 80px;
-      margin-bottom: 10px;
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid #bdc3c7;
-      border-radius: 5px;
-    }
-
-    .notif-form button {
-      align-self: flex-start;
-      background: #3498db;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .notif-form button:hover {
-      background: #2980b9;
-    }
-
-    a {
-      color: #3498db;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    .notif-detail .no-theme {
-      text-align: center;
-      font-size: 18px;
-      color: #c0392b;
-    }
-  </style>
-</head>
-
+{% endblock %}

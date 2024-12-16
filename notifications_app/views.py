@@ -24,7 +24,6 @@ class NotificationCreateView(LoginRequiredMixin, CreateView):
 
 class NotificationUpdateView(LoginRequiredMixin, UpdateView):
     model = Notification
-    fields = ['text']
     form_class = NotificationForm
     template_name = 'notification_app/update_notif.html'
     success_url = '/notifications/'
