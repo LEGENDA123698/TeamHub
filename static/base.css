@@ -173,7 +173,7 @@
 }
 
 .mainmenu {
-    padding: 4px 4px;
+    padding: 6px 6px;
     border-radius: 14px;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.15);
@@ -185,7 +185,7 @@
     grid-template-columns: repeat(4, 1fr) !important;
     grid-template-rows: repeat(2, 1fr) !important;
     grid-auto-flow: dense !important;
-    gap: 4px;
+    gap: 6px;
     width: fit-content; 
     top: 15px !important;
     left: 100px !important;
