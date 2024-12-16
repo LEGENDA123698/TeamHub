@@ -180,13 +180,13 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     position: fixed;
     height: fit-content; 
-    max-width: fit-content;
+    max-width: 450px;
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
     grid-template-rows: repeat(2, 1fr) !important;
     grid-auto-flow: dense !important;
     gap: 4px;
-    width: 400px; 
+    width: fit-content; 
     top: 15px !important;
     left: 100px !important;
     transform: scale(0);
