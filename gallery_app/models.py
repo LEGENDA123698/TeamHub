@@ -4,7 +4,7 @@ from auth_app.models import User
 
 class Image(models.Model):
     title = models.CharField(max_length=20)
-    image = models.ImageField(upload_to='gallery_images/')
+    image = models.ImageField(upload_to='media/gallery_images/')
     author = models.ForeignKey(User, related_name='image_author', on_delete=models.CASCADE)
     grid_column_span = models.IntegerField(
         default=1,

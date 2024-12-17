@@ -36,6 +36,11 @@ class ImageDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Image
     success_url = reverse_lazy('gallery-start')
 
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()
+        image.image.delete()
+        return super().post(request, *args, **kwargs)
+
     def test_func(self):
         image = self.get_object()
         return self.request.user == image.author
