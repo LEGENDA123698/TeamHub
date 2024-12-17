@@ -17,12 +17,21 @@
 </head>
 
 <!-- <div class="gradient-rect"></div> -->
-<nav class="navbar fixed-top">
-  <div class="container-fluid p-0">
-    <a href="{% url 'main-page' %}" class="p-0">
-      <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img mainmenu-toggler m-0" />
+<div class="container text-center">
+  <div class="row justify-content-lg-center ">
+    <div class="col-12 col-lg-3" style="background-color: red;">
+      <p>dfsdsfds</p>
+      <div class="row">
+        <nav class="navbar sticky-top">
+        <div class="col-1">
+    <a href="{% url 'main-page' %}" class="">
+      <img src="{% static 'logo.png' %}" class="navbar-brand navbar-img mainmenu-toggler" />
     </a>
-    <div class="dropdown p-0 m-0">
+      </div>
+      <div class="col-8"></div>
+
+      <div class="col-1 col-lg-2 text-end ms-auto mr-0 me-0 justify-content-end">
+    
       <a id="navbarDropdown" data-bs-toggle="dropdown" href="#" class="no-focus">
       {% if user.is_authenticated %}
       <div class='navbar-brand navbar-img mainmenu-toggler avatar m-0' style='background-image: url("{{user.avatar.url}}"); width: 50px; height: 50px;'></div>
@@ -30,6 +39,8 @@
       <div class='navbar-brand navbar-img mainmenu-toggler avatar m-0' style='background-image: url("{% static 'user_icon.png' %}"); width: 50px; height: 50px;'></div>
       {% endif %}
     </a>
+      </div>
+
     <ul class="dropdown-menu dropdown-menu-lg-end animate slideIn" aria-labelledby="navbarDropdown">
       <li>
         <input type="search" class="search" placeholder="Search">
@@ -59,8 +70,10 @@
       <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
       {% endif %}
     </ul>
-  </div>
 </nav>
+</div>
+</div>
+</div>
 
 <ul class="dropdown-menu mainmenu" aria-labelledby="navbarDropdown">
   <li>
@@ -142,4 +155,6 @@
   }
 
 </script>
+<div class="container">
 {% block content %} {% endblock %}
+</div>
