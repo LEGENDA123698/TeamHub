@@ -9,11 +9,6 @@ body {
     padding: 10.5vh;
 }
 
-.navbar {
-    width: 71.1vw;
-
-}
-
 .grid-container {
     display: grid;
     grid-template-columns: repeat(5, 200px);

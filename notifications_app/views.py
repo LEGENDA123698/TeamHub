@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
@@ -47,4 +47,3 @@ class NotificationDetailView(DetailView):
     model = Notification
     template_name = 'notification_app/notif_detail.html'
     context_object_name = 'notification'
-

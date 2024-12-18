@@ -4,18 +4,6 @@
 {% block extra_head %}
 <link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet">
 <style>
-  .chill-guy {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    transform: rotate(90deg) translateX(100%);
-    transition: transform 0.5s ease;
-  }
-
-  .chill-guy:hover {
-    transform: translateX(0);
-  }
-
   .confirm-popup {
     position: fixed;
     top: 0;
@@ -76,106 +64,154 @@
     width: auto;
   }
 </style>
+<script>
+  function showEdit(id, name) {
+    const modal = new bootstrap.Modal(document.getElementById('edit' + id));
+    modal.show();
+  }
+
+  function showConfirm(id) {
+    const modal = new bootstrap.Modal(document.getElementById('confirm' + id));
+    modal.show();
+  }
+</script>
 <title>TeamHub Forum</title>
 {% endblock %}
 
 {% block content %}
-{% if sections %}
-<div class="default-placeholder">
-  <div class="placeholder-header">
-    <span>Sections</span>
-    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
-      <i class="fa-solid fa-plus"></i>
-    </button>
-  </div>
-  {% for section in sections %}
-  <div class="placeholder-item">
-    <a href="{% url 'forum_app:section_detail' section.pk %}">{{ section.name }}</a>
-    <button class="edit-button" onclick="showEdit({{ section.pk }}, '{{ section.name }}')">
-      <i class="fa-solid fa-pen-to-square"></i>
-    </button>
-    <button class="delete-button" onclick="showConfirm({{ section.pk }})">
-      <i class="fa-solid fa-trash"></i>
-    </button>
-  </div>
-  <div id="confirm{{ section.pk }}" class="confirm-popup" style="display: none;">
-    <div class="confirm-content">
-      <span>Delete {{ section.name }}?</span>
-      <div class="confirm-buttons">
-        <button onclick="hideConfirm({{ section.pk }})">Cancel</button>
-        <a href="{% url 'forum_app:section-delete' section.pk %}">Delete</a>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-5 mt-5">
+      <div class="forum-placeholder">
+        {% if sections %}
+        <div class="card shadow-sm mt-1">
+          <div class="card-header d-flex justify-content-between align-items-center bg-light px-2">
+            <span class="fw-bold">Sections</span>
+            <button class="create-button p-0 no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          
+          <div class="list-group list-group-flush">
+            {% for section in sections %}
+            <div class="list-group-item placeholder-item">
+              <a href="{% url 'forum_app:section_detail' section.pk %}" class="text-decoration-none text-dark">
+                {% if section.tag %}
+                  <span class="badge rounded-pill me-2" style="background-color: {{ section.tag_color|default:'#6c757d' }}">
+                    {{ section.tag }}
+                  </span>
+                {% endif %}
+                {{ section.name }}
+              </a>
+              <button class="edit-button" onclick="showEdit({{ section.pk }}, '{{ section.name }}')">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="delete-button" onclick="showConfirm({{ section.pk }})" href="{% url 'forum_app:section-delete' section.pk %}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% else %}
+        <div class="card shadow-sm mt-1">
+          <div class="card-header d-flex justify-content-between align-items-center bg-light px-2">
+            <span class="fw-bold">Sections</span>
+            <button class="create-button p-0 no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          <div class="card-body text-center text-muted">
+            No sections yet
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
-  <div id="edit{{ section.pk }}" class="confirm-popup" style="display: none;">
-    <div class="confirm-content">
-      <form method="POST" action="{% url 'forum_app:section-update' section.pk %}">
-        {% csrf_token %}
-        <input type="text" name="name" value="{{ section.name }}" required>
-        <div class="confirm-buttons">
-          <button type="button" onclick="hideEdit({{ section.pk }})">Cancel</button>
-          <button type="submit">Save</button>
+
+  <!-- модалы редактирования и удаления -->
+  {% for section in sections %}
+  <div id="confirm{{ section.pk }}" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <p class="mb-3">Delete {{ section.name }}?</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <a href="{% url 'forum_app:section-delete' section.pk %}" class="btn btn-danger">Delete</a>
+          </div>
         </div>
-      </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="edit{{ section.pk }}" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form method="POST" action="{% url 'forum_app:section-update' section.pk %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <input type="text" name="name" class="form-control" value="{{ section.name }}" required>
+            </div>
+            <div class="mb-3">
+              <label for="tagColor" class="form-label">Tag Color</label>
+              <input type="color" class="form-control form-control-color" id="tagColor" name="tag_color">
+            </div>
+            <div class="mb-3">
+              <label for="tagName" class="form-label">Tag</label>
+              <input type="text" class="form-control" id="tagName" name="tag">
+            </div>
+            <div class="modal-footer px-0 pb-0">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
   {% endfor %}
-</div>
-{% else %}
-<div class="default-placeholder">
-  <div class="placeholder-header">
-    <span>Sections</span>
-    <button class="create-button no-focus" data-bs-toggle="modal" data-bs-target="#createSectionModal">
-      <i class="fa-solid fa-plus"></i>
-    </button>
-  </div>
-  <div class="placeholder-item">
-    <a>No sections yet</a>
-  </div>
-</div>
-{% endif %}
 
-<div class="modal fade" id="createSectionModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <form method="POST" action="{% url 'forum_app:section-create' %}">
-        {% csrf_token %}
-        <div class="modal-body p-0">
-          <div class="search-container">
-            <input type="text" name="name" class="search" placeholder="Section Name">
-            <button type="button" class="close-button" data-bs-dismiss="modal">&times;</button>
-          </div>
+  <!-- модал для создания -->
+  <div class="modal fade" id="createSectionModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Section</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </form>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'forum_app:section-create' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="sectionName" class="form-label">Section Name</label>
+              <input type="text" class="form-control" id="sectionName" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="tagColor" class="form-label">Tag Color</label>
+              <input type="color" class="form-control form-control-color" id="tagColor" name="tag_color">
+            </div>
+            <div class="mb-3">
+              <label for="tagName" class="form-label">Tag</label>
+              <input type="text" class="form-control" id="tagName" name="tag">
+            </div>
+            <div class="modal-footer px-0 pb-0">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<div style="display: flex; flex-direction: column; align-items: center;">
-  <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="get-of-my-oven">
-  <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Go to top</a>
+  <div class="text-center mt-4">
+    <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="img-fluid rounded">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="d-block mt-2">Go to top</a>
+  </div>
 </div>
 
 <img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
-
-<script>
-  function showConfirm(id) {
-    document.getElementById('confirm' + id).style.display = 'flex';
-  }
-
-  function hideConfirm(id) {
-    document.getElementById('confirm' + id).style.display = 'none';
-  }
-
-  function showEdit(id, currentName) {
-    const editPopup = document.getElementById('edit' + id);
-    const inputField = editPopup.querySelector('input[name="name"]');
-    inputField.value = currentName;
-    editPopup.style.display = 'flex';
-  }
-
-  function hideEdit(id) {
-    document.getElementById('edit' + id).style.display = 'none';
-  }
-</script>
 {% endblock %}

@@ -1,28 +1,15 @@
 @import "../base.css";
 
-.navbar {
-    width: 44vw !important;
-}
-
 .placeholder-header {
     display: flex;
     flex-direction: row;
-    /* position: absolute; */
-    /* top: -35px;
-    left: 50%; */
-    transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.15);
     color: white;
     padding: 5px 5px;
     border-radius: 14px 14px 0px 0px;
-    /* width: 45vw; */
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    /* max-height: 48%; */
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
 }
 
 .placeholder-header p {
@@ -32,28 +19,27 @@
 }
 
 .placeholder-header span {
-    /* position: absolute;
-    left: 50%;
-    transform: translateX(-50%); */
     background: inherit;
+}
+
+.forum-placeholder {
+    width: calc(100% + 6px);
+    margin-left: -3px;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: transparent;
 }
 
 .default-placeholder {
     background-color: whitesmoke;
-    /* position: relative;
-    margin-left: auto;
-    margin-right: auto; */
     text-align: center;
-    border-radius: 0px 0px 14px 14px;
+    border-radius: 14px !important;
     border: 1px solid rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    /* width: 45vw;
-    top: 19vh; */
     padding: 6px 6px;
     display: flex;
     flex-direction: column;
     gap: 6px;
-    /* margin-bottom: 1000px; */
 }
 
 .placeholder-item {
@@ -61,7 +47,6 @@
     color: black !important;
     border-radius: 8px !important;
     text-decoration: none;
-    /* width: 100%; */
     transition: transform 0.3s ease-in-out;
     height: 60px !important;
     line-height: 60px !important;
@@ -84,7 +69,14 @@
     line-height: 60px;
     color: inherit;
     text-decoration: none;
+    transition: color 0.1s ease-in-out;
     z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+.placeholder-item:hover a{
+    color: white !important;
 }
 
 .placeholder-item:hover {
@@ -95,8 +87,8 @@
 
 .placeholder-item .edit-button {
     position: absolute;
-    right: 11%;
     transform: translateX(30px) scale(0.8);
+    right: calc(6px + 62px);
     opacity: 0;
     transition: opacity 0.1s ease-in-out,
         transform 0.1s ease-in-out;
@@ -117,7 +109,7 @@
 
 .placeholder-item .delete-button {
     position: absolute;
-    right: 6%;
+    right: calc(6px + 31px);
     transform: translateX(30px) scale(0.8);
     opacity: 0;
     transition: opacity 0.1s ease-in-out,
@@ -137,11 +129,7 @@
     font-size: 16px;
 }
 
-.placeholder-item:hover .delete-button {
-    opacity: 1;
-    transform: translateX(30px) scale(1);
-}
-
+.placeholder-item:hover .delete-button,
 .placeholder-item:hover .edit-button {
     opacity: 1;
     transform: translateX(30px) scale(1);
@@ -156,7 +144,6 @@
     border: 1px solid rgba(0, 0, 0, 0.15);
     background: linear-gradient(145deg, #007aff, #0051a8);
     color: white;
-    padding-bottom: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -165,25 +152,15 @@
 }
 
 .modal-content {
-    border: none;
-    background: transparent;
-    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 14px;
 }
 
 .modal-backdrop {
-    display: none;
-}
-
-.modal {
-    position: absolute !important;
-    top: -237px !important;
-    left: 27.17vw !important;
-}
-
-.modal-dialog {
-    position: relative !important;
-    transform: none !important;
-    width: auto !important;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .search-container {
@@ -219,4 +196,82 @@
     width: 40vw;
     height: 30vh;
     border-radius: 14px;
+}
+
+.chill-guy {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(90deg) translateX(100%);
+    transition: transform 0.5s ease;
+    max-width: 150px;
+}
+
+.chill-guy:hover {
+    transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .chill-guy {
+        max-width: 100px;
+    }
+}
+
+.list-group {
+    padding: 6px !important;
+    gap: 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: rgb(250, 250, 250);
+}
+
+.list-group-item {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.card {
+    border: none !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+    box-shadow: none !important;
+}
+
+.card.shadow-sm {
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.messages-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.messages-list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+    padding: initial !important;
+    gap: initial !important;
+    display: flex !important;
+    flex-direction: row !important;
+    background-color: initial !important;
+}
+
+.pagination li {
+    padding: initial !important;
+    margin: initial !important;
+    background: initial !important;
+    border-radius: initial !important;
+    box-shadow: initial !important;
 }

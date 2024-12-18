@@ -57,7 +57,7 @@ class ThemeDetailView(DetailView):
     
 class SectionCreateView(CreateView):
     model = Section 
-    fields = ['name']
+    fields = ['name', 'tag', 'tag_color']
     success_url = reverse_lazy('forum_app:forum-start')
 
     def form_valid(self, form):
@@ -73,7 +73,7 @@ class SectionDeleteView(DeleteView):
 
 class SectionUpdateView(UpdateView):
     model = Section
-    fields = ['name']
+    fields = ['name', 'tag', 'tag_color']
     success_url = reverse_lazy('forum_app:forum-start')
 
     def form_valid(self, form):
@@ -84,7 +84,7 @@ class SectionUpdateView(UpdateView):
 
 class ThemeCreateView(CreateView):
     model = Theme
-    fields = ['name'] 
+    fields = ['name', 'tag', 'tag_color'] 
     template_name = 'forum_app/section_detail.html'
 
     def form_valid(self, form):
@@ -117,7 +117,7 @@ class ThemeDeleteView(DeleteView):
     
 class ThemeUpdateView(UpdateView):
     model = Theme
-    fields = ['name']
+    fields = ['name', 'tag', 'tag_color']
 
     def get_success_url(self):
         if self.object.section:
