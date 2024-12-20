@@ -14,16 +14,19 @@
             <div class="grid-container mt-1">
                 <div class="grid-item add-image-item" data-bs-toggle="modal" data-bs-target="#addImageModal" style="--cols: 1; --rows: 1;">
                     <a href="#" class="add-image-button">
-                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-plus "></i>
                     </a>
                 </div>
                 {% for image in images %}
                 <div class="grid-item" style="--cols: {{ image.grid_column_span }}; --rows: {{ image.grid_row_span }};">
                     <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                    <div class="image-overlay">
-                        <a href="{% url 'user_profile' image.author.id%}" class="author-name">{{ image.author.username }}</a>
-                        <p class="title-text">{{ image.title }}</p>
+                        <div class="image-overlay">
+                            <a href="{% url 'user_profile' image.author.id%}" class="author-name user-select-none">{{ image.author.username }}</a>
+                            <p class="title-text">{{ image.title }}</p>
                         <div class="control-buttons">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#viewImageModal{{image.id}}">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
                             <a href="{{ image.image.url}}" download><i class="fa-solid fa-download"></i></a>
                             {% if image.author == user or user.is_staff %}
                             <a href="#" data-bs-toggle="modal" data-bs-target="#editImageModal{{image.id}}">
@@ -31,10 +34,10 @@
                             </a>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#deleteImageModal{{image.id}}">
                                 <i class="fa-solid fa-trash"></i>
-                            </a>
                             {% endif %}
                         </div>
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -43,7 +46,6 @@
 </div>
 
 <!-- Остальной код остается без изменений -->
-
 
 <div class="modal fade" id="addImageModal" tabindex="-1" aria-labelledby="addImageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -172,9 +174,38 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="viewImageModal{{ image.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; max-height: 70vh;">
+        <div class="modal-content" style="height: 90vh;">
+            <div class="modal-header">
+                <h5 class="modal-title">Images</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="height: calc(90vh - 56px); overflow: hidden;">
+                <div id="carousel{{ image.id }}" class="carousel slide" data-bs-ride="false" style="height: 100%;">
+                    <div class="carousel-inner" style="height: 100%;">
+                        {% for img in images %}
+                        <div class="carousel-item {% if img.id == image.id %}active{% endif %}" style="height: 100%;">
+                            <img src="{{ img.image.url }}" class="d-block w-100" alt="{{ img.title }}" style="height: 100%; object-fit: contain;">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ image.id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ image.id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endfor %}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function updatePreview(columnSelect, rowSelect, previewItem) {
         const cols = columnSelect.value;
@@ -208,6 +239,5 @@
         {% endfor %}
     });
 </script>
-
 
 {% endblock %}
