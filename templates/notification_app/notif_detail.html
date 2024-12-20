@@ -1,7 +1,18 @@
 {% include 'base.html' %}
 {% load static %}
-<br><br><br><br>
+{% block extra_head %}
+<link rel="stylesheet" href='{% static '/notifications_app/notif.css' %}'>
+<title>Деталi повiдомлення #{{ notification.id }}</title>
+{% endblock %}
 {% block content %}
-    <small>Автор: {{ notification.author }} | {{ notification.date|date:"Y-m-d H:i" }}</small>
-    <p>{{ notification.text }}</p>
-{% endblock %} 
+<div class="container">
+    <div class="default-placeholder">
+        <div class="placeholder-header">        
+            <h1 class='text-center'>Деталi</h1>
+        </div>
+        <h2>Автор: {{ notification.author }}</h2> 
+        <p>Вмiст: {{ notification.text }}</p>
+    </div>
+</div>
+
+{% endblock %}
