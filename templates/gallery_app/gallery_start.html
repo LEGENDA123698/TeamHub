@@ -17,7 +17,7 @@
                         <i class="fa-solid fa-plus "></i>
                     </a>
                 </div>
-                {% for image in images %}
+                {% for image in page_obj %}
                 <div class="grid-item" style="--cols: {{ image.grid_column_span }}; --rows: {{ image.grid_row_span }};">
                     <img src="{{ image.image.url }}" alt="{{ image.title }}">
                         <div class="image-overlay">
@@ -100,7 +100,7 @@
     </div>
 </div>
 
-{% for image in images %}
+{% for image in page_obj %}
 <div class="modal fade" id="editImageModal{{image.id}}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -205,6 +205,36 @@
     </div>
 </div>
 {% endfor %}
+
+<nav aria-label="Page navigation example"></nav>
+    <ul class="pagination justify-content-center mt-1">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+      </li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">&raquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
 
 <script>
     function updatePreview(columnSelect, rowSelect, previewItem) {

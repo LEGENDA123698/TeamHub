@@ -159,6 +159,8 @@
         <a class="page-link" href="#" aria-label="Next">&raquo;</a>
       </li>
       {% endif %}
+    </ul>
+  </nav>
 
       {% if user.is_authenticated %}
     <div class="message-form">
@@ -177,7 +179,5 @@
       Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы оставить сообщение.
         </p>
         {% endif %}
-      </ul>
-    </nav>
   </div>
 {% endblock %}
