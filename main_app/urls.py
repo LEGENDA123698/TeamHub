@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from main_app import views
+from . import views
 
 urlpatterns = [
-    path('', views.StartView.as_view(), name = "main-page"),
+    path('', views.StartView.as_view(), name="main-page"),
+    path('search/', views.global_search, name='global_search'),
 ]

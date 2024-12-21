@@ -38,7 +38,10 @@
                 {% endif %}
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <input type="search" class="search" placeholder="Search">
+                <form method="GET" action="{% url 'global_search' %}">
+                  <input type="text" name="query" placeholder="Поиск" value="{{ query }}">
+                  <button type="submit">Найти</button>
+                </form>                          
                 <li><hr class="dropdown-divider"></li>
                 {% if user.is_authenticated %}
                   <li>
@@ -76,7 +79,7 @@
       </div>
       
       <div class="col">
-        <a class="dropdown-item mainmenu-item h-100" href="{% url 'calendar' %}">
+        <a class="dropdown-item mainmenu-item h-100" href="{% url 'calendar_app:calendar' %}">
           <i class="fa-solid fa-calendar"></i>Calendar
         </a>
       </div>
