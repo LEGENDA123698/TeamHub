@@ -4,11 +4,11 @@
 <div class="mt-5">
     <h2>Результаты поиска для "{{ query }}"</h2>
     {% if query %}
-        {% if results.forum_sections.exists or results.forum_themes.exists or results.forum_messages.exists or results.gallery_images.exists or results.calendar_events.exists %}
+        {% if results.forum_sections or results.forum_themes or results.forum_messages or results.gallery_images or results.calendar_events %}
             <div class="mt-4">
-                <!-- Форум: Разделы -->
+                <!-- Форум: Секции -->
                 {% if results.forum_sections %}
-                    <h4>Форум - Разделы</h4>
+                    <h4>Форум - Секции</h4>
                     <ul>
                         {% for section in results.forum_sections %}
                             <li><a href="{{ section.get_absolute_url }}">{{ section.name }}</a> (Тег: {{ section.tag }})</li>
@@ -67,4 +67,4 @@
         </div>
     {% endif %}
 </div>
-{% endblock %} 
+{% endblock %}
