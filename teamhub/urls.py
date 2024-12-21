@@ -24,13 +24,11 @@ urlpatterns = [
     path('', include('main_app.urls')),
     path('auth/', include('auth_app.urls')),
     path('forum/', include('forum_app.urls')),
-    path('', include('calendar_app.urls')),
-    path('', include('materials_app.urls')),
+    path('calendar/', include('calendar_app.urls')),
+    path('materials/', include('materials_app.urls')),
     path('notifications/', include('notifications_app.urls')),
-    path('', include('portfolio_app.urls')),
+    path('portfolio/', include('portfolio_app.urls')), 
     path('gallery/', include('gallery_app.urls')),
-    path('', include('portfolio_app.urls')),
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
