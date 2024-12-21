@@ -185,7 +185,7 @@
             <div class="modal-body" style="height: calc(90vh - 56px); overflow: hidden;">
                 <div id="carousel{{ image.id }}" class="carousel slide" data-bs-ride="false" style="height: 100%;">
                     <div class="carousel-inner" style="height: 100%;">
-                        {% for img in images %}
+                        {% for img in page_obj %}
                         <div class="carousel-item {% if img.id == image.id %}active{% endif %}" style="height: 100%;">
                             <img src="{{ img.image.url }}" class="d-block w-100" alt="{{ img.title }}" style="height: 100%; object-fit: contain;">
                         </div>
