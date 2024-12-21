@@ -1,68 +1,36 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% include 'base.html' %}
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block extra_head %}
   <link rel="stylesheet" href="{% static 'forum_app/forum.css' %}" />
-  <title>Детали темы</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'portfolio/avatar.css' %}" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
 
     .theme-detail {
-      max-width: 800px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
+      background: whitesmoke;
+      padding: 6px;
+      border-radius: 14px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    .theme-detail h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      color: #2c3e50;
-    }
 
     .theme-detail p {
       font-size: 16px;
       line-height: 1.6;
-      margin-bottom: 20px;
     }
 
-    .messages-list h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      color: #34495e;
-    }
 
     .messages-list ul {
       list-style: none;
       padding: 0;
+      gap: 6px;
     }
 
     .messages-list li {
-      padding: 10px;
-      margin-bottom: 10px;
       background: #ecf0f1;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .messages-list li p {
-      margin: 5px 0;
-    }
-
-    .messages-list li strong {
-      color: #e74c3c;
     }
 
     .message-form h3 {
@@ -102,81 +70,99 @@
       background: #2980b9;
     }
 
-    a {
-      color: #3498db;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    p {
-      margin: 0;
-    }
-
     .theme-detail .no-theme {
       text-align: center;
       font-size: 18px;
       color: #c0392b;
     }
-  </style>
-</head>
 
-<body>
+    .message-author {
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      background-color: white;
+      padding: 6px
+    }
+
+
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-lg-5 mx-auto mt-5">
   {% if themes %}
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h1>{{ themes.name }}</h1>
+      <p>{{ themes.description }}</p>
+    </div>
+  </div>
   <div class="theme-detail">
-    <h1>{{ themes.name }}</h1>
-    <p>{{ themes.description }}</p>
     <div class="messages-list">
-      <h2>Сообщения:</h2>
       {% if page_obj %}
       <ul>
         {% for message in page_obj %}
-        <li>
-          <p><strong>{{ message.message_author }}</strong>:</p>
-          <p>{{ message.text }}</p>
-          {% if message.image %}
-          <img src="{{ message.image.url }}" alt="Изображение" style="max-width: 100%; height: auto; margin-top: 10px;">
-          {% endif %}
-        </li>
-        {% endfor %}
-      </ul>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
-          </li>
-          {% endif %}
-    
-          {% for num in page_obj.paginator.page_range %}
-            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        <div class="row">
+          <div class="col-md-12">
+            <li class="d-flex align-items-left" style="padding: 2px; border-radius: 8px;">
+              <div class="message-author">
+                <a href="{% url 'user_profile' message.message_author.id %}" class="text-decoration-none text-dark d-flex flex-column align-items-center">
+                  <img src="{{ message.message_author.avatar.url }}" alt="Аватар" class="avatar" style="width: 60px; height: 60px;">
+                  <p class="mb-0 fw-bold">{{ message.message_author }}</p>
+                </a>
+              </div>
+              <div class="vr mx-1"></div>
+              <div class="text-left" style="border-radius: 6px; background-color: white; padding: 6px; width: 100%;">
+                <p>{{ message.text }}</p>
+              </div>
+              {% if message.image %}
+              <img src="{{ message.image.url }}" alt="Изображение" style="max-width: 100%; height: auto; margin-top: 10px;">
+              {% endif %}
             </li>
-          {% endfor %}
-      
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">&raquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Next">&raquo;</a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>      
+          </div>
+        </div>
+        {% endfor %}
+      </ul>      
       {% else %}
       <p>Нет сообщений в теме.</p>
       {% endif %}
     </div>
+  </div>
+  {% else %}
+  <p class="no-theme">Тема не найдена.</p>
+  {% endif %}
+  
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-1">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+      </li>
+      {% endif %}
 
-    {% if user.is_authenticated %}
+      {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">&raquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+      {% if user.is_authenticated %}
     <div class="message-form">
       <h3>Написать сообщение:</h3>
       <form method="post" enctype="multipart/form-data">
@@ -191,11 +177,7 @@
     {% else %}
     <p>
       Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы оставить сообщение.
-    </p>
-    {% endif %}
+        </p>
+        {% endif %}
   </div>
-  {% else %}
-  <p class="no-theme">Тема не найдена.</p>
-  {% endif %}
-</body>
-</html>
+{% endblock %}

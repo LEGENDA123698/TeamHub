@@ -21,7 +21,7 @@
   <div class="row justify-content-lg-center ">
     <div class="col-12 col-lg-5" >
       <div class="container">
-        <nav class="navbar ">
+        <nav class="navbar">
           <div class="container-fluid px-2">
             <div class="d-flex align-items-center">
               <a href="{% url 'main-page' %}" class="me-2">
@@ -30,13 +30,13 @@
             </div>
 
             <div class="ms-auto dropdown">
-              <a href="#" class="no-focus" data-bs-toggle="dropdown">
-                {% if user.is_authenticated %}
-                <div class='navbar-brand navbar-img avatar m-0' style='background-image: url("{{user.avatar.url}}"); width: 50px; height: 50px;'></div>
-                {% else %}
-                <div class='navbar-brand navbar-img avatar m-0' style='background-image: url("{% static 'user_icon.png' %}"); width: 50px; height: 50px;'></div>
-                {% endif %}
-              </a>
+            <a href="#" class="no-focus" data-bs-toggle="dropdown">
+              {% if user.is_authenticated %}
+              <div class='navbar-brand navbar-img avatar m-0' style='background-image: url("{{user.avatar.url}}"); width: 50px; height: 50px;'></div>
+              {% else %}
+              <div class='navbar-brand navbar-img avatar m-0' style='background-image: url("{% static 'user_icon.png' %}"); width: 50px; height: 50px;'></div>
+              {% endif %}
+            </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <form method="GET" action="{% url 'global_search' %}">
                   <input type="text" name="query" placeholder="Поиск" value="{{ query }}">
@@ -140,8 +140,7 @@
   function hideMenuWithDelay() {
     hideMenuTimer = setTimeout(hideMenu, 200);
   }
-
 </script>
-<div class="container">
-{% block content %} {% endblock %}
-</div>
+
+{% block content %}
+{% endblock %}
