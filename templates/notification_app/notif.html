@@ -10,42 +10,45 @@
         <div class="notification-card">
             <h1 class="text-center">Повiдомлення</h1>
         </div>
-    {% if page_object %}
-        {% for notification in page_object %}
-        <div class="notification-card">
-            <div class="notification-header">
-                <div class="user-name">{{ user.name }}</div>
-            </div>
-            <div class="notification-text">
-                <p>Вмiст:
-                    <a class='button' href="{% url 'notification-detail' notification.pk %}">Подивитись Деталi:</a>
-                </p>
-            </div>
-            <div class="notification-date">Posted on: {{ notification.date }}</div>
-        </div>
-        {% endfor %}
-        <ul class='pagination'>
-            {% if page_object.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_object.previous_page_number }}" aria-label="Previous">&laquo;</a>
-            </li>
-            {% for num in page_object.paginator.page_range %}
-            <li class="page-item {% if page_object.number == num %}active{% endif %}">
-            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-            </li>
-            {% endfor %}
+        {% if notifications %}
+            {% if page_object %}
+                {% for notification in page_object %}
+                <div class="notification-card">
+                    <div class="notification-header">
+                        <img src="user_icon.png" alt="Profile Picture" class="profile-picture">
+                        <div class="user-name">{{ user.name }}</div>
+                    </div>
+                    <div class="notification-text">
+                        <p>Вмiст:
+                            <a class='button' href="{% url 'notification-detail' notification.pk %}">Подивитись Деталi:</a>
+                        </p>
+                    </div>
+                    <div class="notification-date">Posted on: {{ notification.date }}</div>
+                </div>
+                {% endfor %}
+                <ul class='pagination'>
+                    {% if page_object.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_object.previous_page_number }}" aria-label="Previous">&laquo;</a>
+                        </li>
+                        {% for num in page_object.paginator.page_range %}
+                            <li class="page-item {% if page_object.number == num %}active{% endif %}">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                    {% if page_object.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_object.next_page_number }}" aria-label="Next">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                        </li>
+                    {% endif %}
+                </ul>
             {% endif %}
-            {% if page_object.has_next %}
-            <li class="page-item">
-            <a class="page-link" href="?page={{ page_object.next_page_number }}" aria-label="Next">&raquo;</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Next">&raquo;</a>
-            </li>
-            {% endif %}
-        </ul>
-    {% endif %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
