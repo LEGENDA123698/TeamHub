@@ -13,7 +13,7 @@ from .forms import *
 class NotificationCreateView(LoginRequiredMixin, CreateView):
     model = Notification
     form_class = NotificationForm
-    template_name = 'notification_app/create_notif.html'
+    template_name = 'notifications_app/create_notif.html'
     success_url = '/notifications/'
 
     def form_valid(self, form):
@@ -26,24 +26,24 @@ class NotificationUpdateView(LoginRequiredMixin, UpdateView):
     model = Notification
     fields = ['text']
     form_class = NotificationForm
-    template_name = 'notification_app/update_notif.html'
+    template_name = 'notifications_app/update_notif.html'
     success_url = '/notifications/'
 
 # Delete
 
-
 class NotificationDeleteView(LoginRequiredMixin, DeleteView):
     model = Notification
-    template_name = 'notification_app/delete_notif.html'
+    template_name = 'notifications_app/delete_notif.html'
     success_url = '/notifications/'
 
 
 class NotificationListView(ListView):
     model = Notification
-    template_name = 'notification_app/notif.html'
+    template_name = 'notifications_app/notif.html'
     context_object_name = 'notifications'
+    paginate_by = 3
 
 class NotificationDetailView(DetailView):
     model = Notification
-    template_name = 'notification_app/notif_detail.html'
+    template_name = 'notifications_app/notif_detail.html'
     context_object_name = 'notification'

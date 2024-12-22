@@ -5,14 +5,15 @@
 <title>Деталi повiдомлення #{{ notification.id }}</title>
 {% endblock %}
 {% block content %}
-<div class="container">
-    <div class="default-placeholder">
-        <div class="placeholder-header">        
+<div class="default-placeholder">
+    <div class="container">
+        <div class="notification-card">
+            <div class="notification-header">
+                <h2>Автор: {{ notification.author }}</h2> 
+                <p>Вмiст: {{ notification.text }}</p>
+            </div>        
             <h1 class='text-center'>Деталi</h1>
         </div>
-        <h2>Автор: {{ notification.author }}</h2> 
-        <p>Вмiст: {{ notification.text }}</p>
     </div>
 </div>
-
 {% endblock %}
