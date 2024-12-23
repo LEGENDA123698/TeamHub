@@ -48,9 +48,8 @@
                     <a class="dropdown-item" href="{% url 'user_profile' user.id %}"><i class="fa-solid fa-user-shield"></i>  {{ user.username }}</a></li>
                     {% else %}
                     <li><a class="dropdown-item" href="{% url 'user_profile' user.id %}"><i class="fa-solid fa-user"></i>  {{ user.username }}</a></li>
-                    <li><hr class="dropdown-divider start-50"></li>
                     {% endif %}
-                    <li><a class="dropdown-item" href="{% url 'notifications-list' %}">
+                    <li><a class="dropdown-item" href="{% url 'notifications_app:notifications-list' %}">
                       <i class="fa-solid fa-bell"></i>  Notifications
                     </a></li>
                     <li><hr class="dropdown-divider"></li>
@@ -96,6 +95,7 @@
 <script>
   const toggler = document.querySelectorAll(".mainmenu-toggler");
   const menu = document.querySelector(".mainmenu");
+  const menuScrolled = document.querySelector(".mainmenu.scrolled");
 
   let hideMenuTimer;
 
@@ -106,11 +106,15 @@
     clearTimeout(hideMenuTimer);
     menu.classList.remove("hide");
     menu.classList.add("show");
+    menuScrolled.classList.remove("hide");
+    menuScrolled.classList.add("show");
   }
 
   function hideMenu() {
     menu.classList.remove("show");
     menu.classList.add("hide");
+    menuScrolled.classList.remove("show");
+    menuScrolled.classList.add("hide");
   }
 
   toggler.forEach(toggle => {

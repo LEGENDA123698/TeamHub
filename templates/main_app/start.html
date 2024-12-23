@@ -29,55 +29,88 @@
 <body>
 
     <main>
-
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="false">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
                     aria-current="true"></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#777">
+                        <defs>
+                            <linearGradient id="imgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="21%" stop-color="rgb(0, 122, 255)" />
+                                <stop offset="100%" stop-color="rgb(255, 255, 255)" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#imgGradient)" />
                     </svg>
 
-                    <div class="carousel-caption text-start">
-                        <h1>Example headline.</h1>
-                        <p>Some representative placeholder content for the first slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100">
+                        <h1 class="fw-bold">WELCOME TO TEAMHUB</h1>
+                        <p>Swipe right
+                            <i class="fa-solid fa-chevron-right"></i>
+                            to explore features</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <defs>
-                            <pattern id="imgPattern" patternUnits="objectBoundingBox" width="1" height="1">
-                                <image href="{% static 'test.jpeg' %}" x="0" y="0" width="100%" height="100%"
-                                    preserveAspectRatio="xMidYMid slice" />
-                            </pattern>
+                            <linearGradient id="imgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="21%" stop-color="#4DD964" />
+                                <stop offset="100%" stop-color="rgb(255, 255, 255)" />
+                            </linearGradient>
                         </defs>
-                        <rect width="100%" height="100%" fill="url(#imgPattern)" />
+                        <rect width="100%" height="100%" fill="url(#imgGradient)" />
                     </svg>
 
-                    <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Some representative placeholder content for the second slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary btn-blue" href="#">Learn more</a></p>
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
+                        <a href="{% url 'forum_app:forum-start' %}" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>FORUM</h1></a>
+                        <p>Place where you can <b>express</b> your thoughts</p>
+                        <img src="{% static 'main_app/forum.png' %}" alt="Forum" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.4))">
                     </div>
+                    
                 </div>
                 <div class="carousel-item">
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#777" />
+                        <defs>
+                            <linearGradient id="imgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="21%" stop-color="#334352" />
+                                <stop offset="100%" stop-color="rgb(255, 255, 255)" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#imgGradient)" />
                     </svg>
 
-                    <div class="carousel-caption text-end">
-                        <h1>One more for good measure.</h1>
-                        <p>Some representative placeholder content for the third slide of this carousel.</p>
-                        <p><a class="btn btn-lg btn-primary btn-blue" href="#">Browse gallery</a></p>
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
+                        <a href="{% url 'calendar_app:calendar' %}" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>CALENDAR</h1></a>
+                        <p>Don't miss the most <b>fresh</b> events</p>
+                        <!-- <img src="{% static 'main_app/calendar.png' %}" alt="Calendar" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));"> -->
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <defs>
+                            <linearGradient id="imgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="21%" stop-color="#FFCC00" />
+                                <stop offset="100%" stop-color="rgb(255, 255, 255)" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#imgGradient)" />
+                    </svg>
+
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
+                        <a href="{% url 'notifications_app:notifications-list' %}" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>NOTIFICATIONS CENTER</h1></a>
+                        <p>Be <b>notified</b> about news</p>
+                        <!-- <img src="{% static 'main_app/calendar.png' %}" alt="Calendar" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));"> -->
                     </div>
                 </div>
             </div>
@@ -92,57 +125,7 @@
         </div>
 
         <!-- Remove the container class to allow full-width content -->
-        <div class="marketing">
-
-            <!-- Three columns of text below the carousel -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio=" xMidYMid slice"
-                        focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                            dy=".3em">140x140</text>
-                    </svg>
-
-                    <h2>Heading</h2>
-                    <p>Some representative placeholder content for the three columns of text below the carousel. This is
-                        the first column.</p>
-                    <p><a class="btn btn-secondary">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice"
-                        focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                            dy=".3em">140x140</text>
-                    </svg>
-
-                    <h2>Heading</h2>
-                    <p>Another exciting bit of representative placeholder content. This time, we've moved on to the
-                        second column.</p>
-                    <p><a class="btn btn-secondary">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice"
-                        focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                            dy=".3em">140x140</text>
-                    </svg>
-
-                    <h2>Heading</h2>
-                    <p>And lastly this, the third column of representative placeholder content.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
-
-            <!-- START THE FEATURETTES -->
-
-            <hr class="featurette-divider">
-
+        <div class="marketing container">
             <div class="row featurette">
                 <div class="col-md-7">
                     <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your
@@ -212,8 +195,8 @@
 
         <!-- FOOTER -->
         <footer class="container">
-            <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+            <p class="float-end"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Back to top</a></p>
+            <p>&copy; <a href="{% url 'ezvenenya' %}">Езвеняйся </a> &middot; <a href="{% static 'forum_app/pashalka.cs' %}">Privacy</a> &middot; <a href="{% static 'forum_app/ezvenenya.cs' %}">Terms</a></p>
         </footer>
     </main>
 </body>
@@ -224,22 +207,15 @@
         const carouselHeight = document.querySelector('.carousel').offsetHeight;
         const navbarHeight = document.querySelector('.navbar').offsetHeight;
         if (window.scrollY > carouselHeight - navbarHeight) {
-            document.querySelector('.navbar').classList.add('scrolled');
-        } else {
             document.querySelector('.navbar').classList.remove('scrolled');
+            document.querySelector('.dropdown-menu').classList.remove('scrolled');
+            document.querySelector('.mainmenu').classList.remove('scrolled');
+        } else {
+            document.querySelector('.navbar').classList.add('scrolled');
+            document.querySelector('.dropdown-menu').classList.add('scrolled');
+            document.querySelector('.mainmenu').classList.add('scrolled');
 
         }
     });
-
-    const updateSVGPosition = () => {
-        const scrollY = window.scrollY;
-        document.querySelectorAll('.carousel-item svg').forEach(svg => {
-            svg.style.transform = `translateY(${scrollY}px)`;
-        });
-    };
-    window.addEventListener('scroll', updateSVGPosition);
-    document.querySelector('.carousel').addEventListener('slid.bs.carousel', updateSVGPosition);
-
-    updateSVGPosition();
 </script>
 {% endblock %}

@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     path('', views.StartView.as_view(), name="main-page"),
     path('search/', views.global_search, name='global_search'),
+    path('ezvenenya/', views.EzvenenyaView.as_view(), name = "ezvenenya"),
 ]

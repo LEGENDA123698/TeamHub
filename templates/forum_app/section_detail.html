@@ -36,9 +36,11 @@
               {% endif %}
               {{ sections.name }}
             </span>
+            {% if user.is_authenticated %}
             <button class="create-button p-0 no-focus" data-bs-toggle="modal" data-bs-target="#createThemeModal">
               <i class="fa-solid fa-plus"></i>
             </button>
+            {% endif %}
           </div>
           
           <div class="list-group list-group-flush">
@@ -47,12 +49,14 @@
               <a href="{% url 'forum_app:theme_detail' theme.pk %}" class="text-decoration-none text-dark">
                 {{ theme.name }}
               </a>
+              {% if user.is_authenticated or theme.theme_author == user %}
               <button class="edit-button" onclick="showEdit({{ theme.pk }}, '{{ theme.name }}')">
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
               <button class="delete-button" onclick="showConfirm({{ theme.pk }})">
                 <i class="fa-solid fa-trash"></i>
               </button>
+              {% endif %}
             </div>
             {% endfor %}
           </div>
@@ -70,9 +74,11 @@
                 </span>
               {% endif %}
               {{ sections.name }}</span>
+            {% if user.is_authenticated %}
             <button class="create-button p-0 no-focus" data-bs-toggle="modal" data-bs-target="#createThemeModal">
               <i class="fa-solid fa-plus"></i>
             </button>
+            {% endif %}
           </div>
           <div class="card-body text-center text-muted">
             No themes yet
@@ -83,7 +89,7 @@
     </div>
   </div>
 
-  <!-- Модальные окна редактирования и удаления -->
+  <!-- модалы редактирования и удаления -->
   {% for theme in themes %}
   <div id="confirm{{ theme.pk }}" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -120,7 +126,7 @@
   </div>
   {% endfor %}
 
-  <!-- Модальное окно создания -->
+  <!-- модал создания -->
   <div class="modal fade" id="createThemeModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -145,8 +151,10 @@
     </div>
   </div>
 
+  <div class="gap-filler"></div>
+
   <div class="text-center mt-4">
-    <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="img-fluid rounded">
+    <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="img-fluid rounded" style="width: 20%; height: 10%;">
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="d-block mt-2">Go to top</a>
   </div>
 </div>

@@ -9,7 +9,6 @@ from calendar_app.models import Event
 class StartView(TemplateView):
     template_name = "main_app/start.html"
 
-
 def global_search(request):
     query = request.GET.get('query', '').strip()
     results = {
@@ -38,3 +37,6 @@ def global_search(request):
         )
     
     return render(request, 'search_results.html', {'query': query, 'results': results})
+
+class EzvenenyaView(TemplateView):
+    template_name = "main_app/ezvenenya.html"

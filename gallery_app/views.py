@@ -14,7 +14,7 @@ class GalleryStartView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['images'] = Image.objects.all()
-        paginator = Paginator(context['images'], 40)
+        paginator = Paginator(context['images'], 20)
         page_number = self.request.GET.get('page')
         context['page_obj'] = paginator.get_page(page_number)
         return context

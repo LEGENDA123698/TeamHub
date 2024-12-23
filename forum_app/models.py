@@ -32,5 +32,6 @@ class Message(models.Model):
     image = models.ImageField(upload_to='media/forum_images/', blank=True, null=True)
     created_at = models.DateTimeField(blank=True, auto_now=True)
 
+
     def get_absolute_url(self):
         return reverse('forum_app:message_detail', args=[str(self.id)])
