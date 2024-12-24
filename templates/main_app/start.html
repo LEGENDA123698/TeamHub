@@ -36,6 +36,9 @@
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="5"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="6"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -62,7 +65,7 @@
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <defs>
                             <linearGradient id="imgGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="21%" stop-color="rgb(255, 204, 0)" />
+                                <stop offset="21%" stop-color="rgb(76, 217, 100)" />
                                 <stop offset="100%" stop-color="rgb(255, 255, 255)" />
                             </linearGradient>
                         </defs>
@@ -81,17 +84,17 @@
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <defs>
                             <linearGradient id="imgGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="21%" stop-color="rgb(51, 67, 82)" />
+                                <stop offset="21%" stop-color="rgb(88, 86, 214)" />
                                 <stop offset="100%" stop-color="rgb(255, 255, 255)" />
                             </linearGradient>
                         </defs>
                         <rect width="100%" height="100%" fill="url(#imgGradient3)" />
                     </svg>
 
-                    <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
+                    <div class="carousel-caption d-flex flex-column justify-content-end h-100 text-start ps-5" style="margin-bottom: 50px;">
                         <a href="{% url 'calendar_app:calendar' %}" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>CALENDAR</h1></a>
                         <p>Don't miss the most <b>fresh</b> events</p>
-                        <!-- <img src="{% static 'main_app/calendar.png' %}" alt="Calendar" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));"> -->
+                        <img src="{% static 'main_app/calendar.png' %}" alt="Calendar" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));">
                     </div>
                 </div>
                 
@@ -100,7 +103,7 @@
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <defs>
                             <linearGradient id="imgGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="21%" stop-color="rgb(51, 67, 82)" />
+                                <stop offset="21%" stop-color="rgb(255, 59, 48)" />
                                 <stop offset="100%" stop-color="rgb(255, 255, 255)" />
                             </linearGradient>
                         </defs>
@@ -110,7 +113,64 @@
                     <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
                         <a href="{% url 'notifications_app:notifications-list' %}" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>NOTIFICATIONS CENTER</h1></a>
                         <p>Be <b>notified</b> about news</p>
-                        <!-- <img src="{% static 'main_app/calendar.png' %}" alt="Calendar" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));"> -->
+                        <!-- <img src="{% static 'main_app/notifications.png' %}" alt="Calendar" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));"> -->
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <defs>
+                            <linearGradient id="imgGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="21%" stop-color="rgb(255, 149, 0)" />
+                                <stop offset="100%" stop-color="rgb(255, 255, 255)" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#imgGradient4)" />
+                    </svg>
+
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
+                        <a href="{% url 'gallery-start' %}" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>GALLERY</h1></a>
+                        <p><b>Share</b> your photos</p>
+                        <img src="{% static 'main_app/gallery.png' %}" alt="Gallery" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));">
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <defs>
+                            <linearGradient id="imgGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="21%" stop-color="rgb(90, 200, 250)" />
+                                <stop offset="100%" stop-color="rgb(255, 255, 255)" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#imgGradient4)" />
+                    </svg>
+
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
+                        <a href="#" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>SURVEYS</h1></a>
+                        <p>Make your <b>voice</b> heard</p>
+                        <img src="{% static 'main_app/survey.png' %}" alt="Surveys" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));">
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <defs>
+                            <linearGradient id="imgGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="21%" stop-color="rgb(90, 200, 250)" />
+                                <stop offset="100%" stop-color="rgb(255, 255, 255)" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#imgGradient4)" />
+                    </svg>
+
+                    <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
+                        <a href="#" class="text-white text-decoration-none cursor-pointer fw-bold"><h1>DIARY</h1></a>
+                        <p>Keep track of your <b>progress</b></p>
+                        <img src="{% static 'main_app/diary.png' %}" alt="Diary" class="img-fluid" style="border-radius: 14px; width: 100%; height: auto; filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4)); object-fit: cover;">
                     </div>
                 </div>
             </div>
