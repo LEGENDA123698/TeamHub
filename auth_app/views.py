@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import *
 from django.contrib import messages
-#
+from django.views.generic import *
 
 def logout_view(request):
     logout(request)
@@ -39,3 +39,6 @@ def login_user(request):
         form = UserAuthForm()
 
     return render(request, 'auth_app/login.html', context = {'form': form})
+
+class ForgotPasswordView(TemplateView):
+    template_name = 'auth_app/forgot_password.html'

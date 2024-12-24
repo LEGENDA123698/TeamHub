@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Votes</title>
+</head>
+<body>
+   
+    <a href="{% url 'create_vote' %}">create new vote</a>
+    <hr><br>
+    {%for object in object_list%}
+        <a href="{% url 'detail_vote' object.pk %}">{{object.title}}</a><br>
+        <a href="{% url 'update_vote' object.pk %}">edit</a>
+        <a href="{% url 'delete_vote' object.pk %}">delete</a><br><br>
+    {%endfor%}
+
+</body>
+</html>

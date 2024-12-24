@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mt-5">
+    <h2>Результаты поиска для "{{ query }}"</h2>
+    {% if query %}
+        {% if results.forum_sections or results.forum_themes or results.forum_messages or results.gallery_images or results.calendar_events %}
+            <div class="mt-4">
+                <!-- Форум: Секции -->
+                {% if results.forum_sections %}
+                    <h4>Форум - Секции</h4>
+                    <ul>
+                        {% for section in results.forum_sections %}
+                            <li><a href="{{ section.get_absolute_url }}">{{ section.name }}</a> (Тег: {{ section.tag }})</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <!-- Форум: Темы -->
+                {% if results.forum_themes %}
+                    <h4>Форум - Темы</h4>
+                    <ul>
+                        {% for theme in results.forum_themes %}
+                            <li><a href="{{ theme.get_absolute_url }}">{{ theme.name }}</a> (Тэг: {{ theme.tag }})</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <!-- Форум: Сообщения -->
+                {% if results.forum_messages %}
+                    <h4>Форум - Сообщения</h4>
+                    <ul>
+                        {% for message in results.forum_messages %}
+                            <li>{{ message.text|truncatewords:20 }} - <a href="{{ message.related_theme.get_absolute_url }}">Тема: {{ message.related_theme.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <!-- Галерея -->
+                {% if results.gallery_images %}
+                    <h4>Галерея - Изображения</h4>
+                    <ul>
+                        {% for image in results.gallery_images %}
+                            <li><a href="{{ image.get_absolute_url }}">{{ image.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <!-- Календарь -->
+                {% if results.calendar_events %}
+                    <h4>Календарь - События</h4>
+                    <ul>
+                        {% for event in results.calendar_events %}
+                            <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a> ({{ event.date }})</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <p>Не найдено результатов для "{{ query }}".</p>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="mt-4">
+            <p>Пожалуйста, введите запрос для поиска.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

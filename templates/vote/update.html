@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update</title>
+</head>
+<body>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Vote</h2>
+        {{ form.as_p }}
+        <hr>
+        <h3>Answers</h3>
+        {{ answer_formset.management_form }}
+        {% for form in answer_formset %}
+            {{ form.as_p }}<br>
+        {% endfor %}
+        <br>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    
+</body>
+</html>

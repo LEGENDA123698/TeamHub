@@ -1,12 +1,163 @@
-{% include 'base.html' %}{% load static %} {% block extra_head %}
-<link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet" />
-{% endblock %} {% if sections %}
-<div class="default-placeholder">
-  <div class="placeholder-header">{{ sections.name }}</div>
+{% include 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link href="{% static 'forum_app/forum.css' %}" type="text/css" rel="stylesheet">
+<script>
+  function showEdit(id, name) {
+    const modal = new bootstrap.Modal(document.getElementById('edit' + id));
+    modal.show();
+  }
+
+  function showConfirm(id) {
+    const modal = new bootstrap.Modal(document.getElementById('confirm' + id));
+    modal.show();
+  }
+</script>
+<title>{{ sections.name }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-5 mt-5">
+      <div class="forum-placeholder">
+        {% if themes %}
+        <div class="card shadow-sm mt-1">
+          <div class="card-header d-flex justify-content-between align-items-center bg-light px-2">
+            <span class="fw-bold">
+              <a href="{% url 'forum_app:forum-start' %}" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-chevron-left"></i>
+              </a>
+              {% if sections.tag and sections.tag_color %}
+                <span class="badge rounded-pill" style="background-color: {{ sections.tag_color|default:'#6c757d' }}">
+                  {{ sections.tag }}
+                </span>
+              {% endif %}
+              {{ sections.name }}
+            </span>
+            {% if user.is_authenticated %}
+            <button class="create-button p-0 no-focus" data-bs-toggle="modal" data-bs-target="#createThemeModal">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            {% endif %}
+          </div>
+          
+          <div class="list-group list-group-flush">
+            {% for theme in themes %}
+            <div class="list-group-item placeholder-item">
+              <a href="{% url 'forum_app:theme_detail' theme.pk %}" class="text-decoration-none text-dark">
+                {{ theme.name }}
+              </a>
+              {% if user.is_authenticated or theme.theme_author == user %}
+              <button class="edit-button" onclick="showEdit({{ theme.pk }}, '{{ theme.name }}')">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="delete-button" onclick="showConfirm({{ theme.pk }})">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% else %}
+        <div class="card shadow-sm mt-1">
+          <div class="card-header d-flex justify-content-between align-items-center bg-light px-2">
+            <span class="fw-bold">
+              <a href="{% url 'forum_app:forum-start' %}" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-chevron-left"></i>
+              </a>
+              {% if sections.tag and sections.tag_color %}
+                <span class="badge rounded-pill" style="background-color: {{ sections.tag_color|default:'#6c757d' }}">
+                  {{ sections.tag }}
+                </span>
+              {% endif %}
+              {{ sections.name }}</span>
+            {% if user.is_authenticated %}
+            <button class="create-button p-0 no-focus" data-bs-toggle="modal" data-bs-target="#createThemeModal">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            {% endif %}
+          </div>
+          <div class="card-body text-center text-muted">
+            No themes yet
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- модалы редактирования и удаления -->
   {% for theme in themes %}
-  <div class="placeholder-item">
-    <a href="{% url 'forum_app:theme_detail' theme.pk %}">{{ theme.name }}</a>
+  <div id="confirm{{ theme.pk }}" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <p class="mb-3">Delete {{ theme.name }}?</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <a href="{% url 'forum_app:theme-delete' theme.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="edit{{ theme.pk }}" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form method="POST" action="{% url 'forum_app:theme-update' theme.pk %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="themeName" class="form-label">Theme Name</label>
+              <input type="text" class="form-control" id="themeName" name="name" value="{{ theme.name }}" required>
+            </div>
+            <div class="modal-footer px-0 pb-0">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
   {% endfor %}
+
+  <!-- модал создания -->
+  <div class="modal fade" id="createThemeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Theme</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'forum_app:theme-create' section_pk=sections.pk %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="themeName" class="form-label">Theme Name</label>
+              <input type="text" class="form-control" id="themeName" name="name" required>
+            </div>
+            <div class="modal-footer px-0 pb-0">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gap-filler"></div>
+
+  <div class="text-center mt-4">
+    <img src="{% static 'forum_app/get_of_my_oven.jpg' %}" alt="Get of my oven" class="img-fluid rounded" style="width: 20%; height: 10%;">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="d-block mt-2">Go to top</a>
+  </div>
 </div>
-{% endif %}
+
+<img src="{% static 'forum_app/chill_guy.png' %}" alt="Chill Guy" class="chill-guy">
+{% endblock %}

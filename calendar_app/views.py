@@ -1,3 +1,4 @@
+from django.views.generic import DetailView
 from django.shortcuts import render
 from calendar_app.forms import *
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -82,3 +83,9 @@ def calendar_view(request):
         template_name='calendar/calendar.html',
         context=context
     )
+
+
+class EventDetailView(DetailView):
+    model = Event
+    template_name = 'calendar/event_detail.html'
+    context_object_name = 'event'

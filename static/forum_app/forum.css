@@ -1,64 +1,138 @@
-@import '../base.css';
-
-body {
-    background-color: gainsboro;
-}
+@import "../base.css";
 
 .placeholder-header {
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
     background: rgba(0, 0, 0, 0.15);
     color: white;
-    padding: 5px 15px;
+    padding: 5px 5px;
     border-radius: 14px 14px 0px 0px;
-    width: 30vw;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    max-height: 48%;
+}
+
+.placeholder-header p {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.placeholder-header span {
+    background: inherit;
+}
+
+.forum-placeholder {
+    width: calc(100% + 6px);
+    margin-left: -3px;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: transparent;
 }
 
 .default-placeholder {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: whitesmoke;
     text-align: center;
-    border-radius: 0px 0px 14px 14px;
+    border-radius: 14px !important;
     border: 1px solid rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    width: 30vw;
-    top: 25vh;
     padding: 6px 6px;
-    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .placeholder-item {
+    background: white;
     color: black !important;
     border-radius: 8px !important;
     text-decoration: none;
-    width: 100%;
     transition: transform 0.3s ease-in-out;
     height: 60px !important;
     line-height: 60px !important;
     font-weight: bold;
     font-size: 18px !important;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.1s ease-in-out,
+        transform 0.1s ease-in-out;
 }
 
 .placeholder-item a {
-    display: block;
+    margin-left: 20px;
+    position: absolute;
     width: 100%;
-    height: 100%;
-    text-align: center;
+    text-align: left;
     line-height: 60px;
     color: inherit;
     text-decoration: none;
+    transition: color 0.1s ease-in-out;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+.placeholder-item:hover a{
+    color: white !important;
 }
 
 .placeholder-item:hover {
     color: white !important;
     background: #007aff !important;
+    transform: scale(1);
+}
+
+.placeholder-item .edit-button {
+    position: absolute;
+    transform: translateX(30px) scale(0.8);
+    right: calc(6px + 62px);
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out,
+        transform 0.1s ease-in-out;
+    z-index: 2;
+    border-radius: 9px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #C7C7CC, #8E8E93);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.placeholder-item .delete-button {
+    position: absolute;
+    right: calc(6px + 31px);
+    transform: translateX(30px) scale(0.8);
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out,
+        transform 0.1s ease-in-out;
+    z-index: 2;
+    border-radius: 9px;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #ff3b30, #a82d28);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.placeholder-item:hover .delete-button,
+.placeholder-item:hover .edit-button {
+    opacity: 1;
+    transform: translateX(30px) scale(1);
 }
 
 .create-button {
@@ -70,5 +144,138 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.15);
     background: linear-gradient(145deg, #007aff, #0051a8);
     color: white;
-    padding-bottom: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.modal-content {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 14px;
+}
+
+.modal-backdrop {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.search-container {
+    position: relative;
+    width: 30%;
+    height: 25px;
+}
+
+.close-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #84848B;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.modal .search {
+    padding-right: 28px;
+    background-image: none;
+    padding-left: 12px;
+    border-radius: 8px;
+}
+
+.get-of-my-oven {
+    position: relative;
+    text-align: center;
+    width: 40vw;
+    height: 30vh;
+    border-radius: 14px;
+}
+
+.chill-guy {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(90deg) translateX(100%);
+    transition: transform 0.5s ease;
+    max-width: 150px;
+}
+
+.chill-guy:hover {
+    transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .chill-guy {
+        max-width: 100px;
+    }
+}
+
+.list-group {
+    padding: 6px !important;
+    gap: 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: rgb(250, 250, 250);
+}
+
+.list-group-item {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.card {
+    border: none !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+    box-shadow: none !important;
+}
+
+.card.shadow-sm {
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.messages-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.messages-list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+    padding: initial !important;
+    gap: initial !important;
+    display: flex !important;
+    flex-direction: row !important;
+    background-color: initial !important;
+}
+
+.pagination li {
+    padding: initial !important;
+    margin: initial !important;
+    background: initial !important;
+    border-radius: initial !important;
+    box-shadow: initial !important;
+}
+
+.gap-filler {
+    margin-top: 1000px;
 }
