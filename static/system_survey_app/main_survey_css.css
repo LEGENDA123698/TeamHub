@@ -1,0 +1,85 @@
+.btn-grad-con {
+    background-image: linear-gradient(145deg, #007aff, #0051a8);
+    margin: 10px;
+    padding: 15px 25px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-position 0.7s ease-in-out, color 0.7s ease-in-out;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 8px;
+    display: block;
+    text-decoration: none;
+}
+
+.btn-grad-con:hover {
+    background-position: right center;
+    color: #ffffff;
+}
+
+
+
+.btn-grad-add {
+    background-image: linear-gradient(to right, #729229 0%, #e7e31d 51%, #68812e 100%);
+    padding: 6px 30px; /* Уменьшенные отступы */
+    font-size: 0.75rem; /* Уменьшенный размер шрифта */
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 10px #eee;
+    border-radius: 5px; /* Уменьшенный радиус */
+    display: inline-block;
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+.btn-grad-add:hover {
+    background-position: right center;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+.btn-grad-check {
+    background-image: linear-gradient(to right, #627a2a 0%, #01ff27 51%, #526527 100%);
+    padding: 6px 30px; /* Уменьшенные отступы */
+    font-size: 0.75rem; /* Уменьшенный размер шрифта */
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 10px #eee;
+    border-radius: 5px; /* Уменьшенный радиус */
+    display: inline-block;
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+.btn-grad-check:hover {
+    background-position: right center;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 6;
+}
+
+.list-group-item {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: whitesmoke;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}

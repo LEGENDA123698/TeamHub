@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'materials_app',
     'colorfield',
     'portfolio_app',
+    'system_survey_app',
     
 
 ]
@@ -130,6 +131,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = 'staticfiles/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+LOGIN_URL = '/auth/login/'
+
 
 # Default primary key field typ
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

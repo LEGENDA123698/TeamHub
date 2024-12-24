@@ -26,7 +26,8 @@ urlpatterns = [
     path('forum/', include('forum_app.urls')),
     path('', include('calendar_app.urls')),
     path('', include('materials_app.urls')),
-    path('notifications/', include('notifications_app.urls'))
+    path('notifications/', include('notifications_app.urls')),
+    path('surveys/', include('system_survey_app.urls'))
 ]
 
 if settings.DEBUG:
