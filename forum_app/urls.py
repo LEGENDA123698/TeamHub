@@ -14,4 +14,6 @@ urlpatterns = [
     path('section/<int:pk>/update/', SectionUpdateView.as_view(), name='section-update'),
     path('theme/<int:pk>/delete/', ThemeDeleteView.as_view(), name='theme-delete'),
     path('theme/<int:pk>/update/', ThemeUpdateView.as_view(), name='theme-update'),
+    path('message/<int:pk>/delete/', MessageDeleteView.as_view(), name='message-delete'),
+    path('message/<int:pk>/update/', MessageUpdateView.as_view(), name='message-update'),
 ]

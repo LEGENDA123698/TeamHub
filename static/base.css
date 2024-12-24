@@ -54,7 +54,6 @@
 
 .carousel {
     background: white !important;
-    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.4);
     height: 100vh;
 }
 
@@ -96,7 +95,35 @@
 
 .navbar.scrolled {
     background: transparent;
-    transition: background, box-shadow, backdrop-filter, --webkit-backdrop-filter, background-color 0.3s ease-in-out;
+    border: 1px solid rgba(0, 0, 0, 0.15); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background, box-shadow, backdrop-filter, -webkit-backdrop-filter, background-color 0.3s ease-in-out;
+}
+
+.mainmenu.scrolled {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.15); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background, box-shadow, backdrop-filter, -webkit-backdrop-filter, background-color 0.3s ease-in-out;
+}
+
+.dropdown-menu.scrolled {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.15); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background, box-shadow, backdrop-filter, -webkit-backdrop-filter, background-color 0.3s ease-in-out;
+}
+
+.dropdown-menu.scrolled .dropdown-item {
+    color: white;
+}
+
+.dropdown-menu.scrolled .search {
+    opacity: 0.5;
 }
 
 .navbar {
@@ -107,6 +134,8 @@
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 8px 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background, box-shadow, backdrop-filter, -webkit-backdrop-filter, background-color 0.3s ease-in-out;
 }
 
 .navbar-img {
@@ -237,8 +266,6 @@
 .mainmenu-item {
     width: 100%;
     height: 100px;
-    padding: 10px;
-    background-color: white;
     border-radius: 10px !important;
     text-align: center;
     display: flex;
@@ -249,6 +276,10 @@
     transition: transform 0.1s ease-in-out, background 0.1s ease-in-out;
     text-decoration: none;
     color: inherit;
+}
+
+.mainmenu.scrolled .mainmenu-item {
+    color: white;
 }
 
 .mainmenu-item i {

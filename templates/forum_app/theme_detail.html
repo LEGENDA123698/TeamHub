@@ -91,10 +91,9 @@
 {% block content %}
 <div class="col-12 col-lg-5 mx-auto mt-5">
   {% if themes %}
-  <div class="row">
+  <div class="row mb-1">
     <div class="col-md-12 mt-4">
       <h1>{{ themes.name }}</h1>
-      <p>{{ themes.description }}</p>
     </div>
   </div>
   <div class="theme-detail">
@@ -102,7 +101,7 @@
       {% if page_obj %}
       <ul>
         {% for message in page_obj %}
-        <div class="row">
+        <div class="row mt-0">
           <div class="col-md-12">
             <li class="d-flex align-items-left" style="padding: 2px; border-radius: 8px;">
               <div class="message-author">
@@ -113,11 +112,24 @@
               </div>
               <div class="vr mx-1"></div>
               <div class="text-left" style="border-radius: 6px; background-color: white; padding: 6px; width: 100%;">
-                <p>{{ message.text }}</p>
+                <span class="d-flex justify-content-between mb-0">  
+                  <p style="font-size: 10px; margin-bottom: 0; color: #808080;">{{ message.created_at|date:"j M Y" }}</p>
+                  {% if message.message_author == user or user.is_staff %}
+                  <div class="d-flex">
+                    <a href="{% url 'forum_app:message-update' message.id %}" class="ms-2">
+                      <i class="fa-solid fa-pen-to-square" style="color: #808080;"></i>
+                    </a>
+                    <a href="{% url 'forum_app:message-delete' message.id %}" class="ms-2">
+                      <i class="fa-solid fa-trash" style="color: #ff3b30;"></i>
+                    </a>
+                  </div>
+                  {% endif %}
+                </span>
+                <p class="mt-0">{{ message.text }}</p>
+                {% if message.image %}
+                <img src="{{ message.image.url }}" alt="Изображение" style="max-width: 100%; height: auto; margin-top: 10px;">
+                {% endif %}
               </div>
-              {% if message.image %}
-              <img src="{{ message.image.url }}" alt="Изображение" style="max-width: 100%; height: auto; margin-top: 10px;">
-              {% endif %}
             </li>
           </div>
         </div>
@@ -133,7 +145,7 @@
   {% endif %}
   
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center mt-1">
+    <ul class="pagination justify-content-center mt-2">
       {% if page_obj.has_previous %}
       <li class="page-item">
         <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo;</a>
@@ -162,22 +174,19 @@
     </ul>
   </nav>
 
-      {% if user.is_authenticated %}
-    <div class="message-form">
-      <h3>Написать сообщение:</h3>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.text }}
-        <br />
-        {{ form.image }}
-        <br />
-        <button type="submit">Отправить</button>
-      </form>
-    </div>
+    {% if user.is_authenticated %}
+      <div class="message-form">
+        <form method="post" enctype="multipart/form-data" class="gap-2">
+          {% csrf_token %}
+          {{ form.text }}
+          {{ form.image }}
+          <button type="submit" class="mt-2">Send</button>
+        </form>
+      </div>
     {% else %}
-    <p>
-      Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы оставить сообщение.
-        </p>
-        {% endif %}
+      <p>
+        Please, <a href="{% url 'login' %}">login</a>, to leave a message.
+      </p>
+    {% endif %}
   </div>
 {% endblock %}

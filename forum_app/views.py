@@ -7,6 +7,8 @@ from .forms import *
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
+from datetime import timedelta
+from django.utils.timezone import now
 
 
 class SectionListView(ListView):
@@ -135,21 +137,14 @@ class MessageCreateView(CreateView):
 class MessageDeleteView(DeleteView):
     model = Message
     context_object_name = "message"
-    template_name = ""
 
-    def dispatch(self, request, *args, **kwargs):
-        message = self.get_object()
-        if message.message_author != request.user:
-            return HttpResponseForbidden("Вы не можете удалить это сообщение.")
-        return super().dispatch(request, *args, **kwargs)
+    def get_success_url(self):
+        return reverse('forum_app:theme_detail', kwargs={'pk': self.object.related_theme.pk})
+
 
 class MessageUpdateView(UpdateView):
     model = Message
     context_object_name = "message"
-    template_name = ""
+    def get_success_url(self):
+        return reverse('forum_app:theme_detail', kwargs={'pk': self.object.related_theme.pk})
 
-    def dispatch(self, request, *args, **kwargs):
-        message = self.get_object()
-        if message.message_author != request.user:
-            return HttpResponseForbidden("Вы не можете редактировать это сообщение.")
-        return super().dispatch(request, *args, **kwargs)

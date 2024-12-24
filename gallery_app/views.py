@@ -27,8 +27,7 @@ class ImageCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         response = super().form_valid(form)
-        # Redirect to the page containing the new image
-        page_number = (self.object.pk - 1) // 5 + 1  # Calculate the page number
+        page_number = (self.object.pk - 1) // 5 + 1 
         return redirect(f"{self.success_url}?page={page_number}")
 
 

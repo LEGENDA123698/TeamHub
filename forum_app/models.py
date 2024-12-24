@@ -30,6 +30,8 @@ class Message(models.Model):
     message_author = models.ForeignKey(User, related_name="message_author", on_delete=models.CASCADE, blank=True, default=1)
     related_theme = models.ForeignKey(Theme, related_name="theme_message", on_delete=models.CASCADE, blank=True, default=1)
     image = models.ImageField(upload_to='media/forum_images/', blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, auto_now=True)
+
 
     def get_absolute_url(self):
         return reverse('forum_app:message_detail', args=[str(self.id)])
