@@ -1,20 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse, reverse_lazy
 from .models import *
 from .forms import *
-
-
-#def is_admin_or_moderator(user):
-    #return user.is_superuser or user.groups.filter(name='Moderators').exists()
 
 # Creation 
 class NotificationCreateView(LoginRequiredMixin, CreateView):
     model = Notification
-    form_class = NotificationForm
-    template_name = 'notifications_app/create_notif.html'
-    success_url = '/notifications/'
+    fields = ['title', 'text', 'date']
+    widgets = {
+        'date': forms.DateInput(attrs={'type': 'date'})
+    }
+    success_url = reverse_lazy('notifications_app:notifications-list')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -24,22 +23,33 @@ class NotificationCreateView(LoginRequiredMixin, CreateView):
 
 class NotificationUpdateView(LoginRequiredMixin, UpdateView):
     model = Notification
-    form_class = NotificationForm
-    template_name = 'notifications_app/update_notif.html'
-    success_url = '/notifications/'
+    fields = ['title', 'text', 'date']
+    widgets = {
+        'date': forms.DateInput(attrs={'type': 'date'})
+    }
+    success_url = reverse_lazy('notifications_app:notifications-list')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(author=self.request.user)
+
+    def get_success_url(self):
+        if self.object.notification:
+            return reverse('notifications_app:notification-detail', args=[self.notification.pk])
+        return reverse_lazy('notifications_app:notifications-list')
+ 
 # Delete
-
 
 class NotificationDeleteView(LoginRequiredMixin, DeleteView):
     model = Notification
-    template_name = 'notifications_app/delete_notif.html'
-    success_url = '/notifications/'
+    success_url = reverse_lazy('notifications_app:notifications-list')
 
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
 
 class NotificationListView(ListView):
     model = Notification
-    template_name = 'notifications_app/notif.html'
+    template_name = 'notification_app/notif.html'
     context_object_name = 'notifications'
 
     def get_context_data(self, **kwargs):
@@ -52,6 +62,6 @@ class NotificationListView(ListView):
 
 class NotificationDetailView(DetailView):
     model = Notification
-    template_name = 'notifications_app/notif_detail.html'
+    template_name = 'notification_app/notif_detail.html'
     context_object_name = 'notification'
 

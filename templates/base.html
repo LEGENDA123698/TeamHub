@@ -51,7 +51,7 @@
                     <li><a class="dropdown-item" href="{% url 'user_profile' user.id %}"><i class="fa-solid fa-user"></i>  {{ user.username }}</a></li>
                     <li><hr class="dropdown-divider start-50"></li>
                     {% endif %}
-                    <li><a class="dropdown-item" href="{% url 'notifications-list' %}">
+                    <li><a class="dropdown-item" href="{% url 'notifications_app:notifications-list' %}">
                       <i class="fa-solid fa-bell"></i>  Notifications
                     </a></li>
                     <li><hr class="dropdown-divider"></li>
