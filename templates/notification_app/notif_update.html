@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Update Notification#{{ notification.id }}</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+<!--
+<div id="edit{{ notification.pk }}" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form method="POST" action="{% url 'notifications_app:update-notification' notification.pk %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" name="title" class="form-control" value="{{ notification.title }}" required>
+                    </div>
+                    <input type="hidden" name="notificationAuthor" value="{{ notification.author.id }}">
+                    <div class="mb-3">
+                        <label for="notificationText" class="form-label">Text</label>
+                        <input type="text" class="form-control" id="notificationText" name="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="notificationDate" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="notificationDate" name="date">
+                    </div>
+                    <div class="modal-footer px-0 pb-0">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+-->

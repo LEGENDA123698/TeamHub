@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Delete Notification#{{ notification.id }}</title>
+</head>
+<body>
+    <form method = "POST">
+        {% csrf_token %}
+        <p class="mb-3">Delete {{ notification.title }}?</p>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'notifications_app:notifications-list'%}" type="dismiss" class="btn btn-secondary">Cancel</button>
+            <a href="{% url 'notifications_app:notifications-list'%}" type="submit" class="btn btn-danger">Delete</a>
+        </div>
+    </form>
+</body>
+</html>
+
+<!-- for notification in page_object %}
+<div id="confirm{{ notification.pk }}" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <p class="mb-3">Delete {{ notification.title }}?</p>
+                <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="{% url 'notifications_app:delete-notification' notification.pk %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+-->
