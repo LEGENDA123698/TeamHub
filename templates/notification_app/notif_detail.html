@@ -15,7 +15,7 @@
                             <h1 class="text-center align-self-center" style="margin-bottom: 25px; margin-top: 20px;">{{ notification.title }}</h1>
                             {% if user.is_staff %}
                             <a class="edit-button" onclick="showEdit({{ notification.pk }}, '{{ notification.title }}')" href="{% url 'notifications_app:update-notification' notification.pk %}">
-                                <i class="fa-solid fa-pen-to-square" style="color: #808080; margin-left: 6px;"></i>
+                                <i class="fa-solid fa-pen-to-square" style="color: #808080;"></i>
                             </a>
                             {% endif %}
                         </div>

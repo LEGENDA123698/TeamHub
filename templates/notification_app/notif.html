@@ -37,11 +37,9 @@
                                             <p style="font-size: 10px; margin-bottom: 0; color: #808080;">{{ notification.date | date:"j M Y" }}</p>
                                             {% if notification.author == user or user.is_staff %}
                                                 <div class="d-flex">
-                                                    {% if user.is_staff %}
                                                     <a class="delete-button" onclick="showConfirm({{ notification.pk }})" href="{% url 'notifications_app:delete-notification' notification.pk %}">
                                                         <i class="fa-solid fa-trash" style="color: #ff3b30; margin-left: 6px;"></i>
                                                     </a>
-                                                    {% endif %}
                                                 </div>
                                             {% endif %}
                                         </span>
