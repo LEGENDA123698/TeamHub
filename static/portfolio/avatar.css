@@ -1,5 +1,4 @@
 .avatar {
-    border: 1px solid rgba(0, 0, 0, 0.15);
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -14,21 +13,22 @@
 }
 
 .own_avatar:hover {
+    transition: filter 0.3s ease;
     filter: brightness(0.8);
 }
 
 .avatar-list {
-    margin-left: 1270px;
     margin-top: 10px;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, 2rem);
+    min-width: 200px;
 }
 
 .avatar-list li {
-    transition: translate 200ms;
+    transition: transform 200ms;
 }
 
-.avatar-list li:hover~li {
-    translate: 2rem;
+.avatar-list li:hover ~ li {
+    transform: translate(2rem);
 }
