@@ -1,25 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Update</title>
-</head>
-<body>
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Vote</title>
+    <link rel="stylesheet" href="{% static 'vote/forms.css' %}">
+{% endblock %}
 
+{% block content %}
+
+<div class="container-a">
+
+    
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2>Vote</h2>
+        <p class="title">Update {{obj.title}}</p>
         {{ form.as_p }}
         <hr>
         <h3>Answers</h3>
-        {{ answer_formset.management_form }}
-        {% for form in answer_formset %}
-            {{ form.as_p }}<br>
-        {% endfor %}
+        <div class="formset">
+            {{ answer_formset.management_form }}
+            {% for form in answer_formset %}
+            <div class="formset-item">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.image.label_tag }}
+                {{ form.image }}
+            </div>
+            {% endfor %}
+        </div>
         <br>
         
-        <button type="submit">Submit</button>
+        <button type="submit" class="button">edit</button>
+        <a href="{% url 'vote_app:votes' %}" style="text-decoration: none;"><button class="button">back to votes list</button></a>
     </form>
 
     
-</body>
-</html>
+</div>
+{% endblock %}

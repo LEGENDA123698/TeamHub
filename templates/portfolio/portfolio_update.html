@@ -9,13 +9,13 @@
 
 <div class="container-a">
 
-    <h1 style="text-align: center;">Add new portfolio</h1>
+    <h1 style="text-align: center;">Edit your portfolio</h1>
     <hr>
 
     <form method="post" enctype='multipart/form-data'>
         {%csrf_token%}
         {{form.as_p}}
-        <button type="submit" class="button">add</button>
+        <button type="submit" class="button">edit</button>
     </form>
     
 </div>

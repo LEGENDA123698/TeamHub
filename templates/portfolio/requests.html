@@ -1,22 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Friend requests</title>
-</head>
-<body>
-    
-    {%for request in requests%}
-        <p>Friend request from {{request.sender}}</p>
-        <form method="POST" action="{% url 'add_friend' request.sender.pk %}">
-            {% csrf_token %}
-            <button type="submit">accept</button>
-        </form>
-        <form method="POST" action="{% url 'decline' request.sender.pk %}">
-            {% csrf_token %}
-            <button type="submit">decline</button>
-        </form>
-        <br><br><br>
-    {%endfor%}
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Profile</title>
+    <link rel="stylesheet" href="{% static 'portfolio/requests.css' %}">
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<div class="container-a">
+
+    <div class="friend-requests">
+        {% for request in requests %}
+        <div class="request">
+            <p class="request-text">Friend request from {{ request.sender }}</p>
+            <div class="buttons">
+                <form method="POST" action="{% url 'portfolio_app:add_friend' request.sender.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="accept-button">Accept</button>
+                </form>
+                <form method="POST" action="{% url 'portfolio_app:decline' request.sender.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="decline-button">Decline</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}

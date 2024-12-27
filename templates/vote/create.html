@@ -1,28 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create</title>
-</head>
-<body>
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Vote</title>
+    <link rel="stylesheet" href="{% static 'vote/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
     
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2>Vote</h2>
-        {{ form.as_p }}
+        <p class="title">Add new vote</p>
+        <div class="form-group">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
         <hr>
         <h3>Answers</h3>
-        <a href="?extra={{ current_extra|add:1 }}">add answer</a>
-        {%if current_extra > 2 %}
-        <a href="?extra={{ current_extra|add:-1 }}">remove answer</a>
-        {%endif%}
-        {{ answer_formset.management_form }}
-        {% for form in answer_formset %}
-            {{ form.as_p }}<br>
-        {% endfor %}
+        <a href="?extra={{ current_extra|add:1 }}" style="text-decoration: none;" class="button">add answer</a>
+        {% if current_extra > 2 %}
+        <a href="?extra={{ current_extra|add:-1 }}" style="text-decoration: none;" class="button">remove answer</a>
+        {% endif %}
+        <br><br>
+        <div class="formset">
+            {{ answer_formset.management_form }}
+            {% for form in answer_formset %}
+            <div class="formset-item">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.image.label_tag }}
+                {{ form.image }}
+            </div>
+            {% endfor %}
+        </div>
         <br>
-        
-        <button type="submit">Submit</button>
+        <button type="submit" class="button">add</button>
+        <a href="{% url 'vote_app:votes' %}" style="text-decoration: none;"><button class="button">back to votes list</button></a>
     </form>
 
-</body>
-</html>
+</div>
+{% endblock %}

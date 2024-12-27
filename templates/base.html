@@ -45,9 +45,9 @@
                 {% if user.is_authenticated %}
                   <li>
                     {% if user.is_staff %}
-                    <a class="dropdown-item" href="{% url 'user_profile' user.id %}"><i class="fa-solid fa-user-shield"></i>  {{ user.username }}</a></li>
+                    <a class="dropdown-item" href="{% url 'portfolio_app:user_profile' user.id %}"><i class="fa-solid fa-user-shield"></i>  {{ user.username }}</a></li>
                     {% else %}
-                    <li><a class="dropdown-item" href="{% url 'user_profile' user.id %}"><i class="fa-solid fa-user"></i>  {{ user.username }}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'portfolio_app:user_profile' user.id %}"><i class="fa-solid fa-user"></i>  {{ user.username }}</a></li>
                     {% endif %}
                     <li><a class="dropdown-item" href="{% url 'notifications_app:notifications-list' %}">
                       <i class="fa-solid fa-bell"></i>  Notifications
@@ -87,6 +87,28 @@
           <i class="fa-solid fa-images"></i>Gallery
         </a>
       </div>
+
+
+      <div class="col">
+        <a class="dropdown-item mainmenu-item h-100" href="{% url 'materials_app:materials' %}">
+          <i class="fa-solid fa-file"></i>Materials
+        </a>
+      </div>
+
+      <div class="col">
+        <a class="dropdown-item mainmenu-item h-100" href="{% url 'vote_app:votes' %}">
+          <i class="fa-solid fa-check-to-slot"></i>Votes
+        </a>
+      </div>
+
+      {% if user.is_authenticated %}
+      <div class="col">
+        <a class="dropdown-item mainmenu-item h-100" href="{% url 'diary_app:diary' user.id %}">
+          <i class="fa-solid fa-book"></i>Diary
+        </a>
+      </div>
+      {% endif %}
+
 
     </div>
   </div>

@@ -1,0 +1,22 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/edit_question.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+    <h1>Редагування питання</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.question_title.label_tag }}
+            {{ form.question_title }}
+        </div>
+        <button type="submit" class="btn btn-success">Зберегти зміни</button>
+        <a href="javascript:history.back()" class="btn btn-secondary">Скасування</a>
+    </form>
+</div>
+{% endblock %}
