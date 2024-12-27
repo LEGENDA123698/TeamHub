@@ -3,9 +3,13 @@ from vote_app.forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
 from django.forms import inlineformset_factory
+from datetime import timedelta
+from django.utils.timezone import now
+from django.contrib.auth.mixins import LoginRequiredMixin
+from vote_app.mixins import StaffRequiredMixin
 
 
-class VoteCreateView(CreateView):
+class VoteCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = Vote
     form_class = VoteForm
     template_name = 'vote/create.html'
@@ -39,7 +43,7 @@ class VoteCreateView(CreateView):
         else:
             return self.render_to_response(self.get_context_data(form=vote_form, answer_formset=answer_formset))
 
-class VoteUpdateView(UpdateView):
+class VoteUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
     model = Vote
     form_class = VoteForm
     template_name = 'vote/update.html'
@@ -51,6 +55,7 @@ class VoteUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         AnswerFormSet = self.get_answer_formset()
+        context['obj'] = self.get_object()
         if self.request.POST:
             context['answer_formset'] = AnswerFormSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
@@ -69,16 +74,18 @@ class VoteUpdateView(UpdateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
-class VoteDeleteView(DeleteView):
+class VoteDeleteView(LoginRequiredMixin, StaffRequiredMixin, DeleteView):
     model = Vote
-    template_name = 'vote/delete.html'
-    success_url = '/vote/'
+
+    def get(self, request, *args, **kwargs):
+        self.get_object().delete()
+        return redirect('vote_app:votes')
 
 class VotesView(ListView):
     model = Vote
     template_name = 'vote/votes.html'
     
-class VoteDetailView(DetailView):
+class VoteDetailView(LoginRequiredMixin, DetailView):
     model = Vote
     template_name = 'vote/vote_detail.html'
 
@@ -100,15 +107,18 @@ class VoteDetailView(DetailView):
                 answer.save()
 
     def post(self, request, *args, **kwargs):
-        vote = self.get_object()
-        answers = vote.vote_answers.all()
-        if request.method == "POST":
-            for answer in answers:
-                if answer.user.filter(id=self.request.user.id).exists():
-                    answer.user.remove(self.request.user.id)
-            selected_option = VoteAnswer.objects.get(id=request.POST.get('vote'))
-            selected_option.user.add(self.request.user)
-            return redirect('detail_vote', pk=self.kwargs.get('pk'))
+        if now() > self.request.user.date_joined + timedelta(minutes=10):
+            vote = self.get_object()
+            answers = vote.vote_answers.all()
+            if request.method == "POST":
+                for answer in answers:
+                    if answer.user.filter(id=self.request.user.id).exists():
+                        answer.user.remove(self.request.user.id)
+                selected_option = VoteAnswer.objects.get(id=request.POST.get('vote'))
+                selected_option.user.add(self.request.user)
+                return redirect('vote_app:detail_vote', pk=self.kwargs.get('pk'))
+        else:
+            return redirect('vote_app:votes')
 
     def get_context_data(self, **kwargs):
         vote = self.get_object()
@@ -129,4 +139,4 @@ def remove_vote(request, pk):
         for a in answers:
             a.procent = 100 * a.user.count() / total_users if total_users > 0 else 0
             a.save()
-    return redirect('detail_vote', pk=answer.vote.id)
+    return redirect('vote_app:detail_vote', pk=answer.vote.id)
