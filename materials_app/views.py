@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 from materials_app.forms import *
+from materials_app.mixins import StaffRequiredMixin
+from django.core.paginator import Paginator
 
 
-class MaterialAddView(CreateView):
+class MaterialAddView(StaffRequiredMixin, CreateView):
 
     template_name = 'materials/add_material.html'
-    success_url = '/materials'
+    success_url = '/materials/'
 
     def get_form_class(self):
         option = self.request.GET.get('option')
@@ -42,10 +44,10 @@ class MaterialAddView(CreateView):
         return context
 
 
-class MaterialUpdateView(UpdateView):
+class MaterialUpdateView(StaffRequiredMixin, UpdateView):
     model = Material
     template_name = 'materials/update.html'
-    success_url = '/materials'
+    success_url = '/materials/'
 
     def get_form_class(self, queryset=None):
         upd_obj = super().get_object(queryset)
@@ -61,18 +63,32 @@ class MaterialUpdateView(UpdateView):
             return LinkForm
 
 
-class MaterialDeleteView(DeleteView):
+class MaterialDeleteView(StaffRequiredMixin, DeleteView):
     model = Material
-    template_name = 'materials/delete.html'
-    success_url = '/materials'
+
+    def get(self, request, *args, **kwargs):
+        self.get_object().delete()
+        return redirect('materials_app:materials')
 
 
 def materials_view(request):
+
+    links = Material.objects.filter(type='LINK')
+    videos = Material.objects.filter(type='VIDEO')
+    files = Material.objects.filter(type='FILE')
+    images = Material.objects.filter(type='IMAGE')
+
+    page_number = request.GET.get('page')
+
     context = {
-        'links': Material.objects.filter(type='LINK'),
-        'videos': Material.objects.filter(type='VIDEO'),
-        'files': Material.objects.filter(type='FILE'),
-        'images': Material.objects.filter(type='IMAGE'),
+        'links': links,
+        'videos': videos,
+        'files': files,
+        'images': images,
+        'page_obj_links': Paginator(links, 4).get_page(page_number),
+        'page_obj_videos': Paginator(videos, 4).get_page(page_number),
+        'page_obj_files': Paginator(files, 4).get_page(page_number),
+        'page_obj_images': Paginator(images, 4).get_page(page_number),
     }
 
     return render(

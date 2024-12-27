@@ -6,6 +6,8 @@ from portfolio_app.forms import *
 from django.urls import reverse_lazy
 from forum_app.models import Message
 from portfolio_app.mixins import UserIsOwnerMixin, UserIsProfileOwner
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 class ProfileView(DetailView):
@@ -13,8 +15,9 @@ class ProfileView(DetailView):
     template_name = 'portfolio/profile.html'
 
     def is_friend(self, user):
-        if self.request.user.friends.filter(id=user.id).exists():
-            return True
+        if self.request.user.is_authenticated:
+            if self.request.user.friends.filter(id=user.id).exists():
+                return True
 
     def get_context_data(self, **kwargs):
         user = self.get_object()
@@ -27,7 +30,7 @@ class ProfileView(DetailView):
         context['user'] = user
         return context
 
-class PortfolioCreateView(CreateView):
+class PortfolioCreateView(LoginRequiredMixin, CreateView):
     model = ShowcaseElement
     form_class = ShowcaseElementForm
     template_name = 'portfolio/create.html'
@@ -37,24 +40,24 @@ class PortfolioCreateView(CreateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse_lazy('user_profile', kwargs={'pk': self.request.user.id})
+        return reverse_lazy('portfolio_app:user_profile', kwargs={'pk': self.request.user.id})
     
-class PortfolioUpdateView(UserIsOwnerMixin, UpdateView):
+class PortfolioUpdateView(LoginRequiredMixin, UserIsOwnerMixin, UpdateView):
     model = ShowcaseElement
     form_class = ShowcaseElementForm
-    template_name = 'portfolio/update.html'
+    template_name = 'portfolio/portfolio_update.html'
     
     def get_success_url(self):
-        return reverse_lazy('user_profile', kwargs={'pk': self.request.user.id})
+        return reverse_lazy('portfolio_app:user_profile', kwargs={'pk': self.request.user.id})
     
-class PortfolioDeleteView(UserIsOwnerMixin, DeleteView):
+class PortfolioDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
     model = ShowcaseElement
 
     def get(self, request, *args, **kwargs):
         self.get_object().delete()
-        return redirect('user_profile', pk=self.request.user.id)
+        return redirect('portfolio_app:user_profile', pk=self.request.user.id)
 
-class FriendRequestsView(TemplateView):
+class FriendRequestsView(LoginRequiredMixin, TemplateView):
     model = User
     template_name = 'portfolio/requests.html'
 
@@ -64,39 +67,39 @@ class FriendRequestsView(TemplateView):
         context['requests'] = FriendRequest.objects.filter(receiver=user.id)
         return context
 
-class AvatarUpdateView(UserIsProfileOwner, UpdateView):
-    model = User
-    form_class = AvatarForm
-    template_name = 'portfolio/update.html'
-    
-    def get_success_url(self):
-        return reverse_lazy('user_profile', kwargs={'pk': self.request.user.id})
-
-class ProfileUpdateView(UserIsProfileOwner, UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UserIsProfileOwner, UpdateView):
     model = User
     form_class = ProfileForm
-    template_name = 'portfolio/update.html'
+    template_name = 'portfolio/profile_update.html'
+    context_object_name = 'user'
     
     def get_success_url(self):
-        return reverse_lazy('user_profile', kwargs={'pk': self.request.user.id})
+        return reverse_lazy('portfolio_app:user_profile', kwargs={'pk': self.request.user.id})
 
+@login_required
 def friend_request(request, pk):
     if request.method == 'POST':
+        if FriendRequest.objects.filter(sender=request.user, receiver=User.objects.get(id=pk)).exists():
+            return redirect('portfolio_app:user_profile', pk=pk)
+        
         FriendRequest.objects.create(sender=request.user, receiver=User.objects.get(id=pk))
-    return redirect('user_profile', pk=pk)
+    return redirect('portfolio_app:user_profile', pk=pk)
 
+@login_required
 def decline(request, pk):
     if request.method == 'POST':
         FriendRequest.objects.get(sender=pk, receiver=request.user).delete()
-    return redirect('friend_requests')
+    return redirect('portfolio_app:friend_requests')
 
+@login_required
 def add_friend(request, pk):
     if request.method == 'POST':
         request.user.friends.add(User.objects.get(id=pk))
         FriendRequest.objects.get(sender=pk, receiver=request.user).delete()
-    return redirect('friend_requests')
+    return redirect('portfolio_app:friend_requests')
 
+@login_required
 def delete_friend(request, pk):
     if request.method == 'POST':
         request.user.friends.remove(User.objects.get(id=pk))
-    return redirect('user_profile', pk=pk)
+    return redirect('portfolio_app:user_profile', pk=pk)

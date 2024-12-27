@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create</title>
-    {% load static %}
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Profile</title>
     <link rel="stylesheet" href="{% static 'portfolio/forms.css' %}">
-</head>
-<body>
+{% endblock %}
 
-   <form method="post" enctype='multipart/form-data'>
-    {%csrf_token%}
-    {{form.as_p}}
-    <button type="submit">submit</button>
-   </form>
+{% block content %}
+
+<div class="container-a">
+
+    <h1 style="text-align: center;">Add new portfolio</h1>
+    <hr>
+
+    <form method="post" enctype='multipart/form-data'>
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit" class="button">add</button>
+    </form>
     
-</body>
-</html>
+</div>
+{% endblock %}

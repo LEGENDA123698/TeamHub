@@ -8,5 +8,7 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ['title', 'description', 'date',]
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter event title'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter event description', 'rows': 4}),
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }

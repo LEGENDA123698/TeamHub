@@ -1,38 +1,41 @@
-from django.views.generic import DetailView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from calendar_app.forms import *
 from django.views.generic import CreateView, UpdateView, DeleteView
 import calendar
 from datetime import datetime
+from django.core.paginator import Paginator
+from calendar_app.mixins import StaffRequiredMixin
 
 
 # создание
-class EventCreateView(CreateView):
+class EventCreateView(StaffRequiredMixin, CreateView):
     model = Event
     form_class = EventForm
     template_name = 'calendar/create.html'
-    success_url = '/calendar'
+    success_url = '/calendar/'
 
     def form_valid(self, form):
         form.instance.color = self.request.POST.get("color-select")
         return super().form_valid(form)
 
 # обновление
-class EventUpdateView(UpdateView):
+class EventUpdateView(StaffRequiredMixin, UpdateView):
     model = Event
     form_class = EventForm
     template_name = 'calendar/update.html'
-    success_url = '/calendar'
+    success_url = '/calendar/'
 
     def form_valid(self, form):
         form.instance.color = self.request.POST.get("color-select")
         return super().form_valid(form)
 
 # удаление
-class EventDeleteView(DeleteView):
+class EventDeleteView(StaffRequiredMixin, DeleteView):
     model = Event
-    template_name = 'calendar/delete.html'
-    success_url = '/calendar'
+
+    def get(self, request, *args, **kwargs):
+        self.get_object().delete()
+        return redirect('calendar_app:calendar')
 
 
 # основная страница календаря
@@ -70,12 +73,17 @@ def calendar_view(request):
 
     month_name = calendar.month_name[month]
 
+    paginator = Paginator(events, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'events': events,
         'days_with_events': days_with_events,
         'month_name': month_name,
         'year': year,
         'month': month,
+        'page_obj': page_obj,
     }
 
     return render(
@@ -83,9 +91,3 @@ def calendar_view(request):
         template_name='calendar/calendar.html',
         context=context
     )
-
-
-class EventDetailView(DetailView):
-    model = Event
-    template_name = 'calendar/event_detail.html'
-    context_object_name = 'event'

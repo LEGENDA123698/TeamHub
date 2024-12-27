@@ -1,0 +1,23 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/add_question.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container-a">
+    <h1 class="mb-4">Додати питання до опитування: {{ survey.title_survey }}</h1>
+
+    <!-- Форма для добавления вопроса -->
+    <form method="post" class="form-container">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-success">Додати</button>
+            <a href="{% url 'detail-survey' survey.id %}" class="btn btn-secondary">Повернутися до опитування</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

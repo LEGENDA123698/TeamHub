@@ -1,3 +1,6 @@
 from django.contrib import admin
+from diary_app.models import *
 
-# Register your models here.
+
+admin.site.register(Note)
+admin.site.register(Theme)

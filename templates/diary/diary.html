@@ -1,0 +1,143 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Diary</title>
+    <link rel="stylesheet" href="{% static 'diary/diary.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+
+    <br>
+    <p style="font-size: 60px; text-align: center; font-weight: 700;">{{ diary_user.username }}'s diary</p>
+
+    {% if user.is_staff %}
+    <div style="display: flex;">
+    <div id="collapse-add" class="accordion-collapse collapse show" aria-labelledby="heading-add" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+        <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#modal-add">
+            <i class="fa-solid fa-plus"></i> add new theme
+        </button>
+        <div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="modalLabel-add" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ theme_form.as_p }}
+            <button type="submit" class="button">add new theme</button>
+        </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="button" data-bs-dismiss="modal">close</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    <br>
+
+    <form method="get" style="margin-left: auto;">
+        <input type="text" name="username" placeholder="input nickname" class="search-bar">
+        <button type="submit" class="button">search</button>
+    </form>
+    </div>
+    {% endif %}
+
+    <div class="accordion" id="accordionExample">
+        {% for theme in themes %}
+        {% if user.is_staff %}
+        <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#modal{{ theme.id }}">
+            <i class="fa-solid fa-pen" aria-hidden="true"></i>
+        </button>
+        <div class="modal fade" id="modal{{ theme.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ theme.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+        <form method="post" action="{% url 'diary_app:update' user_pk=diary_user.id theme_pk=theme.id %}">
+        {% csrf_token %}
+        {{ theme_form.as_p }}
+        <button type="submit" class="button">edit theme</button>
+        </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="button" data-bs-dismiss="modal">close</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        <a href="{% url 'diary_app:delete' user_pk=diary_user.id pk=theme.id %}">
+            <button class="edit-button">
+            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+            </button>
+        </a>
+        {% endif%}
+
+        <div>
+        <div class="accordion-header" id="heading{{ theme.id }}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ theme.id }}" aria-expanded="false" aria-controls="collapse{{ theme.id }}">
+            <p style="font-size: 40px; font-weight: 600; padding: 10px; width: 90%; display: flex; flex-direction: column;">
+            <span>{{ theme.title }}</span>
+            <span style="font-size: 16px; font-weight: 300;">created by {{ theme.user }}</span>
+            </p>
+        </button>
+        </div>
+
+        <div id="collapse{{ theme.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ theme.id }}" data-bs-parent="#accordionExample">
+        <div class="accordion-body" style="background-color: #fff;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+
+        {% if user.is_staff %}
+        <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#modalnote{{ theme.id }}">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="modal fade" id="modalnote{{ theme.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabelNote{{ theme.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            <form method="post" action="{% url 'diary_app:add_note' user_pk=diary_user.id theme_pk=theme.id %}">
+                {% csrf_token %}
+                {{ note_form.as_p }}
+                <button type="submit" class="button">add note</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="button" data-bs-dismiss="modal">close</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        {% endif%}
+
+        {% for note in theme.notes.all %}
+        {% if note.user == diary_user %}
+            <div style="padding: 15px; border-radius: 10px; margin-top: 5px;
+                {% if note.type == 'HOMEWORK' %}
+                background-color: #c5d3e8;
+                {% elif note.type == 'PROJECT' %}
+                background-color: #e8c5c5;
+                {% else %}
+                background-color: whitesmoke;
+                {% endif %}">
+            <b>note: {{ note.note }}</b>
+            {% if user.is_staff %}
+            <a href="{% url 'diary_app:delete_note' user_pk=diary_user.id pk=note.id %}" style="color: #000;text-decoration: none;float: right;font-size: 10px;"><i class="fa-solid fa-x"></i></a>
+            {%endif%}
+            <br>
+            type: {{ note.type }}<br>
+            on {{ note.date }}
+            </div>
+        {% endif %}
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

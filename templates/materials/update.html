@@ -1,14 +1,20 @@
-<html>
-<head>
-    <title>Update</title>
-</head>
-<body>
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Materials</title>
+    <link rel="stylesheet" href="{% static 'materials/materials.css' %}">
+    <link rel="stylesheet" href="{% static 'materials/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
 
     <form method = "post" enctype='multipart/form-data'>
         {% csrf_token %}
         {{form.as_p }}
-        <button type="submit">sumbit</button>
+        <button type="submit" class="button" style="border: none;">edit material</button>
     </form>
 
-</body>
-</html>
+</div>
+{% endblock %}

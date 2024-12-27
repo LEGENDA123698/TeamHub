@@ -1,0 +1,67 @@
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+.form-control:focus {
+    border-color: #306998;
+    outline: none;
+    box-shadow: 0 0 5px #306998;
+}
+
+.btn-primary {
+    background-color: #306998;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #306998;
+}
+
+.form-control-color {
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: none;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-control-color:hover {
+    box-shadow: 0 0 5px #306998;
+}
+
+.form-control-color:focus {
+    outline: none;
+    box-shadow: 0 0 5px #306998;
+}
+
+.button {
+    background-color: #306998;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border-color: #00000000;
+}
+
+.button:hover {
+    background-color: #0f2a40;
+    font-size: 18px;
+}

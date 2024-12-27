@@ -7,7 +7,7 @@ class Vote(models.Model):
 
 class VoteAnswer(models.Model):
     title = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='vote_images/', blank=True, null=True)
+    image = models.ImageField(upload_to='media/vote_images/', blank=True, null=True)
     procent = models.IntegerField(default=0)
     user = models.ManyToManyField(User, blank=True, related_name='users')
     vote = models.ForeignKey(Vote, on_delete=models.CASCADE, related_name='vote_answers')

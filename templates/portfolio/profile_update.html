@@ -1,0 +1,27 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Profile</title>
+    <link rel="stylesheet" href="{% static 'portfolio/avatar.css' %}">
+    <link rel="stylesheet" href="{% static 'portfolio/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+
+
+    <h1 style="text-align: center;">Edit profile</h1>
+    <hr>
+
+    <form method="post" enctype='multipart/form-data'>
+        {%csrf_token%}
+        <div style="display: flex;">
+        <div style="width: 70%;">{{form.as_p}}</div>
+        <div class="avatar" style="background-image: url('{{user.avatar.url}}'); margin-left: auto;margin-right: auto;margin-top: auto;margin-bottom: auto;"></div>
+        </div>
+        <button type="submit" class="button">submit</button>
+    </form>
+
+</div>
+{% endblock %}

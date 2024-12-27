@@ -1,0 +1,19 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/detail_survey.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 14.5vh;">
+<div class="container mt-4">
+    <h1>Ви впевнені, що бажаєте видалити?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Видалити</button>
+        <a href="javascript:history.back()" class="btn btn-secondary">Скасування</a>
+    </form>
+</div>
+</div>
+{% endblock %}

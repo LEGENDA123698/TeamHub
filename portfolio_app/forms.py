@@ -6,12 +6,13 @@ class ShowcaseElementForm(forms.ModelForm):
         model = ShowcaseElement
         fields = ['image']
 
-class AvatarForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['avatar']
+    image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'about']
+        fields = ['avatar', 'username', 'about']
+
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    about = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    avatar = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))

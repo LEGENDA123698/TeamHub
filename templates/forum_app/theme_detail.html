@@ -105,7 +105,7 @@
           <div class="col-md-12">
             <li class="d-flex align-items-left" style="padding: 2px; border-radius: 8px;">
               <div class="message-author">
-                <a href="{% url 'user_profile' message.message_author.id %}" class="text-decoration-none text-dark d-flex flex-column align-items-center">
+                <a href="{% url 'portfolio_app:user_profile' message.message_author.id %}" class="text-decoration-none text-dark d-flex flex-column align-items-center">
                   <img src="{{ message.message_author.avatar.url }}" alt="Аватар" class="avatar" style="width: 60px; height: 60px;">
                   <p class="mb-0 fw-bold">{{ message.message_author }}</p>
                 </a>
