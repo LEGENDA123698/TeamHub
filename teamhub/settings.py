@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'colorfield',
     'portfolio_app',
     'vote_app',
+    'system_survey_app',
     
 
 ]

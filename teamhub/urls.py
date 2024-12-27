@@ -28,7 +28,10 @@ urlpatterns = [
     path('materials/', include('materials_app.urls')),
     path('notifications/', include('notifications_app.urls')),
     path('portfolio/', include('portfolio_app.urls')), 
-    path('gallery/', include('gallery_app.urls')),
+    path('gallery/', include('gallery_app.urls')), 
+    path('diary/', include('diary_app.urls')),
+    path('vote/', include('vote_app.urls')),
+    path('surveys/', include('system_survey_app.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
