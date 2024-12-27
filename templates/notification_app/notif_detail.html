@@ -12,10 +12,10 @@
                 <div class="container">
                     <div class="card-placeholder">
                         <div class="title-card d-flex col-lg-5" style="margin-top: 55px; margin-bottom: 25px;">
-                            <h1 class="text-center align-self-center" style="margin-bottom: 25px; margin-top: 20px;">{{ notification.title }}</h1>
+                            <h3 class="text-center align-self-center" style="font-weight: bold; margin-bottom: 15px; margin-top: 35px;">{{ notification.title }}</h3>
                             {% if user.is_staff %}
-                                <a class="edit-button" href="{% url 'notifications_app:update-notification' notification.pk %}">
-                                    <i class="fa-solid fa-pen-to-square" style="color: #808080;"></i>
+                                <a class="edit-button align-self-end" href="{% url 'notifications_app:update-notification' notification.pk %}">
+                                    <i class="fa-solid fa-pen-to-square" style="color: rgb(20,170,20);"></i>
                                 </a>
                             {% endif %}
                         </div>

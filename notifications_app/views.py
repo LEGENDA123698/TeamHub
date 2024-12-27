@@ -23,6 +23,7 @@ class NotificationCreateView(LoginRequiredMixin, CreateView):
 
 class NotificationUpdateView(LoginRequiredMixin, UpdateView):
     model = Notification
+    template_name = 'notification_app/notif_update.html'
     fields = ['title', 'text', 'date']
     widgets = {
         'date': forms.DateInput(attrs={'type': 'date'})
@@ -33,19 +34,14 @@ class NotificationUpdateView(LoginRequiredMixin, UpdateView):
         queryset = super().get_queryset()
         return queryset.filter(author=self.request.user)
 
-    def get_success_url(self):
-        if self.object.notification:
-            return reverse('notifications_app:notification-detail', args=[self.notification.pk])
-        return reverse_lazy('notifications_app:notifications-list')
  
 # Delete
 
 class NotificationDeleteView(LoginRequiredMixin, DeleteView):
     model = Notification
+    template_name = 'notification_app/notif_delete.html'
     success_url = reverse_lazy('notifications_app:notifications-list')
 
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
 
 class NotificationListView(ListView):
     model = Notification
