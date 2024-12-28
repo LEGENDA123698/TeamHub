@@ -17,10 +17,12 @@
 
                         <!-- title card start -->
 
-                        <div class="title-card d-flex col-lg-5" style="margin-top: 50px; margin-bottom: 25px;"> 
+                        <div class="title-card d-flex col-lg-5" style="margin-top: 50px; margin-bottom: 25px;">
+                            {% if user.is_staff %} 
                             <button class="create-button p-0 no-focus" data-bs-toggle="modal" data-bs-target="#createNotificationModal">
                                 <i class="fa-solid fa-plus"></i>
                             </button>                           
+                            {% endif %}
                             <h1 class="text-center align-self-center" style="margin-bottom: 25px;">Повiдомлення</h1>
                         </div>
 
@@ -107,16 +109,16 @@
                                             {% csrf_token %}
                                             <div class="mb-3">
                                                 <label for="notificationTitle" class="form-label">Title</label>
-                                                <input type="text" class="form-control" id="notificationTitle" name="title" required>
+                                                <input type="text" class="form-control" id="notificationTitle" name="title" required maxlength="20">
                                             </div>
                                             <input type="hidden" name="notificationAuthor" value="{{ notification.author.id }}">
                                             <div class="mb-3">
                                                 <label for="notificationText" class="form-label">Text</label>
-                                                <input type="text" class="form-control" id="notificationText" name="text">
+                                                <input type="text" class="form-control" id="notificationText" name="text" required maxlength="500">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="notificationDate" class="form-label">Date</label>
-                                                <input type="date" class="form-control" id="notificationDate" name="date">
+                                                <input type="date" class="form-control" id="notificationDate" name="date" required>
                                             </div>
                                             <div class="modal-footer px-0 pb-0">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -127,9 +129,6 @@
                                 </div>
                             </div>
                         </div>   
-
-                        <!-- creation modal end -->
-
                     </div>
                 </div>
             </div>

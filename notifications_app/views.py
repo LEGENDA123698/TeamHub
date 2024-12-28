@@ -9,6 +9,7 @@ from .forms import *
 # Creation 
 class NotificationCreateView(LoginRequiredMixin, CreateView):
     model = Notification
+    template_name = 'notification_app/notif.html'
     fields = ['title', 'text', 'date']
     widgets = {
         'date': forms.DateInput(attrs={'type': 'date'})
@@ -51,7 +52,7 @@ class NotificationListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['notifications'] = Notification.objects.all()
-        paginator = Paginator(context['notifications'], 2)
+        paginator = Paginator(context['notifications'], 3)
         page_num = self.request.GET.get('page')
         context['page_object'] = paginator.get_page(page_num)
         return context
