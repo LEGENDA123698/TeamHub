@@ -21,7 +21,6 @@ h1, h2 {
     font-size: 16px;
     font-weight: bold;
     transition: background-color 0.3s ease-in-out;
-
 }
 
 .btn-success:hover {
@@ -60,6 +59,38 @@ h1, h2 {
     background-color: #218838;
 }
 
+/* Кнопка "Удалить вопрос" */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #bd2130;
+}
+
+/* Кнопка "Редактировать" */
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
 /* Укрупнение и стили формы */
 textarea {
     width: 100%;
@@ -70,3 +101,24 @@ textarea {
     margin-bottom: 15px;
     font-size: 14px;
 }
+
+
+/* Убираем линию под текстом для всех кнопок-ссылок */
+a {
+    text-decoration: none;
+}
+
+/* Дополнительно для кнопок с текстом */
+a.btn-warning,
+a.btn-danger,
+a.btn-admin,
+a.btn-secondary {
+    text-decoration: none;
+}
+
+/* При наведении курсора */
+a:hover {
+    text-decoration: none;
+}
+
+

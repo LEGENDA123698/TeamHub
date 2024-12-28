@@ -1,4 +1,4 @@
-/* Общие стили страницы */
+/* Основные стили для страницы */
 body {
     background-color: #f8f9fa;
     font-family: 'Roboto', sans-serif;
@@ -7,24 +7,25 @@ body {
     padding: 0;
 }
 
+
+
 /* Контейнер формы */
 .container-a {
     max-width: 600px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-top: 14.5vh;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 14.5vh auto 0;
+    text-align: center;
 }
 
-/* Стили для заголовка */
-h1 {
+/* Заголовок формы */
+.form-title {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
-    text-align: center;
+    color: #0d6efd;
+    margin-bottom: 20px;
 }
 
 /* Форматирование элементов формы */
@@ -42,39 +43,38 @@ form p {
 .button-group {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    gap: 15px;
 }
 
-button.btn-success, a.btn-secondary {
+button.btn-custom-primary, a.btn-custom-secondary {
     width: 48%;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 20px;
+    font-size: 14px;
     font-weight: bold;
     border-radius: 8px;
     text-align: center;
-    text-decoration: none; /* Для ссылки */
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
 }
 
 /* Кнопка "Додати" */
-button.btn-success {
+.btn-custom-primary {
     background-color: #007aff;
     color: white;
-    border: none;
-    transition: background-color 0.3s ease-in-out;
 }
 
-button.btn-success:hover {
+.btn-custom-primary:hover {
     background-color: #0051a8;
 }
 
 /* Кнопка "Повернутися до опитування" */
-a.btn-secondary {
+.btn-custom-secondary {
     background-color: #6c757d;
     color: white;
-    border: none;
-    transition: background-color 0.3s ease-in-out;
 }
 
-a.btn-secondary:hover {
+.btn-custom-secondary:hover {
     background-color: #5a6268;
 }

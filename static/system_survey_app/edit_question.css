@@ -20,17 +20,43 @@ h1 {
     margin-bottom: 20px;
 }
 
-.btn-success {
+/* Кастомные стили для кнопки "Зберегти зміни" */
+.btn-custom-success {
     background-color: #28a745;
-    border-color: #28a745;
     width: 100%;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: none;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
 }
 
-.btn-secondary {
-    width: 100%;
-    margin-top: 10px;
+.btn-custom-success:hover {
+    background-color: #218838;
 }
 
-.form-control {
-    border-radius: 6px;
+/* Кастомные стили для кнопки "Скасування" */
+.btn-custom-secondary {
+    background-color: #6c757d;
+    width: 100%;
+    padding: 14px 230px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: none;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-custom-secondary:hover {
+    background-color: #5a6268;
 }
