@@ -52,6 +52,9 @@
                     <li><a class="dropdown-item" href="{% url 'notifications_app:notifications-list' %}">
                       <i class="fa-solid fa-bell"></i>  Notifications
                     </a></li>
+                    <li><a class="dropdown-item" href="{% url 'diary_app:diary' user.id %}">
+                      <i class="fa-solid fa-book"></i>  Diary
+                    </a></li>
                     <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item logout-item" href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
                 {% else %}
@@ -66,50 +69,60 @@
   </div>
 </div>
 
-<div class="mainmenu">
-  <div class="container p-2">
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-2">
+<div class="mt-5 fixed-top">
+  <div class="mainmenu mt-4">
+    <div class="container p-2">
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-2">
 
-      <div class="col">
-        <a class="dropdown-item mainmenu-item h-100" href="{% url 'forum_app:forum-start' %}">
-          <i class="fa-solid fa-comments"></i>Forum
-        </a>
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'forum_app:forum-start' %}">
+            <i class="fa-solid fa-comments mt-1 mb-1"></i>Forum
+          </a>
+        </div>
+        
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'calendar_app:calendar' %}">
+            <i class="fa-solid fa-calendar mt-1 mb-1"></i>Calendar
+          </a>
+        </div>
+
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'gallery-start' %}">
+            <i class="fa-solid fa-images mt-1 mb-1"></i>Gallery
+          </a>
+        </div>
+
+
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'materials_app:materials' %}">
+            <i class="fa-solid fa-file mt-1 mb-1"></i>Materials
+          </a>
+        </div>
+
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'vote_app:votes' %}">
+            <i class="fa-solid fa-check-to-slot mt-1 mb-1"></i>Votes
+          </a>
+        </div>
+
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'vote_app:votes' %}">
+            <i class="fa-solid fa-list-ul mt-1 mb-1"></i></i>Surveys
+          </a>
+        </div>
+
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'ezvenenya' %}">
+            <i class="fa-solid fa-question mt-1 mb-1"></i>FAQ
+          </a>
+        </div>
+
+        <div class="col">
+          <a class="dropdown-item mainmenu-item h-100" href="{% url 'ezvenenya' %}">
+            <i class="fa-solid fa-money-bill mt-1 mb-1"></i>Tip Us
+          </a>
+        </div>
       </div>
-      
-      <div class="col">
-        <a class="dropdown-item mainmenu-item h-100" href="{% url 'calendar_app:calendar' %}">
-          <i class="fa-solid fa-calendar"></i>Calendar
-        </a>
-      </div>
-
-      <div class="col">
-        <a class="dropdown-item mainmenu-item h-100" href="{% url 'gallery-start' %}">
-          <i class="fa-solid fa-images"></i>Gallery
-        </a>
-      </div>
-
-
-      <div class="col">
-        <a class="dropdown-item mainmenu-item h-100" href="{% url 'materials_app:materials' %}">
-          <i class="fa-solid fa-file"></i>Materials
-        </a>
-      </div>
-
-      <div class="col">
-        <a class="dropdown-item mainmenu-item h-100" href="{% url 'vote_app:votes' %}">
-          <i class="fa-solid fa-check-to-slot"></i>Votes
-        </a>
-      </div>
-
-      {% if user.is_authenticated %}
-      <div class="col">
-        <a class="dropdown-item mainmenu-item h-100" href="{% url 'diary_app:diary' user.id %}">
-          <i class="fa-solid fa-book"></i>Diary
-        </a>
-      </div>
-      {% endif %}
-
-
     </div>
   </div>
 </div>
@@ -117,7 +130,6 @@
 <script>
   const toggler = document.querySelectorAll(".mainmenu-toggler");
   const menu = document.querySelector(".mainmenu");
-  const menuScrolled = document.querySelector(".mainmenu.scrolled");
 
   let hideMenuTimer;
 
@@ -128,15 +140,11 @@
     clearTimeout(hideMenuTimer);
     menu.classList.remove("hide");
     menu.classList.add("show");
-    menuScrolled.classList.remove("hide");
-    menuScrolled.classList.add("show");
   }
 
   function hideMenu() {
     menu.classList.remove("show");
     menu.classList.add("hide");
-    menuScrolled.classList.remove("show");
-    menuScrolled.classList.add("hide");
   }
 
   toggler.forEach(toggle => {

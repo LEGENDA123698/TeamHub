@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+<div
+  class="container d-flex justify-content-center align-items-center"
+  style="height: 100vh"
+>
+  <div
+    class="card p-4"
+    style="
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    "
+  >
+    <h2 class="text-center">Edit Message</h2>
+
+    <form method="post" enctype="multipart/form-data" class="text-center">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="id_text" class="form-label">Message Content</label>
+        <textarea name="text" id="id_text" class="form-control">
+{{ form.text.value }}</textarea
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="id_image" class="form-label">Image (Optional)</label>
+        <input type="file" name="image" id="id_image" class="form-control" />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 mb-3">
+        Save Changes
+      </button>
+
+      <a
+        href="{% url 'forum_app:theme_detail' message.related_theme.pk %}"
+        class="btn btn-secondary w-100"
+        >Cancel</a
+      >
+    </form>
+  </div>
+</div>
+{% endblock %}
