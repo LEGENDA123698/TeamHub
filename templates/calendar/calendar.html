@@ -9,7 +9,7 @@
 
 <div class="container-a">
 
-    <div style="display: flex;gap: 50px;">
+    <div style="display: flex;gap: 40px;">
     <div style="float: left;display: flex;flex-direction: column;align-items: center;">
     <div>
         <a href="?month={{ month|add:'-1' }}&year={{ year }}" class="button"><i class="fa-solid fa-arrow-left"></i> Previous Month</a>
@@ -56,14 +56,16 @@
         <br>
         <ul>
         {%for event in page_obj%}
-        <li>
-            <b>{{event.title}}</b> on {{event.date}}<br>
-            {{event.description}}<br>
+            <div style="background-color: #fff;padding: 25px;border-radius: 10px;word-wrap: break-word;word-break: break-word;overflow-wrap: break-word;">
             {% if user.is_staff %}
+            <div style="float:right;margin-top: -10px;">
             <a href="{% url 'calendar_app:calendar_update_event' event.pk %}" class="edit-button"><i class="fa-solid fa-pencil"></i></a>
             <a href="{% url 'calendar_app:calendar_delete_event' event.pk %}" class="edit-button" style="margin-left: 5px;"><i class="fa-solid fa-trash"></i></i></a>
+            </div>
             {% endif %}
-        </li>
+            <b>{{event.title}}</b> on {{event.date}}<br>
+            {{event.description}}<br>
+            </div>
         <br>
         {%endfor%}
         </ul>

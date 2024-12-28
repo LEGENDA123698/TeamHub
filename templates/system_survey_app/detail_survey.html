@@ -8,44 +8,43 @@
 {% block content %}
 
 <div style="margin-top: 14.5vh;">
-<h1>{{ object.title_survey }}</h1>
-<h2>{{ object.description }}</h2>
+    <h1>{{ object.title_survey }}</h1>
+    <h2>{{ object.description }}</h2>
 
-<!-- Форма для отправки ответов на вопросы -->
-<form method="post" id="questions" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div>
-        {% for question in questions %}
-            <div class="mb-3">
-                <label for="question_{{ question.id }}">{{ question.question_title }}</label>
-                <textarea 
-                    name="question_{{ question.id }}" 
-                    id="question_{{ question.id }}" 
-                    rows="3"
-                    placeholder="Ваша відповідь..."
-                    class="form-control"></textarea>
-                
-                {% if request.user.is_staff %}
-                    <!-- Кнопки для редактирования и удаления вопроса -->
-                    <a href="{% url 'edit-question' question.survey.id question.id %}" class="btn btn-warning btn-sm">Редагувати</a>
-                    <a href="{% url 'delete-question' question.survey.id question.id %}" class="btn btn-danger btn-sm">Видалити питання</a>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
-    <button type="submit" form="questions" class="btn btn-success">Надіслати відповіді</button>
-</form>
+    <!-- Форма для отправки ответов на вопросы -->
+    <form method="post" id="questions" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            {% for question in questions %}
+                <div class="mb-3">
+                    <label for="question_{{ question.id }}">{{ question.question_title }}</label>
+                    <textarea 
+                        name="question_{{ question.id }}" 
+                        id="question_{{ question.id }}" 
+                        rows="3"
+                        placeholder="Ваша відповідь..."
+                        class="form-control"></textarea>
+                    
+                    {% if request.user.is_staff %}
+                        <!-- Кнопки для редактирования и удаления вопроса -->
+                        <a href="{% url 'edit-question' question.survey.id question.id %}" class="btn-warning">Редагувати</a>
+                        <a href="{% url 'delete-question' question.survey.id question.id %}" class="btn-danger">Видалити питання</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" form="questions" class="btn-success">Надіслати відповіді</button>
+    </form>
 
-<br>
-<a href="{% url 'list-surveys' %}" class="btn btn-secondary">Повернутись до опитувань</a>
+    <br>
+    <a href="{% url 'list-surveys' %}" class="btn-secondary">Повернутись до опитувань</a>
 
-{% if request.user.is_staff %}
-    <!-- Кнопка для добавления вопроса -->
-    <a href="{% url 'add-question' object.pk %}" class="btn btn-primary">Додати питання</a>
-    
-    <!-- Кнопка для удаления опроса -->
-    <a href="{% url 'delete-survey' object.pk %}" class="btn btn-danger">Видалити опитування</a>
-{% endif %}
+    {% if request.user.is_staff %}
+        <!-- Кнопка для добавления вопроса -->
+        <a href="{% url 'add-question' object.pk %}" class="btn-admin">Додати питання</a>
+        
+        <!-- Кнопка для удаления опроса -->
+        <a href="{% url 'delete-survey' object.pk %}" class="btn-danger">Видалити опитування</a>
+    {% endif %}
 </div>
 {% endblock %}
-
