@@ -73,7 +73,7 @@ def calendar_view(request):
 
     month_name = calendar.month_name[month]
 
-    paginator = Paginator(events, 4)
+    paginator = Paginator(events, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
