@@ -26,12 +26,14 @@ class Theme(models.Model):
 
     
 class Message(models.Model):
-    text = models.TextField(max_length=10000, blank=True)
-    message_author = models.ForeignKey(User, related_name="message_author", on_delete=models.CASCADE, blank=True, default=1)
-    related_theme = models.ForeignKey(Theme, related_name="theme_message", on_delete=models.CASCADE, blank=True, default=1)
-    image = models.ImageField(upload_to='media/forum_images/', blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, auto_now=True)
+    message_author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    image = models.ImageField(upload_to='messages/', null=True, blank=True)
+    related_theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.text
 
     def get_absolute_url(self):
         return reverse('forum_app:message_detail', args=[str(self.id)])

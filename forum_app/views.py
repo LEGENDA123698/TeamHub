@@ -33,7 +33,7 @@ class ThemeDetailView(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['messages'] = self.object.theme_message.all()
+        context['messages'] = self.object.message_set.all().order_by('-created_at')
         context['form'] = MessageForm()
         paginator = Paginator(context['messages'], 4)
         page_number = self.request.GET.get('page')
@@ -45,7 +45,7 @@ class ThemeDetailView(DetailView):
         if not request.user.is_authenticated:
             return HttpResponseForbidden("Вы должны быть авторизованы для отправки сообщений.")
         
-        form = MessageForm(request.POST, request.FILES)  # Добавлено request.FILES
+        form = MessageForm(request.POST, request.FILES)
         if form.is_valid():
             message = form.save(commit=False)
             message.related_theme = self.object
@@ -53,6 +53,7 @@ class ThemeDetailView(DetailView):
             message.save()
             return redirect(reverse('forum_app:theme_detail', args=[self.object.pk]))
         return self.get(request, *args, **kwargs)
+
 
     
 #-----------------------------------------------------------------
@@ -145,6 +146,8 @@ class MessageDeleteView(DeleteView):
 class MessageUpdateView(UpdateView):
     model = Message
     context_object_name = "message"
+    fields = ['text', 'image']
+    template_name = 'forum_app/message_form.html'
+
     def get_success_url(self):
         return reverse('forum_app:theme_detail', kwargs={'pk': self.object.related_theme.pk})
-

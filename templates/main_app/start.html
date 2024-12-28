@@ -121,12 +121,12 @@
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <defs>
-                            <linearGradient id="imgGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <linearGradient id="imgGradient5" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="21%" stop-color="rgb(255, 149, 0)" />
                                 <stop offset="100%" stop-color="rgb(255, 255, 255)" />
                             </linearGradient>
                         </defs>
-                        <rect width="100%" height="100%" fill="url(#imgGradient4)" />
+                        <rect width="100%" height="100%" fill="url(#imgGradient5)" />
                     </svg>
 
                     <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
@@ -140,12 +140,12 @@
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <defs>
-                            <linearGradient id="imgGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <linearGradient id="imgGradient6" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="21%" stop-color="rgb(90, 200, 250)" />
                                 <stop offset="100%" stop-color="rgb(255, 255, 255)" />
                             </linearGradient>
                         </defs>
-                        <rect width="100%" height="100%" fill="url(#imgGradient4)" />
+                        <rect width="100%" height="100%" fill="url(#imgGradient6)" />
                     </svg>
 
                     <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
@@ -159,12 +159,12 @@
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <defs>
-                            <linearGradient id="imgGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <linearGradient id="imgGradient7" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="21%" stop-color="rgb(90, 200, 250)" />
                                 <stop offset="100%" stop-color="rgb(255, 255, 255)" />
                             </linearGradient>
                         </defs>
-                        <rect width="100%" height="100%" fill="url(#imgGradient4)" />
+                        <rect width="100%" height="100%" fill="url(#imgGradient7)" />
                     </svg>
 
                     <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-start ps-5">
@@ -260,22 +260,4 @@
         </footer>
     </main>
 </body>
-
-<script>
-    document.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        const carouselHeight = document.querySelector('.carousel').offsetHeight;
-        const navbarHeight = document.querySelector('.navbar').offsetHeight;
-        if (window.scrollY > carouselHeight - navbarHeight) {
-            document.querySelector('.navbar').classList.remove('scrolled');
-            document.querySelector('.dropdown-menu').classList.remove('scrolled');
-            document.querySelector('.mainmenu').classList.remove('scrolled');
-        } else {
-            document.querySelector('.navbar').classList.add('scrolled');
-            document.querySelector('.dropdown-menu').classList.add('scrolled');
-            document.querySelector('.mainmenu').classList.add('scrolled');
-
-        }
-    });
-</script>
 {% endblock %}
