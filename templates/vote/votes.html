@@ -9,7 +9,9 @@
 
 <div class="container-a">
     
-    <p style="font-weight: 700;color:#0f2a40;font-size: 50px;text-align: center;">All votes <i class="fa-solid fa-list"></i></p>
+    <a href='{% url "vote_app:cat" %}' style="text-decoration: none;">
+        <p style="font-weight: 700;color:#0f2a40;font-size: 50px;text-align: center;">All votes <i class="fa-solid fa-list"></i></p>
+    </a>
     {% if user.is_staff %}
     <a href="{% url 'vote_app:create_vote' %}" class="create-button"><i class="fa-regular fa-pen-to-square"></i>create new vote</a>
     {%endif%}
