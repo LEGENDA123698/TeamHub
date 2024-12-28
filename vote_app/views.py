@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from vote_app.forms import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.shortcuts import redirect
 from django.forms import inlineformset_factory
 from datetime import timedelta
@@ -140,3 +140,6 @@ def remove_vote(request, pk):
             a.procent = 100 * a.user.count() / total_users if total_users > 0 else 0
             a.save()
     return redirect('vote_app:detail_vote', pk=answer.vote.id)
+
+class Cat(TemplateView):
+    template_name = 'vote/cat.html'

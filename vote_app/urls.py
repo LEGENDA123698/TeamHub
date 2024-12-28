@@ -10,4 +10,5 @@ urlpatterns = [
     path("update/<int:pk>/", views.VoteUpdateView.as_view(), name="update_vote"),
     path("delete/<int:pk>/", views.VoteDeleteView.as_view(), name="delete_vote"),
     path("remove_vote/<int:pk>/", views.remove_vote, name="remove_vote_answer"),
+    path("cat/", views.Cat.as_view(), name="cat"),
 ]
