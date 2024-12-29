@@ -1,0 +1,70 @@
+.container-a {
+    background: whitesmoke;
+    border-radius: 14px;
+    padding: 6px;
+    width: 80vw;
+    margin-top: 14.5vh;
+    gap: 6px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.accordion-button {
+    background-color: #fff;
+    color: #000;
+}
+
+.accordion-button:after {
+    background-color: #00000000;
+}
+
+.accordion-button:hover {
+    background-color: #fff;
+    color: #0f2a40;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #fff;
+    color: #306998;
+}
+
+.edit-button {
+    background-color: #00000000;
+    border-color: #00000000;
+    color: #0f2a40;
+    font-size: 20px;
+    float:right;
+}
+
+.edit-button:hover {
+    color: #306998;
+}
+  
+.button {
+    background-color: #306998;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border-color: #00000000;
+}
+
+.button:hover {
+    background-color: #0f2a40;
+    font-size: 18px;
+}
+
+.search-bar {
+    border: 2px #306998 solid;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.search-bar:hover {
+    border-color: #0f2a40;
+}

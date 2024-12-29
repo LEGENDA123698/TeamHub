@@ -1,0 +1,151 @@
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.button-container {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.upper-button {
+    text-decoration: none;
+    color: #fff;
+    background-color: #306998;
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.upper-button:hover {
+    background-color: #0f2a40;
+}
+
+.nav-link {
+    color: #0f2a40;
+    font-size: 30px;
+}
+
+.nav-link:hover {
+    color: #306998;
+}
+
+.inner-image {
+    width: 700px;
+    height: 500px;
+    border-radius: 10%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.button {
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    font-size: 22px;
+    color: #306998;
+}
+
+.add-image:hover {
+    transition: all 0.3s ease;
+    filter: brightness(0.8);
+}
+
+.nickname {
+    padding-top: 70px;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    max-width: 40%;
+}
+
+.about {
+    position: relative;
+    font-size: 20px;
+    font-weight: normal;
+    padding-top: -40px;
+    display: block;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.theme {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.theme:hover {
+    color: #0f2a40;
+}
+
+.comment-text {
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.b-container {
+    background: white;
+    width: 80vw;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.friend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.friend-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+}
+
+.friends-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+.friend-username {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0f2a40;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.friend-username:hover {
+    color: #306998;
+}

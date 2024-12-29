@@ -1,0 +1,120 @@
+.create-button {
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: #306998;
+    transition: all 0.3s ease;
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.create-button:hover {
+    font-size: 18px;
+    background-color: #0f2a40;
+}
+
+.image-container {
+    width: 75px;
+    height: 75px;
+    border-radius: 10%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container-a {
+    background: whitesmoke;
+    border-radius: 14px;
+    padding: 6px;
+    width: 80vw;
+    margin-top: 14.5vh;
+    gap: 6px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+input[type="radio"] {
+    display: none;
+}
+    
+label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+    font-size: 16px;
+    color: #333;
+}
+    
+label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    transition: all 0.3s ease;
+}
+
+input[type="radio"]:checked + label::before {
+    background-color: #0f2a40;
+    border-color: #0f2a40;
+}
+
+label:hover::before {
+    border-color: #306998;
+}
+
+.button {
+    border: 2px #0f2a40 solid;
+    background-color: #0f2a40;
+    color: #f5f5f5;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #306998;
+    border-color: #306998;
+}
+
+.edit-button {
+    color: #0f2a40;
+    margin-top: auto;
+    margin-bottom: auto;
+    float:right;
+    margin-top: 2.5%;
+    font-size: 30px;
+}
+
+.edit-button:hover {
+    color: #306998;
+}
+
+.vote-container {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+}
+
+.vote-container:hover {
+    background-color: #e6e6e6;
+}
+
+.votelist-title {
+    color: #0f2a40;
+    font-size: 40px;
+    max-width: 70%;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin: 0;
+    flex-grow: 1;
+}

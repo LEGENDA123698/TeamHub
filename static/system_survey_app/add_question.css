@@ -1,0 +1,80 @@
+/* Основные стили для страницы */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* Контейнер формы */
+.container-a {
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 14.5vh auto 0;
+    text-align: center;
+}
+
+/* Заголовок формы */
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0d6efd;
+    margin-bottom: 20px;
+}
+
+/* Форматирование элементов формы */
+form .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form p {
+    margin: 0 0 15px;
+}
+
+/* Кнопки */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+button.btn-custom-primary, a.btn-custom-secondary {
+    width: 48%;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+/* Кнопка "Додати" */
+.btn-custom-primary {
+    background-color: #007aff;
+    color: white;
+}
+
+.btn-custom-primary:hover {
+    background-color: #0051a8;
+}
+
+/* Кнопка "Повернутися до опитування" */
+.btn-custom-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-custom-secondary:hover {
+    background-color: #5a6268;
+}
