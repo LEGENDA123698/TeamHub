@@ -21,7 +21,7 @@
                 <div class="grid-item" style="--cols: {{ image.grid_column_span }}; --rows: {{ image.grid_row_span }};">
                     <img src="{{ image.image.url }}" alt="{{ image.title }}">
                         <div class="image-overlay">
-                            <a href="{% url 'user_profile' image.author.id%}" class="author-name user-select-none">{{ image.author.username }}</a>
+                            <a href="{% url 'portfolio_app:user_profile' image.author.id%}" class="author-name user-select-none">{{ image.author.username }}</a>
                             <p class="title-text">{{ image.title }}</p>
                         <div class="control-buttons">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#viewImageModal{{image.id}}">
