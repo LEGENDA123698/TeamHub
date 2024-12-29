@@ -1,0 +1,104 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Calendar</title>
+    <link rel="stylesheet" href="{% static 'calendar/calendar.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+
+    <div style="display: flex;gap: 40px;">
+    <div style="float: left;display: flex;flex-direction: column;align-items: center;">
+    <div>
+        <a href="?month={{ month|add:'-1' }}&year={{ year }}" class="button"><i class="fa-solid fa-arrow-left"></i> Previous Month</a>
+        <a href="?month={{ month|add:'1' }}&year={{ year }}" class="button" style="margin-left: 10px;">Next Month <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="calendar-header">
+        {{month_name}} {{year}}
+    </div>
+
+    <div class="calendar">
+        {% for day_data in days_with_events %}
+            {% if day_data.events %}
+                <div class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000;text-decoration: none;">
+                <div class="calendar-day day-w-event" style="background-color: {{ day_data.events.0.color }}; border-color: {{ day_data.events.0.color }};">
+                    {{ day_data.day }}
+                </div>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {%for event in day_data.events %}
+                    <li>
+                        <b>• {{event.title}}</b><br>
+                        {{event.description}}
+                    </li>
+                    {%endfor%}
+                </ul>
+                </div>
+            {% elif day_data.day == 0 %}
+                <div class="calendar-day" style="background-color: #dedddd;"></div>
+            {% else %}
+                <div class="calendar-day">{{ day_data.day }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if user.is_staff %}
+    <a href="{% url 'calendar_app:calendar_create_event' %}" class="button">Create new event</a>
+    {% endif %}
+    </div>
+
+    <div style="float: right;">
+        {%if page_obj%}
+        <br>
+        <ul>
+        {%for event in page_obj%}
+            <div style="background-color: #fff;padding: 25px;border-radius: 10px;word-wrap: break-word;word-break: break-word;overflow-wrap: break-word;">
+            {% if user.is_staff %}
+            <div style="float:right;margin-top: -10px;">
+            <a href="{% url 'calendar_app:calendar_update_event' event.pk %}" class="edit-button"><i class="fa-solid fa-pencil"></i></a>
+            <a href="{% url 'calendar_app:calendar_delete_event' event.pk %}" class="edit-button" style="margin-left: 5px;"><i class="fa-solid fa-trash"></i></i></a>
+            </div>
+            {% endif %}
+            <b>{{event.title}}</b> on {{event.date}}<br>
+            {{event.description}}<br>
+            </div>
+        <br>
+        {%endfor%}
+        </ul>
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+            </li>
+            {% endif %}
+          
+            {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">&raquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+        {%endif%}
+    </div>
+    </div>
+
+</div>
+{% endblock %}

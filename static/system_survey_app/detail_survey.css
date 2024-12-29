@@ -1,0 +1,124 @@
+/* Основные стили для страницы */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+/* Кнопка "Отправить ответы" */
+.btn-success {
+    background-color: #007aff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+    background-color: #0051a8;
+}
+
+/* Кнопка "Вернуться к опросам" */
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Кнопка "Добавить вопрос" */
+.btn-admin {
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-admin:hover {
+    background-color: #218838;
+}
+
+/* Кнопка "Удалить вопрос" */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #bd2130;
+}
+
+/* Кнопка "Редактировать" */
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Укрупнение и стили формы */
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    resize: none;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+
+/* Убираем линию под текстом для всех кнопок-ссылок */
+a {
+    text-decoration: none;
+}
+
+/* Дополнительно для кнопок с текстом */
+a.btn-warning,
+a.btn-danger,
+a.btn-admin,
+a.btn-secondary {
+    text-decoration: none;
+}
+
+/* При наведении курсора */
+a:hover {
+    text-decoration: none;
+}
+
+

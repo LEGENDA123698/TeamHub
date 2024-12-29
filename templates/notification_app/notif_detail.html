@@ -1,0 +1,32 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href='{% static '/notifications_app/notif.css' %}'>
+    <title>Деталi повiдомлення #{{ notification.id }}</title>
+{% endblock %}
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="row justify-content-lg-center ">
+        <div class="col-12 col-lg-12 mt-5">
+            <div class="default-placeholder">
+                <div class="container">
+                    <div class="card-placeholder">
+                        <div class="title-card d-flex col-lg-5" style="margin-top: 55px; margin-bottom: 25px;">
+                            <h3 class="text-center align-self-center" style="font-weight: bold; margin-bottom: 15px; margin-top: 35px;">{{ notification.title }}</h3>
+                            {% if user.is_staff %}
+                                <a class="edit-button align-self-end" href="{% url 'notifications_app:update-notification' notification.pk %}">
+                                    <i class="fa-solid fa-pen-to-square" style="color: rgb(20,170,20);"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="notification-card my-1 col-lg-5">
+                            <p class="notification-text-card align-self-center" style="font-weight: bold; font-size: 18px;">Вмiст:</p>
+                            <p style="word-wrap: break-word;">{{ notification.text }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

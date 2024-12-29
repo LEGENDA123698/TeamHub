@@ -1,0 +1,33 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/user_detail_survey.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 14.5vh;">
+<div class="container mt-4">
+    <form>
+        <h1>Відповіді користувача {{ user.username }} на опитування: "{{ survey.title_survey }}"</h1>
+
+        {% if answers %}
+            <div class="mb-3">
+                {% for answer in answers %}
+                    <div class="list-group-item">
+                        <strong>Питання:</strong> {{ answer.connection_question.question_title }} <br>
+                        <strong>Відповідь:</strong> {{ answer.answer }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{% url 'user-list-surveys' user.id %}">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </form>
+</div>
+</div>
+{% endblock %}
+
+

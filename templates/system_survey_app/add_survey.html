@@ -1,0 +1,20 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/add_survey.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container-a">
+    <h1 class="form-title">Створити нове опитування</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-custom-primary">Створити опитування</button>
+        <a href="javascript:history.back()" class="btn-custom-secondary">Повернутися до опитувань</a>
+    </form>
+</div>
+{% endblock %}
+
+

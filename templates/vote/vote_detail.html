@@ -1,0 +1,52 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Vote</title>
+    <link rel="stylesheet" href="{% static 'vote/vote.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+
+    <div style="text-align: center; display: flex; justify-content: center; align-items: center;">
+        <h1 style="font-weight: 600; max-width: 90%; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">{{vote.title}}</h1>
+    </div>
+    <hr style="max-width: 400px;margin: auto;"><br>
+    <form method="POST">
+        {% csrf_token %}
+        {% for answer in answers %}
+        <div style="display: flex;gap: 10px;">
+        {% if answer.image %}
+        <div>
+        <div class='image-container' style="background-image: url('{{answer.image.url}}');"></div>
+        </div>
+        {% endif %}
+        <div style="min-width: 90%">
+        <input type="radio" id="{{answer.id}}" name="vote" value="{{answer.id}}" onchange="this.form.submit()">
+        <label for="{{answer.id}}" style="font-size: 20px;">
+            {{answer.title}}
+        </label><br>
+        <div class="progress" style="height: 20px">
+            <div class="progress-bar" role="progressbar" style="width:{{answer.procent}}%;background: linear-gradient(to right, #306998, #658fb1);">
+                <p style="padding-top: 17px;padding-right: 95%;">{{answer.procent}}%</p>
+            </div>
+        </div>
+        </div>
+        </div>
+        <br>
+        {% endfor %}
+    </form>
+
+    {%for answer in answers%}
+    {% if current_user in answer.user.all %}
+    <form method="post" action="{% url 'vote_app:remove_vote_answer' answer.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="button">remove vote</button>
+    </form>
+    {%endif%}
+    {%endfor%}
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/user_list_surveys.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 14.5vh;">
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4 mb-0">Список опитувань користувача: {{ user.username }}</h1>
+        </div>
+        <div class="card-body">
+            {% if object_list %}
+                {% for survey in object_list %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ survey.title_survey }}</span>
+                        <a href="{% url 'user-detail-survey' pk=survey.id user_id=user.id %}" class="btn btn-outline-primary btn-sm">
+                            Переглянути опрос
+                        </a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted">У вас немає опитувань.</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'list-users' %}" style="margin-left: 20px; margin-top: -10px;">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Calendar</title>
+    <link rel="stylesheet" href="{% static 'calendar/calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'calendar/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+
+    <h1 style="text-align: center;">Update {{event.title}}</h1>
+
+    <form method = "post">
+        {% csrf_token %}
+        {{form.as_p }}
+        <input type="color" name="color-select" value="{{event.color}}" class="form-control-color"><br>
+        <button type="submit" class="button">edit</button>
+    </form>
+
+</div>
+{% endblock %}
