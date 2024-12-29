@@ -1,0 +1,30 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'auth_app/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{{ form.errors }}
+<div class="container mt-5">
+    <div class="row justify-content-lg-center">
+        <div class="col-12 col-lg-3 mt-5">
+            <form method="post" action="{% url 'register' %}">
+                {%csrf_token%}
+                <div class="input-container">
+                <p class="mb-0" style="font-weight: 500;">Username</p>
+                <input type="text" name="username" class="auth-input mb-1" id="floatingInput">
+                <p class="mb-0" style="font-weight: 500;">Password</p>
+                <input type="password" name="password1" class="auth-input mb-1" id="floatingPassword">
+                <p class="mb-0" style="font-weight: 500;">Repeat Password</p>
+                <input type="password" name="password2" class="auth-input mb-0" id="floatingPasswordRepeat">
+                <button type="submit" class="auth-button">Register</button>
+                <p>Have an account? <a href="{% url 'login'%}">Login here!</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

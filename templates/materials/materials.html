@@ -1,0 +1,246 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Materials</title>
+    <link rel="stylesheet" href="{% static 'materials/materials.css' %}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+
+    <button type="button" class="egg" data-placement="bottom" data-toggle="tooltip" data-html="true" id="imageTooltip">
+        ?
+    </button>
+    
+    <script>
+        $(document).ready(function () {
+            $('#imageTooltip').tooltip({
+                title: "<img src='{% static 'materials/aaaa.jpg' %}' class='img-fluid'>",
+                html: true
+            });
+        });
+    </script>    
+
+    <h1 style="text-align: center;">All materials</h1>
+    {% if user.is_staff %}
+    <a href="{% url 'materials_app:add_material' %}" class="button">Add new material</a>
+    {% endif %}
+    <hr>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="links-tab" data-bs-toggle="tab" data-bs-target="#links" type="button" role="tab" aria-controls="links" aria-selected="true">
+                <i class="fa-solid fa-link"></i> Ссылки
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="videos-tab" data-bs-toggle="tab" data-bs-target="#videos" type="button" role="tab" aria-controls="videos" aria-selected="false">
+                <i class="fa-solid fa-video"></i> Видео
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab" aria-controls="files" aria-selected="false">
+                <i class="fa-solid fa-file"></i> Файлы
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab" aria-controls="images" aria-selected="false">
+                <i class="fa-solid fa-image"></i> Картинки
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <br>
+        <div class="tab-pane show active" id="links" role="tabpanel" aria-labelledby="links-tab">
+            {%if page_obj_links %}
+            <ul>
+                {%for link in page_obj_links %}
+                    <div style="background-color: #fff;padding: 25px;border-radius: 10px;">
+                    {% if user.is_staff %}
+                    <a href="{% url 'materials_app:update_material' link.pk %}" class="edit-button"><i class="fa-solid fa-file-pen"></i></a>
+                    <a href="{% url 'materials_app:delete_material' link.pk %}" class="edit-button"><i class="fa-solid fa-x"></i></a>
+                    {% endif %}
+                    <a href="{{link.link}}" class="material-style">{{link.link}}</a><br>
+                    <span class="desc-style">{{ link.description }}</span>
+                    </div>
+                    <br>
+                {%endfor%}
+            </ul>
+            <ul class="pagination">
+                {% if page_obj_links.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_links.previous_page_number }}" aria-label="Previous">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+                </li>
+                {% endif %}
+              
+                {% for num in page_obj_links.paginator.page_range %}
+                    <li class="page-item {% if page_obj_links.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+                
+                {% if page_obj_links.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_links.next_page_number }}" aria-label="Next">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="tab-pane" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+            {%if page_obj_videos %}
+            <ul>
+                {%for video in page_obj_videos %}
+                <div style="background-color: #fff;padding: 25px;border-radius: 10px;">
+                    <iframe width="100%" height="300px" src="https://www.youtube.com/embed/{{video.link}}" frameborder="0"></iframe><br>
+                    <hr>
+                    {% if user.is_staff %}
+                    <a href="{% url 'materials_app:update_material' video.pk %}" class="edit-button"><i class="fa-solid fa-file-pen"></i></a>
+                    <a href="{% url 'materials_app:delete_material' video.pk %}" class="edit-button"><i class="fa-solid fa-x"></i></a>
+                    {% endif %}
+                    <span class="desc-style">{{ video.description }}</span>
+                    </div>
+                    <br>
+                {%endfor%}
+            </ul>
+            <ul class="pagination">
+                {% if page_obj_videos.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_videos.previous_page_number }}" aria-label="Previous">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+                </li>
+                {% endif %}
+              
+                {% for num in page_obj_videos.paginator.page_range %}
+                    <li class="page-item {% if page_obj_videos.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+                
+                {% if page_obj_videos.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_videos.next_page_number }}" aria-label="Next">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="tab-pane" id="files" role="tabpanel" aria-labelledby="files-tab">
+            {%if page_obj_files %}
+            <ul>
+                {%for file in page_obj_files %}
+                    <div style="background-color: #fff;padding: 25px;border-radius: 10px;">
+                    {% if user.is_staff %}
+                    <a href="{% url 'materials_app:update_material' file.pk %}" class="edit-button"><i class="fa-solid fa-file-pen"></i></a>
+                    <a href="{% url 'materials_app:delete_material' file.pk %}" class="edit-button"><i class="fa-solid fa-x"></i></a>
+                    {% endif %}
+                    <a href="{{file.file.url}}" class='material-style' download>Скачать файл</a> | {{file.file}}<br>
+                    <span class="desc-style">{{ file.description }}</span>
+                    </div>
+                    <br>
+                {%endfor%}
+            </ul>
+            <ul class="pagination">
+                {% if page_obj_files.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_files.previous_page_number }}" aria-label="Previous">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+                </li>
+                {% endif %}
+              
+                {% for num in page_obj_files.paginator.page_range %}
+                    <li class="page-item {% if page_obj_files.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+                
+                {% if page_obj_files.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_files.next_page_number }}" aria-label="Next">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab">
+            {%if page_obj_images %}
+            <ul>
+                {%for image in page_obj_images%}
+                <div style="background-color: #fff; padding: 25px; border-radius: 10px;">
+                    {% if user.is_staff %}
+                    <a href="{% url 'materials_app:update_material' image.pk %}" class="edit-button" style="display: block; margin-bottom: 5px;">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </a>
+                    <a href="{% url 'materials_app:delete_material' image.pk %}" class="edit-button">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                    {% endif %}
+                    <div style="display: flex; align-items: flex-start;gap: 10px;">
+                    <div style="display: flex; flex-direction: column; margin-right: 15px;">
+                    </div>
+                    <div class="image-style" style="background-image: url('{{ image.image.url }}');"></div>
+                    <div style="flex: 1; display: flex; align-items: center;">
+                    <span class="desc-style">{{ image.description }}</span>
+                    </div>
+                    </div>
+                </div>
+                <br>
+                {%endfor%}
+            </ul>
+            <ul class="pagination">
+                {% if page_obj_images.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_images.previous_page_number }}" aria-label="Previous">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+                </li>
+                {% endif %}
+              
+                {% for num in page_obj_images.paginator.page_range %}
+                    <li class="page-item {% if page_obj_images.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+                
+                {% if page_obj_images.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj_images.next_page_number }}" aria-label="Next">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

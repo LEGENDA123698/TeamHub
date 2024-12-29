@@ -1,0 +1,50 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/main_survey_css.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 14.5vh;">
+<div class="container mt-4">
+    <div class="row g-3 justify-content-md-center">
+        <div class="col-4">
+            {% if request.user.is_staff %}
+                <a href="{% url 'add-survey' %}" class="my-3 me-3" style="text-decoration: none;">
+                    <i class="fas fa-plus"></i>
+                </a>  
+            {% endif %}
+
+            <h2 class="text-center pt-3 pb-3" style="color:rgb(0, 157, 255); display: inline-block">
+                Список опитувань
+            </h2> 
+            
+            {% if request.user.is_staff %}
+                    <a href="{% url 'list-users' %}" class="ms-3 mt-5" style="text-decoration: none;">
+                    <i class="fa-solid fa-check"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+        
+
+    <div class="row g-3">
+        {% for question in object_list %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ question.title_survey }}</h5>
+                        <p class="card-text text-muted">{{ question.description }}</p>
+                        <a href="{% url 'detail-survey' question.id %}" class="btn-grad-con">
+                            пройти опитування
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}

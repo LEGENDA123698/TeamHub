@@ -1,0 +1,192 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'forum_app/forum.css' %}" />
+  <link rel="stylesheet" href="{% static 'portfolio/avatar.css' %}" />
+  <style>
+
+    .theme-detail {
+      background: whitesmoke;
+      padding: 6px;
+      border-radius: 14px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+
+    .theme-detail p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+
+    .messages-list ul {
+      list-style: none;
+      padding: 0;
+      gap: 6px;
+    }
+
+    .messages-list li {
+      background: #ecf0f1;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .message-form h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #16a085;
+    }
+
+    .message-form form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-form textarea {
+      width: 100%;
+      min-height: 80px;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+    }
+
+    .message-form button {
+      align-self: flex-start;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .message-form button:hover {
+      background: #2980b9;
+    }
+
+    .theme-detail .no-theme {
+      text-align: center;
+      font-size: 18px;
+      color: #c0392b;
+    }
+
+    .message-author {
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      background-color: white;
+      padding: 6px
+    }
+
+
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-lg-5 mx-auto mt-5">
+  {% if themes %}
+  <div class="row mb-1">
+    <div class="col-md-12 mt-4">
+      <h1>{{ themes.name }}</h1>
+    </div>
+  </div>
+  <div class="theme-detail">
+    <div class="messages-list">
+      {% if page_obj %}
+      <ul>
+        {% for message in page_obj %}
+        <div class="row mt-0">
+          <div class="col-md-12">
+            <li class="d-flex align-items-left" style="padding: 2px; border-radius: 8px;">
+              <div class="message-author">
+                <a href="{% url 'portfolio_app:user_profile' user.id %}" class="text-decoration-none text-dark d-flex flex-column align-items-center">
+                  <img src="{{ message.message_author.avatar.url }}" alt="Аватар" class="avatar" style="width: 60px; height: 60px;">
+                  <p class="mb-0 fw-bold">{{ message.message_author }}</p>
+                </a>
+              </div>
+              <div class="vr mx-1"></div>
+              <div class="text-left" style="border-radius: 6px; background-color: white; padding: 6px; width: 100%;">
+                <span class="d-flex justify-content-between mb-0">  
+                  <p style="font-size: 10px; margin-bottom: 0; color: #808080;">{{ message.created_at|date:"j M Y" }}</p>
+                  {% if message.message_author == user or user.is_staff %}
+                  <div class="d-flex">
+                    <a href="{% url 'forum_app:message-update' message.id %}" class="ms-2">
+                      <i class="fa-solid fa-pen-to-square" style="color: #808080;"></i>
+                    </a>
+                    <a href="{% url 'forum_app:message-delete' message.id %}" class="ms-2">
+                      <i class="fa-solid fa-trash" style="color: #ff3b30;"></i>
+                    </a>
+                  </div>
+                  {% endif %}
+                </span>
+                <p class="mt-0">{{ message.text }}</p>
+                {% if message.image %}
+                <img src="{{ message.image.url }}" alt="Изображение" style="max-width: 100%; height: auto; margin-top: 10px;">
+                {% endif %}
+              </div>
+            </li>
+          </div>
+        </div>
+        {% endfor %}
+      </ul>      
+      {% else %}
+      <p>Нет сообщений в теме.</p>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <p class="no-theme">Тема не найдена.</p>
+  {% endif %}
+  
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-2">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">&laquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+      </li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+  
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">&raquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+    {% if user.is_authenticated %}
+      <div class="message-form">
+        <form method="post" enctype="multipart/form-data" class="gap-2">
+          {% csrf_token %}
+          {{ form.text }}
+          {{ form.image }}
+          <button type="submit" class="mt-2">Send</button>
+        </form>
+      </div>
+    {% else %}
+      <p>
+        Please, <a href="{% url 'login' %}">login</a>, to leave a message.
+      </p>
+    {% endif %}
+  </div>
+{% endblock %}

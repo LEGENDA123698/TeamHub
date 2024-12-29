@@ -1,0 +1,30 @@
+{% include 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <title>TeamHub Materials</title>
+    <link rel="stylesheet" href="{% static 'materials/materials.css' %}">
+    <link rel="stylesheet" href="{% static 'materials/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-a">
+
+    <form method="get">
+        Choose material type: 
+        {% csrf_token %}
+        <select name="option" id="option" onchange="this.form.submit()">
+            {% for option in options %}
+                <option value="{{ option }}" {% if option == selected_option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button" style="border: none;">add new material</button>
+    </form>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'base.html' %}
+
+{% block extra_head %}
+    <link href="{% static 'system_survey_app/list_users.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 14.5vh;">
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4 mb-0">Список користувачів</h1>
+        </div>
+        <div class="card-body">
+            {% if object_list %}
+                <ul class="list-group list-group-flush">
+                    {% for user in object_list %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="user-name">{{ user.username }}</span>
+                            <a href="{% url 'user-list-surveys' user.id %}" class="btn btn-outline-primary btn-sm">
+                                Переглянути результати
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center text-muted">Нема користувачів для відображення.</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'list-surveys' %}" style="margin-left: 20px; margin-top: -10px;" >
+            <i class="fa-solid fa-arrow-left"></i>
+        </a> 
+    </div>
+</div>
+</div>
+{% endblock %}

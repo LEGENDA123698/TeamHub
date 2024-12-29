@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'portfolio/forms.css' %}">
+</head>
+<body>
+
+   <form method="post" enctype='multipart/form-data'>
+    {%csrf_token%}
+    <div class="form-style">
+    {{form.as_p}}
+    </div>
+    <button type="submit" class="sumbitbutton-style">submit</button>
+   </form>
+    
+</body>
+</html>
