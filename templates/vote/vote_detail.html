@@ -7,6 +7,14 @@
 
 {% block content %}
 
+<style>
+    @media (max-width: 1000px) {
+        .sus {
+            max-width: 80%;
+        }
+    }
+</style>
+
 <div class="container-a">
 
     <div style="text-align: center; display: flex; justify-content: center; align-items: center;">
@@ -27,7 +35,7 @@
         <label for="{{answer.id}}" style="font-size: 20px;">
             {{answer.title}}
         </label><br>
-        <div class="progress" style="height: 20px">
+        <div class="progress {% if answer.image %}sus{%endif%}" style="height: 20px">
             <div class="progress-bar" role="progressbar" style="width:{{answer.procent}}%;background: linear-gradient(to right, #306998, #658fb1);">
                 <p style="padding-top: 17px;padding-right: 95%;">{{answer.procent}}%</p>
             </div>

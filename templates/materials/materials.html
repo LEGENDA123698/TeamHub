@@ -61,8 +61,9 @@
                     {% if user.is_staff %}
                     <a href="{% url 'materials_app:update_material' link.pk %}" class="edit-button"><i class="fa-solid fa-file-pen"></i></a>
                     <a href="{% url 'materials_app:delete_material' link.pk %}" class="edit-button"><i class="fa-solid fa-x"></i></a>
+                    <br>
                     {% endif %}
-                    <a href="{{link.link}}" class="material-style">{{link.link}}</a><br>
+                    <a href="{{link.link}}" class="material-style" style="word-wrap: break-word;word-break: break-word;overflow-wrap: break-word;">{{link.link}}</a><br>
                     <span class="desc-style">{{ link.description }}</span>
                     </div>
                     <br>
@@ -198,10 +199,9 @@
                     <a href="{% url 'materials_app:delete_material' image.pk %}" class="edit-button">
                         <i class="fa-solid fa-x"></i>
                     </a>
+                    <br>
                     {% endif %}
-                    <div style="display: flex; align-items: flex-start;gap: 10px;">
-                    <div style="display: flex; flex-direction: column; margin-right: 15px;">
-                    </div>
+                    <div class="buckshot-roulette">
                     <div class="image-style" style="background-image: url('{{ image.image.url }}');"></div>
                     <div style="flex: 1; display: flex; align-items: center;">
                     <span class="desc-style">{{ image.description }}</span>

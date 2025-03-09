@@ -9,8 +9,8 @@
 
 <div style="margin-top: 14.5vh;">
 <div class="container mt-4">
-    <div class="row g-3 justify-content-md-center">
-        <div class="col-4">
+    <div class="row g-3" style="justify-self: center;">
+        <div class="col-4" style="display: flex;align-items: first baseline;width: 100%;">
             {% if request.user.is_staff %}
                 <a href="{% url 'add-survey' %}" class="my-3 me-3" style="text-decoration: none;">
                     <i class="fas fa-plus"></i>

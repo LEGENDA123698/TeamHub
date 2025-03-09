@@ -149,3 +149,63 @@ body::-webkit-scrollbar {
 .friend-username:hover {
     color: #306998;
 }
+
+.i-wanna-cry {
+    padding-top: 130px;
+    padding-left: 5px;
+    display: flex;
+    gap:15px
+}
+
+.👽 {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .avatar {
+        height: 125px;
+        width: 125px;
+    }
+
+    .i-wanna-cry {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nickname {
+        padding-top: 0;
+        max-width: 100%;
+    }
+
+    .avatar-list {
+        display: none;
+    }
+
+    .😭 {
+        display: none;
+    }
+
+    .👽 {
+        display: block;
+    }
+
+    .upper-button {
+        padding: 10px;
+    }
+
+    .container {
+        padding-top: 80%;
+    }
+
+    .inner-image {
+        width: auto;
+    }
+
+    ul {
+        padding-left: 0;
+    }
+
+    .aaaaaaaaa {
+        max-width: 75%;
+    }
+}

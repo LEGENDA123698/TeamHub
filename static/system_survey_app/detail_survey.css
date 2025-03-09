@@ -122,3 +122,13 @@ a:hover {
 }
 
 
+.aaaaaaaaaaaaaaaaaaaaaa {
+    display: flex;
+    gap: 5px;
+}
+
+@media (max-width: 1000px) {
+    .aaaaaaaaaaaaaaaaaaaaaa{
+        flex-direction: column;
+    }
+}

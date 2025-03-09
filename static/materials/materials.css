@@ -94,3 +94,28 @@ body::-webkit-scrollbar {
     word-break: break-word;
     overflow-wrap: break-word;
 }
+
+.buckshot-roulette {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+@media (max-width: 1000px) {
+    ul {
+        padding-left: 0;
+    }
+
+    .buckshot-roulette {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .desc-style {
+        max-width: 100%;
+    }
+
+    .button {
+        margin-left: 25%;
+    }
+}

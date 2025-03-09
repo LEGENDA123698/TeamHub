@@ -87,3 +87,13 @@
     color: #888;
     text-align: right;
 }
+
+@media (max-width: 1000px) {
+    .title-card {
+        width: 100%;
+    }
+
+    .notification-card {
+        width: 90%;
+    }
+}

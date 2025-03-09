@@ -78,3 +78,18 @@ button.btn-custom-primary, a.btn-custom-secondary {
 .btn-custom-secondary:hover {
     background-color: #5a6268;
 }
+
+@media (max-width: 1000px) {
+    .container-a {
+        width: 90%;  
+    }
+
+    form p {
+        padding: 15px;
+    }
+
+    form textarea {
+        border: 1px black solid;
+        height: 100px;
+    }
+}

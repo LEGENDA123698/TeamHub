@@ -400,3 +400,22 @@
     right: -5px;
     z-index: 2;
   }
+
+.forphone {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .dropdown-menu {
+        left: -137px !important;
+        top: 60px !important;
+    }
+
+    .forphone {
+        display: block;
+    }
+
+    .forpc {
+        display: none;
+    }
+}

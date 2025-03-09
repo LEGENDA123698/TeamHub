@@ -68,3 +68,19 @@ body::-webkit-scrollbar {
 .search-bar:hover {
     border-color: #0f2a40;
 }
+
+.amogus {
+    display: flex;
+}
+
+@media (max-width: 1000px) {
+    .amogus {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 3%;
+    }
+
+    .amogus form {
+        margin-left: 0 !important;
+    }
+}
