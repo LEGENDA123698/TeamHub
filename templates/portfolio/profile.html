@@ -2,6 +2,7 @@
 <html>
 <head>
     {%load static%}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/7283992a6b.js" crossorigin="anonymous"></script>
@@ -13,7 +14,7 @@
 
 
     <div style="background-color: #8a8a8a;height: 200px;">
-        <div style="padding-top: 130px;padding-left: 5px;display: flex;gap:15px">
+        <div class="i-wanna-cry">
         <div id="collapse-add" class="accordion-collapse collapse show" aria-labelledby="heading-add" data-bs-parent="#accordionExample">
         <div class="accordion-body">
         <button type="button" data-bs-toggle="modal" data-bs-target="#modal-add" style="background-color: #00000000;border-color: #00000000;">
@@ -40,17 +41,29 @@
             {% if is_friend %}
             <form method="post" action="{% url 'portfolio_app:delete_friend' user.pk %}">
             {% csrf_token %}
-            <button type="submit" class="upper-button">Delete friend</button>
+            <button type="submit" class="upper-button">
+                <span class="😭">Delete friend</span>
+                <span class="👽"><i class="fa-solid fa-user-minus"></i></span>
+            </button>
             </form>
             {% else %}
             <form method="post" action="{% url 'portfolio_app:friend_request' user.pk %}">
             {% csrf_token %}
-            <button type="submit" class="upper-button">Send friend request</button>
+            <button type="submit" class="upper-button">
+                <span class="😭">Send friend request</span>
+                <span class="👽"><i class="fa-solid fa-user-plus"></i></span>
+            </button>
             </form>
             {% endif %}
             {% else %}
-            <a href="{% url 'portfolio_app:friend_requests' %}" class="upper-button">View friend requests</a><br>
-            <a href="{% url 'portfolio_app:update_profile' current_user.pk %}" class="upper-button">Edit profile</a>
+            <a href="{% url 'portfolio_app:friend_requests' %}" class="upper-button">
+                <span class="😭">View friend requests</span>
+                <span class="👽"><i class="fa-solid fa-user-plus"></i></span>
+            </a><br>
+            <a href="{% url 'portfolio_app:update_profile' current_user.pk %}" class="upper-button">
+                <span class="😭">Edit profile</span>
+                <span class="👽"><i class="fa-solid fa-pencil"></i></span>
+            </a>
             {% endif %}
         </div>
         {% endif %}
@@ -70,8 +83,7 @@
     </div>
     
     
-    <div style="padding-top: 50px;"></div>
-    
+    <div style="padding-top: 50px;"></div>  
     
         <div class="container">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -169,7 +181,7 @@
         </div>
     
         <hr style="margin-top: 200px;">
-        <div style="display: flex;justify-content: center;"><img src="{% static 'portfolio/aaaa.jpg' %}"></div>
+        <div style="display: flex;justify-content: center;"><img src="{% static 'portfolio/aaaa.jpg' %}" class="aaaaaaaaa"></div>
 
 
 

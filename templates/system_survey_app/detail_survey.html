@@ -9,7 +9,7 @@
 
 <div style="margin-top: 14.5vh;">
     <h1>{{ object.title_survey }}</h1>
-    <h2>{{ object.description }}</h2>
+    <h2 style="word-wrap: break-word;word-break: break-word;overflow-wrap: break-word;">{{ object.description }}</h2>
 
     <!-- Форма для отправки ответов на вопросы -->
     <form method="post" id="questions" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
         <div>
             {% for question in questions %}
                 <div class="mb-3">
-                    <label for="question_{{ question.id }}">{{ question.question_title }}</label>
+                    <label for="question_{{ question.id }}" style="word-wrap: break-word;word-break: break-word;overflow-wrap: break-word;">{{ question.question_title }}</label>
                     <textarea 
                         name="question_{{ question.id }}" 
                         id="question_{{ question.id }}" 
@@ -37,6 +37,7 @@
     </form>
 
     <br>
+    <div class="aaaaaaaaaaaaaaaaaaaaaa">
     <a href="{% url 'list-surveys' %}" class="btn-secondary">Повернутись до опитувань</a>
 
     {% if request.user.is_staff %}
@@ -46,5 +47,6 @@
         <!-- Кнопка для удаления опроса -->
         <a href="{% url 'delete-survey' object.pk %}" class="btn-danger">Видалити опитування</a>
     {% endif %}
+    </div>
 </div>
 {% endblock %}

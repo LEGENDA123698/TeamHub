@@ -89,7 +89,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-12 col-lg-5 mx-auto mt-5">
+<div class="col-12 col-lg-5 mx-auto mt-5" style="padding: 7%;">
   {% if themes %}
   <div class="row mb-1">
     <div class="col-md-12 mt-4">
@@ -125,7 +125,7 @@
                   </div>
                   {% endif %}
                 </span>
-                <p class="mt-0">{{ message.text }}</p>
+                <p class="mt-0" style="word-wrap: break-word;word-break: break-word;overflow-wrap: break-word;">{{ message.text }}</p>
                 {% if message.image %}
                 <img src="{{ message.image.url }}" alt="Изображение" style="max-width: 100%; height: auto; margin-top: 10px;">
                 {% endif %}

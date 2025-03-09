@@ -8,8 +8,15 @@
 
 {% block content %}
 
-<div class="container-a">
+<style>
+    @media (max-width: 1000px) {
+        .cry {
+            display: none;
+        }
+    }
+</style>
 
+<div class="container-a">
 
     <h1 style="text-align: center;">Edit profile</h1>
     <hr>
@@ -18,7 +25,7 @@
         {%csrf_token%}
         <div style="display: flex;">
         <div style="width: 70%;">{{form.as_p}}</div>
-        <div class="avatar" style="background-image: url('{{user.avatar.url}}'); margin-left: auto;margin-right: auto;margin-top: auto;margin-bottom: auto;"></div>
+        <div class="avatar cry" style="background-image: url('{{user.avatar.url}}'); margin-left: auto;margin-right: auto;margin-top: auto;margin-bottom: auto;"></div>
         </div>
         <button type="submit" class="button">submit</button>
     </form>

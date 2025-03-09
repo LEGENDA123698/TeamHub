@@ -14,7 +14,7 @@
         {% if answers %}
             <div class="mb-3">
                 {% for answer in answers %}
-                    <div class="list-group-item">
+                    <div class="list-group-item" style="word-wrap: break-word;word-break: break-word;overflow-wrap: break-word;">
                         <strong>Питання:</strong> {{ answer.connection_question.question_title }} <br>
                         <strong>Відповідь:</strong> {{ answer.answer }}
                     </div>
