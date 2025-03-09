@@ -71,3 +71,21 @@ body {
     margin-top: 20px;
 }
 
+@media (max-width: 1000px) {
+    .container-a {
+        width: 90%;  
+    }
+
+    form p {
+        padding: 15px;
+    }
+
+    form input {
+        border: 1px black solid;
+    }
+
+    form textarea {
+        max-width: 90%;
+        border: 1px black solid;
+    }
+}

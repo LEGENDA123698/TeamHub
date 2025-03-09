@@ -62,24 +62,46 @@
     margin-right: auto;
 }
 
-.dropdown:hover .dropdown-menu {
+.a:hover .c {
     display: block;
-    margin-top: 0;
-    margin-left: -15px;
 }
-.dropdown-toggle::after {
+.b::after {
     transition: transform 0.2s;
     display: none;
 }
-.dropdown:hover .dropdown-toggle::after {
-    transform: rotate(180deg);
-}
 
-.dropdown-menu {
+.c {
     transform: none !important;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .empty-day {
     background-color: #b6b6b6;
     border-color: #b6b6b6;
+}
+
+.rdr2 {
+    display: flex;
+    gap: 40px;
+}
+
+@media (max-width: 1000px) {
+    .calendar-day {
+        padding: 6px;
+    }
+
+    .rdr2 {
+        flex-direction: column;
+    }
+
+    ul {
+        padding-left: 0;
+    }
+
+    .c {
+        margin-left: -150px !important;
+        margin-top: 55px !important;
+    }
 }
